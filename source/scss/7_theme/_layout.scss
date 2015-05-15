@@ -1,0 +1,34 @@
+// LAYOUT BLOCK COLOURS
+
+//Default colors
+body {
+  background:$background;
+  color:$text;
+}
+
+// Reverse the colours
+.reverse {
+  @include font-smoothing(on);
+  background:$text;
+  color:$background;
+}
+
+// Subtly highlighted section
+.subtle {
+  background:$dark-background;
+}
+.grey {
+   @include font-smoothing(on);
+  background:$mid-text;
+  color:$background;  
+}
+.blue {
+  @include font-smoothing(on);
+  background:$blue;
+  color:$background; 
+}
+.red {
+  @include font-smoothing(on);
+  background:$red;
+  color:$background; 
+}

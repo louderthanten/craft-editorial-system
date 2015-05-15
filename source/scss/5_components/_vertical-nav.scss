@@ -1,0 +1,44 @@
+// VERTICAL NAVIGATION
+//
+// Makes a simple vertical list of links for sub-navigation, category lists, etc.
+//
+// Example:
+// <nav class="vertical-nav">
+//   <ul>
+//    <li><a href="/page">Nav Item 1</a></li>
+//    <li><a href="/page">Nav Item 2</a></li>
+//    <li><a href="/page">Nav Item 3</a></li>
+//   </ul>
+// </nav>
+
+.vertical-nav {
+  @extend %group;
+  margin-left: 0;
+  margin-right: 0;
+
+  li {
+    position: relative;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    font-family: $sans;
+    padding:rem($line/4) 0;
+
+    &:link,
+    &:visited {
+
+    }
+    &:hover,
+    &:active,
+    &:focus {
+
+    }
+  }
+  .current {
+    a {
+      cursor: default;
+    }
+  }
+}

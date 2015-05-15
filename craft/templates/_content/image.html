@@ -1,0 +1,16 @@
+{% if block.fullImageBackground == '' or block.fullImageBackground == '#000000' %}
+    {% set blockColour = '' %}
+{% else %}
+    {% set blockColour = block.fullImageBackground %}
+{% endif %}
+
+{% if block.imageWidth == 'full' %}
+</div>
+{% endif %}
+  <figure class="{{ block.imageWidth }} article__image{% if block.imageWidth == 'full' %} {{ block.fullImageTheme }}{% endif %} {{ block.customClasses }}"{% if blockColour and block.imageWidth == 'full' %} style="background-color:{{ blockColour }};"{% endif %}>
+    {% set assets = block.images %}
+    {% include '_components/image' %}
+  </figure>
+{% if block.imageWidth == 'full' %}
+<div class="row row--tight">
+{% endif %}

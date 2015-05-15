@@ -1,0 +1,7 @@
+<div class="content {{ block.textType }}{% if block.textType == 'flex' %} collapse{% endif %} {{ block.customClass }}">
+  {% if block.markdown == 1 %}
+  {{ block.textContent|markdown }}
+  {% else %}
+  {{ block.textContent }}
+  {% endif %}
+</div>

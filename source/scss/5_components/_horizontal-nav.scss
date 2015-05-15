@@ -1,0 +1,48 @@
+// HORIZONTAL NAVIGATION
+//
+// Example:
+// <nav class="horizontal-nav">
+//   <ul>
+//    <li><a href="/page">Nav Item 1</a></li>
+//    <li><a href="/page">Nav Item 2</a></li>
+//    <li><a href="/page">Nav Item 3</a></li>
+//   </ul>
+// </nav>
+
+.horizontal-nav {
+  ul {
+    @extend %group;
+    padding:0;
+    margin-bottom: 0;
+  }
+  li {
+    display: block;
+  }
+  a {
+    display: block;
+    width:100%;
+    padding:rem($line/2) $margin;
+    font-family: $serif;
+    text-decoration: none;
+    font-family: $sans;
+  }
+}
+
+@media only screen and (min-width: $screenSmall) {
+  .horizontal-nav {
+    li {
+      display: inline-block;
+    }
+    a {
+      padding:rem($line/2);
+    }
+  }
+
+  // Add a 'horizontal-nav--center' class to the <nav> element to center it horizontally.
+  .horizontal-nav--center {
+    ul {
+      display: table;
+      margin: 0 auto;
+    }
+  }
+}

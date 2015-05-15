@@ -1,0 +1,3 @@
+{% for block in entry.flexContent %}
+  {% include ['_content/' ~ block.type ~ '-' ~ entry.section.handle, '_content/' ~ block.type] %}
+{% endfor %}

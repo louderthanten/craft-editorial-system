@@ -1,0 +1,10 @@
+// ANIMATIONS
+//
+// We like to group animations and keyframes in one spot.
+
+// Adds a nice default transition for link and button hovers.
+a,
+button,
+input[type="submit"] {
+  transition: all 0.2s linear;
+}

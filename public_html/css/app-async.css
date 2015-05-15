@@ -1,0 +1,1628 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'BLOKKNeue';
+  src: url('../fonts/BLOKKNeue-Regular.eot');
+  src: url('../fonts/BLOKKNeue-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/BLOKKNeue-Regular.woff') format('woff'), url('../fonts/BLOKKNeue-Regular.svg#BLOKKNeue-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+/* line 7, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_forms.scss */
+fieldset {
+  border: none;
+  display: block; }
+
+/* line 10, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_fields.scss */
+.text-input, input[type=text], input[type=password], input[type=email], input[type=search], input[type=number], input[type=date], input[type=time], input[type=file], textarea {
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  outline: none;
+  border: 1px solid #AAAAAA;
+  border-radius: 3px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 12; }
+
+/* line 30, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_fields.scss */
+textarea {
+  min-height: 144; }
+
+/* line 36, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_fields.scss */
+input[type=checkbox], input[type=radio] {
+  margin-right: 0.5em; }
+
+/* line 45, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_fields.scss */
+.search-input {
+  overflow: hidden; }
+
+/* line 15, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_buttons.scss */
+button, input[type="submit"], .button, .option-buttons label, .pill-buttons label, .tabs a, a.button, .tabs a {
+  position: relative;
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif; }
+
+/* line 1, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+table {
+  border-collapse: collapse;
+  width: 100%; }
+  /* line 8, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+  table ul, table ol, table dl, table p {
+    margin-bottom: 0; }
+  /* line 12, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+  table img {
+    max-width: 100%; }
+
+/* line 17, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+th, td {
+  text-align: left; }
+
+/* line 25, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+[colspan] {
+  text-align: center; }
+
+/* line 28, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+[colspan="1"] {
+  text-align: left; }
+
+/* line 31, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+[rowspan] {
+  vertical-align: middle; }
+
+/* line 34, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_tables.scss */
+[rowspan="1"] {
+  vertical-align: top; }
+
+/* line 1, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_rules.scss */
+hr {
+  clear: both;
+  height: 0;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 0;
+  border-top: 1px solid #AAAAAA; }
+
+/* line 4, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_code.scss */
+code, pre, kbd {
+  font-family: monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none; }
+
+/* line 17, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_code.scss */
+pre {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  overflow: auto; }
+  /* line 21, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_code.scss */
+  pre > code {
+    margin: 0; }
+
+/* line 28, /Users/trav/Sites/craft-editorial-system/source/scss/4_elements/_code.scss */
+:not(pre) > code, kbd {
+  padding: 0.1875rem 0.25rem 0.0625rem 0.25rem;
+  font-size: 1em; }
+
+/* line 3, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_rules.scss */
+.rule--light {
+  border-top: 1px solid #DDDDDD; }
+
+/* line 6, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_rules.scss */
+.rule--red {
+  border-top: 1px solid #d13731; }
+
+/* line 9, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_rules.scss */
+.rule--white {
+  border-top: 1px solid #FFFFFF; }
+
+/* line 11, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+.field {
+  position: relative;
+  padding-bottom: 1.5rem; }
+
+/* line 27, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+.check-label, .field--check label, .field--check .label {
+  display: inline-block; }
+
+/* line 30, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+.check-list {
+  list-style: none; }
+  /* line 33, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+  .check-list label {
+    cursor: pointer; }
+
+@media only screen and (min-width: 48em) {
+  /* line 53, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+  .field--half, .field--third, .field--two-third {
+    float: left;
+    padding: 0; }
+  /* line 57, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+  .field--half {
+    width: 50%; }
+  /* line 60, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+  .field--third {
+    width: 33.33333%; }
+  /* line 63, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_fields.scss */
+  .field--two-third {
+    width: 66.66667%; } }
+
+/* line 15, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_forms-inline.scss */
+.form--inline label {
+  display: inline-block;
+  font: inherit; }
+
+/* line 22, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_option-buttons.scss */
+.option-buttons label, .pill-buttons label {
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  position: relative;
+  display: block;
+  float: left;
+  padding: 0.375rem;
+  margin-right: 1px;
+  text-align: center; }
+/* line 32, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_option-buttons.scss */
+.option-buttons input, .pill-buttons input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  -moz-appearance: none; }
+/* line 45, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_option-buttons.scss */
+.option-buttons span, .pill-buttons span {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+/* line 52, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_option-buttons.scss */
+.option-buttons label {
+  margin-right: 0.375rem; }
+
+/* line 61, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_option-buttons.scss */
+.pill-buttons label {
+  border-radius: 0; }
+  /* line 64, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_option-buttons.scss */
+  .pill-buttons label:first-child {
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px; }
+  /* line 68, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_option-buttons.scss */
+  .pill-buttons label:last-child {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px; }
+
+/* line 15, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+.switch {
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  height: 2.25rem;
+  padding: 0;
+  margin-bottom: 0.375rem;
+  line-height: 2.5;
+  font-family: 'Source Sans Pro', sans-serif;
+  border-radius: 3px; }
+  /* line 28, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch label {
+    -webkit-transition: opacity 0.3s linear;
+    transition: opacity 0.3s linear;
+    position: relative;
+    left: 0;
+    height: 100%;
+    margin: 0;
+    float: left;
+    z-index: 2;
+    text-align: left; }
+    /* line 38, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+    .switch label:first-of-type {
+      padding: 0 1rem 0 1rem; }
+    /* line 41, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+    .switch label:last-of-type {
+      padding: 0 1rem 0 0; }
+  /* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input {
+    position: absolute;
+    z-index: 3;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    -moz-appearance: none; }
+    /* line 55, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+    .switch input:first-of-type:checked ~ span:last-child {
+      left: 100%;
+      margin-left: -2.1875rem; }
+  /* line 61, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch span:last-child {
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    z-index: 1;
+    border-width: 0.0625rem;
+    border-style: solid;
+    border-radius: 3px;
+    cursor: pointer; }
+  /* line 77, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input:not(:checked) + label {
+    opacity: 0; }
+  /* line 79, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input:checked {
+    display: none !important; }
+  /* line 80, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input {
+    left: 0;
+    display: block !important; }
+  /* line 84, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input:first-of-type + label, .switch input:first-of-type + span + label {
+    left: -50%; }
+  /* line 86, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input:first-of-type:checked + label, .switch input:first-of-type:checked + span + label {
+    left: 0%; }
+  /* line 90, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input:last-of-type + label, .switch input:last-of-type + span + label {
+    right: -50%;
+    left: auto;
+    text-align: right; }
+  /* line 92, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_switches.scss */
+  .switch input:last-of-type:checked + label, .switch input:last-of-type:checked + span + label {
+    right: 0%;
+    left: auto; }
+
+/* line 3, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_labels.scss */
+.label--error {
+  position: absolute;
+  left: 0;
+  bottom: 0; }
+
+/* line 7, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.namespace {
+  opacity: .7; }
+
+/* line 10, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.token.important {
+  font-weight: 700; }
+
+/* line 13, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.token.entity {
+  cursor: help; }
+
+/* line 18, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.line-numbers {
+  position: relative;
+  counter-reset: linenumber; }
+
+/* line 22, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.line-numbers > code {
+  position: relative; }
+
+/* line 25, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: -1.5rem;
+  width: 3rem;
+  /* works for line-numbers below 1000 lines */
+  border-right: 1px solid #DDDDDD;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/* line 35, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.line-numbers-rows > span {
+  pointer-events: none;
+  display: block;
+  counter-increment: linenumber; }
+
+/* line 41, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_code.scss */
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  display: block;
+  padding-right: 0.75rem;
+  text-align: right; }
+
+/* line 11, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_maps.scss */
+.map {
+  position: relative;
+  max-height: 144;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden; }
+  /* line 20, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_maps.scss */
+  .map object, .map embed, .map iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%; }
+
+/* line 36, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_maps.scss */
+#googlemap img, object, embed, #map_canvas embed, #map_canvas img, #map_canvas object {
+  max-width: 100%;
+  max-height: 100%; }
+
+@media only screen and (min-width: 48em) {
+  /* line 42, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_maps.scss */
+  .map {
+    max-height: auto; } }
+
+/* line 23, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_pagination.scss */
+.pagination {
+  margin-top: 1.5rem; }
+  /* line 27, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_pagination.scss */
+  .pagination li {
+    display: block;
+    float: left; }
+  /* line 31, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_pagination.scss */
+  .pagination a {
+    display: block; }
+  /* line 45, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_pagination.scss */
+  .pagination .current a {
+    cursor: default; }
+
+/* line 51, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_pagination.scss */
+.pagination--mini a {
+  display: block;
+  float: left; }
+
+/* line 57, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t1 {
+  width: 1%; }
+
+/* line 58, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t5 {
+  width: 5%; }
+
+/* line 59, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t10 {
+  width: 10%; }
+
+/* line 60, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t12 {
+  width: 12.5%; }
+
+/* 1/8 */
+/* line 61, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t15 {
+  width: 15%; }
+
+/* line 62, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t20 {
+  width: 20%; }
+
+/* line 63, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t25 {
+  width: 25%; }
+
+/* 1/4 */
+/* line 64, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t30 {
+  width: 30%; }
+
+/* line 65, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t33 {
+  width: 33.333%; }
+
+/* 1/3 */
+/* line 66, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t35 {
+  width: 35%; }
+
+/* line 67, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t37 {
+  width: 37.5%; }
+
+/* 3/8 */
+/* line 68, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t40 {
+  width: 40%; }
+
+/* line 69, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t45 {
+  width: 45%; }
+
+/* line 70, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t50 {
+  width: 50%; }
+
+/* 1/2 */
+/* line 71, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t55 {
+  width: 55%; }
+
+/* line 72, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t60 {
+  width: 60%; }
+
+/* line 73, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t62 {
+  width: 62.5%; }
+
+/* 5/8 */
+/* line 74, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t65 {
+  width: 65%; }
+
+/* line 75, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t66 {
+  width: 66.666%; }
+
+/* 2/3 */
+/* line 76, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t70 {
+  width: 70%; }
+
+/* line 77, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t75 {
+  width: 75%; }
+
+/* 3/4*/
+/* line 78, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t80 {
+  width: 80%; }
+
+/* line 79, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t85 {
+  width: 85%; }
+
+/* line 80, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t87 {
+  width: 87.5%; }
+
+/* 7/8 */
+/* line 81, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t90 {
+  width: 90%; }
+
+/* line 82, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.t95 {
+  width: 95%; }
+
+/* line 87, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.numerical, .delete {
+  text-align: right; }
+
+@media only screen and (max-width: 48em) {
+  /* line 101, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+  table, tbody, tfoot, th, td, tr {
+    display: block !important; }
+  /* line 104, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+  thead {
+    display: none; }
+  /* line 110, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+  thead, tfoot, tbody, tr {
+    clear: both; }
+  /* line 113, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+  tr {
+    width: 100%; }
+  /* line 117, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+  .numerical, .delete {
+    text-align: left; } }
+
+/* line 127, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.table--bordered th, .table--bordered td {
+  border: 1px solid #AAAAAA; }
+  /* line 130, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+  .table--bordered th:empty, .table--bordered td:empty {
+    border: none; }
+
+/* line 138, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.table--lined thead tr {
+  border-bottom: 1px solid #AAAAAA; }
+/* line 141, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_tables.scss */
+.table--lined tbody tr {
+  border-bottom: 1px solid #DDDDDD; }
+
+/* line 4, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_address.scss */
+.vcard .type {
+  display: block; }
+
+/* line 9, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_address.scss */
+.street-address, .country-name {
+  display: block; }
+
+/* line 14, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_vertical-nav.scss */
+.vertical-nav {
+  margin-left: 0;
+  margin-right: 0; }
+  /* line 19, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_vertical-nav.scss */
+  .vertical-nav li {
+    position: relative; }
+  /* line 23, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_vertical-nav.scss */
+  .vertical-nav a {
+    display: block;
+    text-decoration: none;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 0.375rem 0; }
+  /* line 40, /Users/trav/Sites/craft-editorial-system/source/scss/5_components/_vertical-nav.scss */
+  .vertical-nav .current a {
+    cursor: default; }
+
+/* line 8, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_animation.scss */
+a, button, input[type="submit"] {
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear; }
+
+/* line 24, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_tabs.scss */
+.tabs {
+  padding: 0;
+  margin-bottom: 0; }
+  /* line 28, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_tabs.scss */
+  .tabs li {
+    display: inline-block;
+    width: auto; }
+  /* line 32, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_tabs.scss */
+  .tabs a {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    display: block;
+    text-decoration: none; }
+
+/* line 40, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_tabs.scss */
+.tab-content {
+  padding: 0.75rem; }
+  /* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_tabs.scss */
+  .tab-content > *:last-child, .tab-content > *:last-child > *:last-child, .tab-content > *:last-child > *:last-child > *:last-child {
+    margin-bottom: 0 !important; }
+  /* line 52, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_tabs.scss */
+  .tab-content > *:first-child, .tab-content > *:first-child > *:first-child, .tab-content > *:first-child > *:first-child > *:first-child {
+    margin-top: 0 !important; }
+
+/* line 3, /Users/trav/Sites/craft-editorial-system/source/scss/6_modules/_footer.scss */
+.footer {
+  clear: both; }
+
+/* line 4, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+code, pre {
+  background: #333333;
+  color: #FFFFFF; }
+  /* line 36, /Users/trav/Sites/craft-editorial-system/source/scss/2_tools/_mixins.scss */
+  code ::-moz-selection, pre ::-moz-selection {
+    background: #AAAAAA;
+    color: #FFFFFF; }
+  /* line 37, /Users/trav/Sites/craft-editorial-system/source/scss/2_tools/_mixins.scss */
+  code ::-moz-selection, pre ::-moz-selection {
+    background: #AAAAAA;
+    color: #FFFFFF; }
+  code ::selection, pre ::selection {
+    background: #AAAAAA;
+    color: #FFFFFF; }
+
+/* line 12, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.reverse code, .reverse pre {
+  background: #262626; }
+
+/* line 18, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.subtle :not(pre) > code {
+  background: #FFFFFF; }
+
+/* line 24, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+:not(pre) > code {
+  background: #DDDDDD;
+  color: #333333; }
+
+/* line 29, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.token.comment {
+  color: #666666; }
+
+/* line 34, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.token.prolog, .token.doctype, .token.cdata {
+  color: #AAAAAA; }
+
+/* line 38, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.token.punctuation {
+  color: #AAAAAA; }
+
+/* line 51, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.selector, .token.attr-name, .token.string, .token.builtin {
+  color: #AAAAAA; }
+
+/* line 60, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string, .token.variable {
+  color: #FFFFFF; }
+
+/* line 67, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.token.atrule, .token.attr-value, .token.keyword {
+  color: #FFFFFF; }
+
+/* line 72, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.token.regex, .token.important {
+  color: #FFFFFF; }
+
+/* line 75, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_code.scss */
+.line-numbers-rows > span:before {
+  color: #AAAAAA; }
+
+/* line 3, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_forms.scss */
+.error {
+  color: #d13731; }
+
+/* line 7, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_forms.scss */
+.text-input {
+  color: #333333; }
+  /* line 12, /Users/trav/Sites/craft-editorial-system/source/scss/2_tools/_mixins.scss */
+  .text-input::-webkit-input-placeholder {
+    /* Safari, Chrome */
+    color: #AAAAAA; }
+  /* line 15, /Users/trav/Sites/craft-editorial-system/source/scss/2_tools/_mixins.scss */
+  .text-input:-moz-placeholder {
+    /* Firefox 4–18 */
+    color: #AAAAAA; }
+  /* line 18, /Users/trav/Sites/craft-editorial-system/source/scss/2_tools/_mixins.scss */
+  .text-input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #AAAAAA; }
+  /* line 21, /Users/trav/Sites/craft-editorial-system/source/scss/2_tools/_mixins.scss */
+  .text-input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #AAAAAA; }
+
+/* line 6, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_special-fields.scss */
+.option-buttons label, .pill-buttons label, .ui-slider, .switch {
+  background: #333333; }
+
+/* line 12, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_special-fields.scss */
+.option-buttons .checked, .pill-buttons .checked, .ui-slider-handle {
+  background: #d13731; }
+
+/* line 18, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_special-fields.scss */
+.option-buttons label, .pill-buttons label, .switch label {
+  color: #FFFFFF; }
+
+/* line 22, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_special-fields.scss */
+.switch span:last-child {
+  border-color: #333333;
+  box-shadow: 2px 0 10px 0 rgba(0, 0, 0, 0.07), 1000px 0 0 980px black, -2px 0 10px 0 rgba(0, 0, 0, 0.07), -1000px 0 0 1000px #d13731; }
+
+/* line 5, /Users/trav/Sites/craft-editorial-system/source/scss/7_theme/_tables.scss */
+.table--striped tbody tr:nth-of-type(odd) {
+  background-color: #e6e6e6; }
+
+/* line 10, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.content p, .content li, .content dd {
+  line-height: 1.25;
+  letter-spacing: -0.1em;
+  word-spacing: -0.9em;
+  font-family: "BLOKKNeue";
+  color: #BABAAE; }
+  /* line 17, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+  .content p > *, .content li > *, .content dd > * {
+    word-spacing: 0;
+    letter-spacing: 0; }
+
+/* line 30, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.callout--clear .content p, .callout--clear .content li, .callout--clear .content dd, .content--clear p, .content--clear li, .content--clear dd {
+  line-height: 1.5;
+  letter-spacing: 0;
+  word-spacing: 0;
+  font-family: inherit;
+  color: inherit; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l1 {
+  height: 24px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l1 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l2 {
+  height: 48px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l2 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l3 {
+  height: 72px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l3 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l4 {
+  height: 96px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l4 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l5 {
+  height: 120px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l5 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l6 {
+  height: 144px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l6 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l7 {
+  height: 168px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l7 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l8 {
+  height: 192px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l8 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l9 {
+  height: 216px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l9 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l10 {
+  height: 240px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l10 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l11 {
+  height: 264px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l11 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l12 {
+  height: 288px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l12 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l13 {
+  height: 312px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l13 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l14 {
+  height: 336px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l14 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l15 {
+  height: 360px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l15 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l16 {
+  height: 384px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l16 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l17 {
+  height: 408px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l17 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l18 {
+  height: 432px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l18 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l19 {
+  height: 456px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l19 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l20 {
+  height: 480px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l20 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l21 {
+  height: 504px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l21 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l22 {
+  height: 528px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l22 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l23 {
+  height: 552px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l23 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l24 {
+  height: 576px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l24 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l25 {
+  height: 600px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l25 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l26 {
+  height: 624px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l26 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l27 {
+  height: 648px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l27 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l28 {
+  height: 672px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l28 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l29 {
+  height: 696px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l29 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l30 {
+  height: 720px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l30 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l31 {
+  height: 744px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l31 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l32 {
+  height: 768px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l32 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l33 {
+  height: 792px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l33 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l34 {
+  height: 816px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l34 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l35 {
+  height: 840px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l35 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l36 {
+  height: 864px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l36 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l37 {
+  height: 888px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l37 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l38 {
+  height: 912px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l38 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l39 {
+  height: 936px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l39 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l40 {
+  height: 960px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l40 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l41 {
+  height: 984px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l41 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l42 {
+  height: 1008px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l42 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l43 {
+  height: 1032px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l43 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l44 {
+  height: 1056px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l44 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l45 {
+  height: 1080px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l45 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l46 {
+  height: 1104px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l46 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l47 {
+  height: 1128px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l47 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l48 {
+  height: 1152px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l48 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l49 {
+  height: 1176px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l49 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l50 {
+  height: 1200px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l50 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l51 {
+  height: 1224px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l51 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l52 {
+  height: 1248px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l52 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l53 {
+  height: 1272px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l53 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l54 {
+  height: 1296px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l54 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l55 {
+  height: 1320px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l55 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l56 {
+  height: 1344px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l56 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l57 {
+  height: 1368px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l57 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l58 {
+  height: 1392px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l58 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l59 {
+  height: 1416px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l59 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l60 {
+  height: 1440px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l60 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l61 {
+  height: 1464px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l61 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l62 {
+  height: 1488px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l62 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l63 {
+  height: 1512px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l63 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l64 {
+  height: 1536px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l64 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l65 {
+  height: 1560px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l65 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l66 {
+  height: 1584px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l66 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l67 {
+  height: 1608px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l67 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l68 {
+  height: 1632px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l68 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l69 {
+  height: 1656px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l69 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l70 {
+  height: 1680px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l70 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l71 {
+  height: 1704px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l71 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l72 {
+  height: 1728px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l72 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l73 {
+  height: 1752px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l73 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l74 {
+  height: 1776px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l74 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l75 {
+  height: 1800px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l75 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l76 {
+  height: 1824px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l76 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l77 {
+  height: 1848px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l77 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l78 {
+  height: 1872px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l78 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l79 {
+  height: 1896px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l79 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l80 {
+  height: 1920px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l80 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l81 {
+  height: 1944px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l81 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l82 {
+  height: 1968px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l82 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l83 {
+  height: 1992px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l83 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l84 {
+  height: 2016px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l84 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l85 {
+  height: 2040px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l85 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l86 {
+  height: 2064px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l86 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l87 {
+  height: 2088px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l87 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l88 {
+  height: 2112px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l88 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l89 {
+  height: 2136px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l89 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l90 {
+  height: 2160px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l90 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l91 {
+  height: 2184px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l91 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l92 {
+  height: 2208px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l92 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l93 {
+  height: 2232px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l93 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l94 {
+  height: 2256px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l94 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l95 {
+  height: 2280px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l95 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l96 {
+  height: 2304px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l96 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l97 {
+  height: 2328px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l97 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l98 {
+  height: 2352px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l98 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l99 {
+  height: 2376px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l99 > p {
+  visibility: hidden; }
+
+/* line 46, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l100 {
+  height: 2400px;
+  background: url('../img/livewires/text.png'); }
+
+/* line 47, /Users/trav/Sites/craft-editorial-system/source/scss/9_overrides/_livewires.scss */
+.l100 > p {
+  visibility: hidden; }

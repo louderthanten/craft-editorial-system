@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" class="no-js"><html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <!-- Title block allowing child pages to override -->
+    <title>{% if craft.request.firstSegment() %}{% block title %}{% if entry.title is defined %}{{ entry.title }}{% endif %}{% endblock %} | {% endif %}{{ siteName }}</title>
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
+
+
+   {# Load critical styles and fonts #}
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/app.min.css" id="mainCss" />
+
+  {# Style block allowing child pages to inject their own styles #}
+  {% block styles %}
+  	{% cache unless craft.config.devMode %}
+  		{% include '_art-direction' %} {# Include art-direction styles by default #}
+  	{% endcache %}
+  {% endblock %}
+
+  <noscript>
+  	{# Just load all CSS and fonts if js off #}
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <link rel="stylesheet" href="/css/font-faces-secondary.min.css" />
+  </noscript>
+
+    <!-- Fontawesome icons. Remove if not using -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
+	  <script charset="utf-8">
+	    var ns = document.getElementsByTagName('noscript')[0];
+	    function loadCSS(e,t,n){
+	      'use strict';
+	      var i=window.document.createElement('link');
+	      var o=t||window.document.getElementsByTagName('script')[0];
+	      i.rel='stylesheet';
+	      i.href=e;
+	      i.media='only x';
+	      o.parentNode.insertBefore(i,o);
+	      setTimeout(function(){
+	        i.media=n||'all'
+	      })
+	    }
+
+	    /* Asyncronously load secondary CSS (aka anything outside of the viewport on load) */
+	    loadCSS( '/css/app-async.min.css', ns );
+
+	    (function() {
+	      'use strict';
+	      /* Asyncronously load secondary fonts if self-hosting 
+	      var files = ['//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,600,700,900,200italic,300italic,600italic,700italic,900italic'];*/
+
+	      function getExtension(src) {
+	        return src.split('.').pop();
+	      }
+
+	      function onEvent(el, event, callback) {
+	        if (el.addEventListener) {
+	          el.addEventListener(event, callback);
+	        } else if (el.attachEvent) {
+	          el.attachEvent('on' + event, callback);
+	        }
+	      }
+
+	      function injectContent(content, type) {
+	        if (type === 'css') {
+	          var style = document.createElement('style');
+	          document.getElementsByTagName('head')[0].appendChild(style);
+	          if (style.styleSheet) {
+	            style.styleSheet.cssText = content;
+	          } else {
+	            style.innerHTML = content;
+	          }
+	        } else if (type === 'svg') {
+	          document.getElementsByTagName('head')[0].insertAdjacentHTML('beforeend', content);
+	        }
+	      }
+
+	      function loadFile(file) {
+	        var content = localStorage[file];
+	        if (content) {
+	          injectContent(content, getExtension(file));
+	        } else {
+	          onEvent(window, 'load', function() {
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('GET', file, true);
+	            onEvent(xhr, 'load', function() {
+	              if (xhr.readyState === 4) {
+	                injectContent(xhr.responseText, getExtension(file));
+	                localStorage[file] = xhr.responseText;
+	              }
+	            });
+	            xhr.send();
+	          });
+	        }
+	      }
+
+	      if (window.localStorage) {
+	        for (var i = 0, count = files.length; i < count; i++) {
+	          if (getExtension(files[i]) === 'svg' && !document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image', '1.1')) {
+	            return;
+	          }
+	          /* if asyncronously loading fonts 
+	          loadFile(files[i]); */
+	        }
+	      }
+
+	    })();
+	   /* or use webfontconfig to load using the js method */
+	   WebFontConfig = {
+		    google: { families: [ 'Source+Serif+Pro:400,700,600:latin' ] }
+		  };
+		  (function() {
+		    var wf = document.createElement('script');
+		    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+		      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+		    wf.type = 'text/javascript';
+		    wf.async = 'true';
+		    var s = document.getElementsByTagName('script')[0];
+		    s.parentNode.insertBefore(wf, s);
+		  })(); 
+	  </script>
+
+  </head>
+  <body>
+
+
+    <!-- Header section -->
+    {% block header %}{% include "_modules/header" %}{% endblock %}
+
+    <!-- Content block, child page inject content -->
+    <main class="main" id="main" role="main">
+    {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer section -->
+    {% block footer %}{% cache unless craft.config.devMode %}{% include "_modules/footer" %}{% endcache %}{% endblock %}
+
+
+    <!-- Script block allowing child pages to inject their own scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')</script>
+
+    <!-- Load critical js -->
+  	<script src="/js/vendor.min.js"></script>
+  	<script src="/js/app.min.js"></script>
+
+    <!-- asyncronously load the rest -->
+  	<script src="/js/vendor-async.min.js" defer></script>
+  	<script src="/js/app-async.min.js" defer></script>
+    {% block scripts %}{% endblock %}
+
+  </body>
+</html>

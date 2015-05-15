@@ -1,3 +1,6 @@
 # Craft Storage (cache) [http://buildwithcraft.com/help/craft-storage-gitignore]
 /craft/storage/*
+/craft/app/*
+/craft/config/*
+/craft/plugins/*
 !/craft/storage/logo/*

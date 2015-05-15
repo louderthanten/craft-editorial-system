@@ -1,0 +1,211 @@
+// LAYOUT
+//
+// Setup your main layout blocks here. We've included a few examples, but
+// encourage you to create your own.
+//
+// Example:
+// <section class="row">
+//    <section class="primary-content">
+//        … Main page stuff …
+//    </section>
+//    <aside class="secondary-content">
+//        … Secondary content (sidebar perhaps?) …
+//     </aside>
+// </section>
+
+
+// LAYOUT
+//
+// Setup your main layout blocks here. We've included a few examples, but
+// encourage you to create your own.
+//
+// Example:
+// <section class="row">
+//    <section class="primary-content">
+//        … Main page stuff …
+//    </section>
+//    <aside class="secondary-content">
+//        … Secondary content (sidebar perhaps?) …
+//     </aside>
+// </section>
+
+
+.quarter,
+.fifth{
+    position:relative;
+    float:left;
+    width:$c2;
+
+  &:nth-child(odd) {
+    clear:both;
+    padding-right:rem($line/2);
+  }
+  &:nth-child(even) {
+    padding-left:rem($line/2);
+  }
+}
+
+@media only screen and (min-width: $screenSmall) {
+  .primary-content {
+    width:$c5*3; // Creates an object that's 3/5 the width of its parent
+    float:left;  // Float this block to the left
+
+    &.push-right {
+      margin-left:$c5*2;
+    }
+
+  }
+  .secondary-content {
+    width:$c5*2; // Creats an object that's 2/5 the width of its parent
+    float:right;
+
+    &.pull-left {
+      float:left;
+    }
+
+  }
+  .wide {
+    width: 100%;
+    clear:both;
+  }
+  .hang-left,
+  .hang-right {
+    width:$c3;
+    margin-bottom: rem($line/2);
+  }
+  .hang-left{
+    float:left;
+    margin-right:rem($line/2);
+  }
+  .hang-right {
+    float:right;
+    margin-left:rem($line/2);
+  }
+  .split-content {
+    width:$c4*2; // Creates objects that are 1/2 the width of its parent
+    float:left;
+
+    &.pull-right {
+      float:right;
+    }
+  }
+  .fifth {
+    &:nth-child(odd) {
+      clear:none;
+    }
+    &:nth-child(3n+4) {
+      clear:left;
+    }
+  }
+  .fifth,
+  .third {
+    width:$c3;
+    float:left;
+  }
+  .two-third {
+    width:$c3*2;
+    float:left;
+  }
+  .three-quarter {
+    width:$c4*3;
+    float:left;
+  }
+  .columns {
+    width:100%;
+    column-count:2;
+    column-gap:rem($line);
+  }
+  .quarter {
+    @include gutter;
+    width:$c4;
+
+    &:nth-child(odd) {
+      clear:none;
+    }
+    &:nth-child(4n+5) {
+      clear:both;
+    }
+  }
+}
+
+@media only screen and (min-width: $screenSmallMedium) {
+  .center-content {
+    width:$c6*4;
+    margin-left: $c6;
+  }
+  .wide-offset {
+    width:$c6*5;
+  }
+}
+@media only screen and (min-width: $screenMedium) {
+  .hang-left,
+  .hang-right {
+    width:$c3;
+  }
+  .three-up {
+    width:$c3*1; // Creates objects that are 1/3 the width of its parent
+    float:left;
+
+    &:nth-child(odd) {
+      clear:none;
+    }
+
+    &:nth-child(3n+4) {
+      clear:left;
+    }
+  }
+  .fifth {
+    width:$c5;
+    &:nth-child(3n+4),
+    &:nth-child(4n+5) {
+      clear:none;
+    }
+    &:nth-child(5n+6) {
+      clear:both;
+    }
+  }
+}
+
+@media only screen and (min-width: $screenLarge) {
+  .center-content {
+    width:$c5*3;
+    margin-left: $c5;
+  }
+  .wide-offset {
+    width:$c5*4;
+  }
+  .secondary-content {
+    width: $c3;
+  }
+  .columns {
+    column-count:3;
+  }
+}
+@media only screen and (min-width: $screenXlarge) {
+  .center-content {
+    width:$c4*2;
+    margin-left: $c4;
+  }
+  .wide-offset {
+    width:$c4*3;
+  }
+  .hang-left,
+  .hang-right {
+    width: $c4;
+  }
+  .primary-content {
+    &.push-right {
+      margin-left:$c4;
+    }
+  }
+  .secondary-content {
+    width:$c4;
+  }
+
+}
+.pull-right{
+  float:right;
+}
+.pull-left{
+  float:left;
+}

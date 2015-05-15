@@ -1,2 +1,40 @@
-# craft-editorial-system
-Louder Than Ten Editorial System for Craft CMS
+# Louder Than Ten editorial system for Craft CMS
+
+Our CMS of choice for rich, powerful, art-directable websites.
+
+## Step 1
+Clone this repository (or download the .zip) and plop it where ever you want to host your demo site.
+
+## Step 2
+Grab a copy of [Craft](http://buildwithcraft.com).
+
+## Step 3
+Drop the following folders inside the *craft* folder:
+
+* craft/app
+* craft/config
+
+## Step 4
+Point a webserver to the *public_html* folder (our default domain is editorial.dev, but this is optional)
+
+## Step 5
+Create a local MySQL database and import data.db
+
+
+You can also install Craft using [these directions](http://buildwithcraft.com/docs/installing).
+
+
+-----
+
+# Once installed
+
+## Sign in
+
+Go to http://editorial.dev/admin
+
+user: admin
+password: password
+email: help@louderthanten.com
+
+(you can change all of this)
+

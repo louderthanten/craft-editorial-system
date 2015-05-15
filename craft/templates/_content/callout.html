@@ -1,0 +1,15 @@
+<aside class="callout {{ block.calloutWidth }}">
+  {% if block.calloutImage|length %}
+  <figure>   
+    {% set assets = block.calloutImage %}
+    {% include '_components/image' %}
+  </figure>
+  {% endif %}
+  <div class="content {{ block.calloutType }}"{% if block.customColour != '#000000' %} style="background-color:{{ block.customColour }};"{% endif %}>
+    {% if block.markdown == 1 %}
+    {{ block.calloutContent|markdown }}
+    {% else %}
+    {{ block.calloutContent }}
+    {% endif %}
+  </div>
+</aside>

@@ -1,0 +1,35 @@
+{
+  "name": "louderthanten.com",
+  "version": "3.3.4",
+  "description": "Louder Than Ten Website",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louderthan10/louderthanten.git"
+  },
+  "author": "Travis Gertz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/louderthan10/louderthanten/issues"
+  },
+  "homepage": "https://github.com/louderthan10/louderthanten#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.2.1",
+    "browser-sync": "^2.10.1",
+    "cssnano": "^3.4.0",
+    "gulp": "^3.9.0",
+    "gulp-concat-util": "^0.5.4",
+    "gulp-postcss": "^6.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "lost": "^6.6.2",
+    "postcss-assets": "^3.0.3",
+    "postcss-cssnext": "^2.4.0"
+  }
+}

@@ -17,18 +17,3 @@ body {
 .subtle {
   background:$dark-background;
 }
-.grey {
-   @include font-smoothing(on);
-  background:$mid-text;
-  color:$background;  
-}
-.blue {
-  @include font-smoothing(on);
-  background:$blue;
-  color:$background; 
-}
-.red {
-  @include font-smoothing(on);
-  background:$red;
-  color:$background; 
-}

@@ -17,7 +17,9 @@ $line: 24; // Set the baseline grid (in px) Also determines gutter width.
 $rule: 1px solid $light-text;
 $hairline: 1px solid $dark-background;
 $accentline: 1px solid $accent;
-$whiteline: 1px solid $background;
+$lightline: 1px solid $background;
+$whiteline: 1px solid white;
+$blackline: 1px solid black;
 
 // Default border radius
 $radius: 3px;
@@ -26,8 +28,9 @@ $radius: 3px;
 ///* =============================================================================
 //   Font Stacks
 //   ========================================================================== */
-$serif: 'Source Serif Pro',Georgia, serif;
-$sans: 'Source Sans Pro',sans-serif;
+
+$serif: Georgia, serif;
+$sans: sans-serif;
 $mono: monospace;
 
 
@@ -55,11 +58,24 @@ $heavy: 900;
 
 // Adjust according to content not device.
 
+$screenXSmall: 28em !default;
 $screenSmall: 48em !default;
 $screenSmallMedium:54em !default;
 $screenMedium: 64em !default;
 $screenLarge: 98em !default;
 $screenXlarge: 110em !default;
+
+$tiny: "only screen and (min-width : #{$screenXSmall})";
+$small: "only screen and (min-width : #{$screenSmall})";
+$smallMedium: "only screen and (min-width : #{$screenSmallMedium})";
+$medium: "only screen and (min-width : #{$screenMedium})";
+$large: "only screen and (min-width : #{$screenLarge})";
+$xlarge: "only screen and (min-width : #{$screenXlarge})";
+
+// EG:
+// @media #{$small} {
+//   background: red;
+// }
 
 ///* =============================================================================
 //   Grid

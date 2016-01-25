@@ -21,19 +21,19 @@
 @import "../4_elements/navigation";
 
 // Components. Little pieces
-@import "../5_components/text";
-@import "../5_components/headlines";
-@import "../5_components/callouts";
-@import "../5_components/buttons";
-@import "../5_components/horizontal-nav";
-@import "../5_components/breadcrumbs";
-@import "../5_components/images";
+@import "../5_components/text--paragraphs";
+@import "../5_components/text--headlines";
+@import "../5_components/layout--callouts";
+@import "../5_components/forms--buttons";
+@import "../5_components/nav--horizontal";
+@import "../5_components/nav--breadcrumbs";
+@import "../5_components/nav--offcanvas";
+@import "../5_components/media--images";
 
 // Modules. Big chunks of elements and components.
 @import "../6_modules/page";
 @import "../6_modules/layout";
 @import "../6_modules/header";
-@import "../6_modules/offcanvas";
 @import "../6_modules/drawers";
 
 // Themes. Remove if you don't need separate theming styles
@@ -43,7 +43,7 @@
 @import "../7_theme/navigation";
 
 // Overrides. Trumps everything
-@import "../9_overrides/alignment";
+@import "../9_overrides/layout";
+@import "../9_overrides/type";
 @import "../9_overrides/hiding";
 @import "../9_overrides/disabled";
-@import "../9_overrides/clearfix";

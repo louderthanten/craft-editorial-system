@@ -14,52 +14,20 @@
  # albeit without an ‘entry’ variable already set for you.
  #
  # See this page for more details on how Craft routes requests:
- # http://buildwithcraft.com/docs/routing
+ # http://craftcms.com/docs/routing
  #}
 
 {% extends "_layout" %}
 
-{% if entry.artDirection|length %}
-{% set art = true %}
-{% else %}
-{% set art = '' %}
-{% endif %}
-
 {% block content %}
+	<h1>{{ entry.title }}</h1>
 
-{% cache unless craft.config.devMode %}
-<section{% if art %} class="page article--{{ entry.slug }} art--{{ entry.slug }}"{% endif %}>
+	{{ entry.body }}
 
-  <header class="row {% if art %} article--{{ entry.slug }}__hero{% else %}row--header{% endif %}">
-
-    <h1 class="{% if art %}headline js-words{% else %}title{% endif %}">{{ entry.heading }}</h1>
-    
-    {% if entry.subhead %}
-    <h2>{{ entry.subhead }}</h2>
-    {% endif %}
-    
-    {% if entry.body %}
-    <div class="primary-content lead">
-      {{ entry.body }}
-    </div>
-    {% endif %}
-  </header>
-  
-  <section{% if art %} class="article--{{ entry.slug }}__content"{% endif %}>
-    <div class="row">
-      {% include '_content' %}
-    </div>
-  </section>
-
-</section>
-<section class="row">
 	<h2>Recent News</h2>
+	<ul>
 		{% for entry in craft.entries.section('news').limit(5).find() %}
-		<article>
-      <h2><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
-      {{ entry.body }}
-    </article>
+			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
 		{% endfor %}
-</section>
-  {% endcache %}
+	</ul>
 {% endblock %}

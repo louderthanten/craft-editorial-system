@@ -1,9 +1,0 @@
-{% if entry is defined and entry.artDirection %}
-{% spaceless %}
-<style>
-{% for block in entry.artDirection %}
-  {% include ['_art-direction/' ~ block.type] %}
-{% endfor %}
-</style>
-{% endspaceless %}
-{% endif %}

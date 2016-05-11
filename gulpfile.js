@@ -10,7 +10,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var assets  = require('postcss-assets');
 var gutil = require('gulp-util');
-var twig = require('gulp-twig');
 var data = require('gulp-data');
 var path = require('path');
 
@@ -60,22 +59,11 @@ gulp.task('js-pages', function() {
     .pipe(browserSync.reload({stream:true}))
 });
 
-gulp.task('compile', function () {
-  return gulp.src('source/templates/**/*.html')
-    .pipe(data(function(file) {
-      return require('./data/content.json');
-    }))
-    .pipe(twig({
-      base: 'source/templates'
-    }))
-    .pipe(gulp.dest('public'))
-    .pipe(browserSync.reload({stream:true}))
-});
 
 gulp.task('watch', function () {
   gulp.watch('source/scss/**/*.scss', ['css']);
   gulp.watch('source/js/**/*.js', ['js']);
-  gulp.watch(['source/templates/**/*.html','data/**/*.json'], ['compile']).on('change', browserSync.reload);
+  gulp.watch(['craft/templates/**/*.html']).on('change', browserSync.reload);
 });
 
 //gulp.task('browser-sync', function() {
@@ -95,4 +83,4 @@ gulp.task('browser-sync', function() {
 
 gulp.task('start', ['watch', 'critical', 'browser-sync']);
 
-gulp.task('default', ['css', 'js', 'js-pages', 'critical', 'compile']);
+gulp.task('default', ['css', 'js', 'js-pages', 'critical']);

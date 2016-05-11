@@ -1,0 +1,11 @@
+{% set blocks = entry.flexContent.limit(null).find({ with: [
+  'blockquote:testimonialEntry',
+  'callout:calloutImage',
+  'featureBlock:features',
+  'footenotes:notes',
+  'image:images',
+  'table:tableData'
+  ] }) %}
+{% for block in blocks %}
+  {% include ['_content/' ~ block.type ~ '-' ~ entry.section.handle, '_content/' ~ block.type] %}
+{% endfor %}

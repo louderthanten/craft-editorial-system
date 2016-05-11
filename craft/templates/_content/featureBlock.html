@@ -1,0 +1,17 @@
+</div>
+<div class="row {{ block.sectionBackground }} {{ block.customClass }} row--features"{% if block.customColour != '#000000' %} style="background-color:{{ block.customColour }};"{% endif %} id="section-{{ block.id }}">
+
+  {{ block.introContent|md|typogrify }}
+  {% set feature = block.features %}
+
+
+  <div class="row--features__items collapse">
+    {% for row in feature %}
+    <div class="{{ block.cellSize }} row--features__feature">
+    {% if row.figure is defined %}
+      <figure class="row--features__figure">{{ row.figure|raw }}</figure>
+    {% endif %}
+      {{ row.text|md|typogrify }}
+    </div>
+    {% endfor %}
+  </div>

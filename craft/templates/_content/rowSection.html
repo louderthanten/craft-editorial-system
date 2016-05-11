@@ -1,0 +1,17 @@
+</div>
+{% if block.customColour == '' or block.customColour == '#000000' %}
+    {% set blockColour = '' %}
+{% else %}
+    {% set blockColour = block.customColour %}
+{% endif %}
+{% if block.backgroundImage|length %}
+    {% set assets = block.backgroundImage %}
+{% else %}
+    {% set assets = '' %}
+{% endif %}
+{% if assets|length or blockColour|length %}
+    {% set customCSS = true %}
+{% else %}
+    {% set customCSS = false %}
+{% endif %}
+<div class="row {{ block.sectionType }} {{ block.customClass }}"{% if customCSS == true %} style="{% include '_components/background-image' %}{% if blockColour %} background-color:{{ blockColour }};{% endif %}"{% endif %}{% if block.anchorName %} id="{% if block.anchorName %}{{ block.anchorName }}{% else %}section-{{ block.id }}{% endif %}"{% endif %}>

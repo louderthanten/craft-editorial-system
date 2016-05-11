@@ -1,0 +1,15 @@
+{% if block.text is defined and block.text != '#000000' %}
+.art--{{ entry.slug }} .coax-logo .st2 {
+  fill: {{ block.text }};
+}
+{% endif %}
+{% if block.primary is defined and block.primary != '#000000' %}
+.art--{{ entry.slug }} .coax-logo .st0 {
+  fill: {{ block.primary }};
+}
+{% endif %}
+{% if block.secondary is defined and block.secondary != '#000000' %}
+.art--{{ entry.slug }} .coax-logo .st1 {
+  fill: {{ block.secondary }};
+}
+{% endif %}

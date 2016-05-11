@@ -1,0 +1,26 @@
+{% if block.testimonialEntry|length %}
+	{% set quote = block.testimonialEntry.first() %}
+	{% set testimonial = quote.body %}
+	{% set source = quote.fullName %}
+	{% set sourceurl = quote.websiteUrl %}
+	{% set sourceOrg = quote.organization %}
+	{% set orgUrl = quote.organizationUrl %}
+	{% if quote.avatar|length %}
+	{% set avatar = quote.avatar.first.url('source') %}
+	{% else %}
+	{% set avatar = '' %}
+	{% endif %}
+{% else %}
+	{% set testimonial = block.quote %}
+	{% set source = block.source %}
+	{% set sourceurl = block.sourceurl %}
+	{% set sourceOrg = block.sourceOrg %}
+	{% set orgUrl = block.orgUrl %}
+	{% set avatar = '' %}
+{% endif %}
+<blockquote class="{{ block.quoteType }} {{ block.quotePositon }}" id="section-{{ block.id }}">
+  {{ testimonial|md|typogrify }}
+  {% if source %}
+  <footer class="source">{% if sourceurl %}<a href="{{ sourceurl|shorten }}">{% endif %}{% if avatar %}<img src="{{ avatar }}" class="grayscale"  alt="" />{% endif %}{{ source }}{% if sourceurl %}</a>{% endif %} {% if sourceOrg %}<small>{% if orgUrl %}<a href="{{ orgUrl|shorten }}">{% endif %}{{ sourceOrg }}{% if orgUrl %}</a>{% endif %}</small>{% endif %}</footer>
+  {% endif %}
+</blockquote>

@@ -1,0 +1,7 @@
+{% if block.breakpoint %}
+@media only screen and (min-width:{{ block.breakpoint }}em) {
+{% endif %}
+{{ block.css|raw }}
+{% if block.breakpoint %}
+}
+{% endif %}

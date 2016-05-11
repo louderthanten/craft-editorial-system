@@ -1,0 +1,9 @@
+<aside class="callout {{ block.position }}">
+  {% for row in block.notes %}
+  {% if loop.first %}
+  <ol class="footnotes" start="{{ row.number }}">
+  {% endif %}
+    <li id="fn:{{ row.number }}"><p>{{ row.note|raw }}</p></li>
+  {% endfor %}
+  </ol>
+</aside>`

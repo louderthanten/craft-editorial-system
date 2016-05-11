@@ -1,0 +1,7 @@
+<div class="content {{ block.textType }}{% if block.textType == 'flex' %} collapse{% endif %} {{ block.customClass }}" id="section-{{ block.id }}">
+  {% if block.markdown == 1 %}
+  {{ block.textContent|shortcodes|smartdown(smartypants=false)|typogrify }}
+  {% else %}
+  {{ block.textContent|shortcodes|dash|initial_quotes|smartypants }}
+  {% endif %}
+</div>

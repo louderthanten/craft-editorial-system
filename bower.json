@@ -1,0 +1,7 @@
+{
+  "name": "project",
+  "version": "2.2.0",
+  "dependencies": {
+    "fitvids": "~1.1.0"
+  }
+}

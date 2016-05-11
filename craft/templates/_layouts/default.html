@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html class="no-js">
   <head>
-    <!-- Include meta tags -->
+
     {% include '_modules/meta.html' %}
+
+    <!-- Fontawesome icons. Remove if not using -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- CSS -->
+    {% if getCookie('style') %}
+    {% set loaded = 'style' %}
+    <link rel="stylesheet" href="/css/app.css" id="mainCss" />
+    {% else %}
+    {% set loaded = '' %}
+    {{ setCookie('style', 'loaded', now | date_modify("+24 hours").timestamp ) }}
     {% include '_css/critical.html' %}
-    {% block css %}{% endblock %}
+    <link rel="preload" onload="this.rel='stylesheet'" href="/css/app.css" as="style" id="mainCss" />
+    {% endif %}
+    {% block css %}{% cache unless craft.config.devMode %}{% include '_art-direction' %}{% endcache %}{% endblock %}
+
+    <noscript>
+      <link rel="stylesheet" href="/css/app.css" />
+    </noscript>
+
+    <!-- Inline JS -->
     {% include '_js/critical.html' %}
   </head>
   <body>
-    {% include '_js/tag-manager.html' %}
+    {% if settings.gtm is defined %}{% include '_js/tag-manager.html' %}{% endif %}
 
     <!-- Header section -->
     {% include '_modules/header.html' %}
@@ -24,6 +43,5 @@
     <!-- JS Includes -->
     {% include '_js/includes.html' %}
     {% block js %}{% endblock %}
-    {% include '_js/analytics.html' %}
   </body>
 </html>

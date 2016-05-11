@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html class="no-js">
   <head>
-    <!-- Include meta tags -->
     {% include '_modules/meta.html' %}
-    {% include '_js/critical.html' %}
-    <!-- build:css({app,.tmp}) /css/guide.css -->
+
+    <!-- Fontawesome icons. Remove if not using -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- CSS -->
+    {% include '_css/critical.html' %}
+    <link href="/css/app.css" rel="stylesheet" media="all" />
     <link href="/css/guide.css" rel="stylesheet" media="all" />
-    <!-- endbuild -->
+    {% block css %}{% endblock %}
+
+    <!-- Inline JS -->
+    {% include '_js/critical.html' %}
 
   </head>
   <body class="pg-{{ page.slug }}">
@@ -23,7 +30,5 @@
 
     <!-- JS Includes -->
     {% include '_js/includes.html' %}
-    {% include '_js/analytics.html' %}
-
   </body>
 </html>

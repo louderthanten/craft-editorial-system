@@ -42,7 +42,6 @@ gulp.task('critical', function() {
 
 gulp.task('js', function () {
   return gulp.src([
-      'bower_components/Lettering.js/jquery.lettering.js',
       'bower_components/fitvids/jquery.fitvids.js',
       'source/js/components/*.js'
     ])

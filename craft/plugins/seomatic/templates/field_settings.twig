@@ -1,0 +1,307 @@
+{% import "_includes/forms" as forms %}
+
+<div>
+    {% if assetSources %}
+        {{ forms.checkboxSelectField({
+            label: "Asset Sources"|t,
+            instructions: "Which sources do you want to select assets from?"|t,
+            id: 'assetSources',
+            name: 'assetSources',
+            options: assetSources,
+            values: settings.assetSources
+        })}}
+    {% else %}
+        {{ forms.field({
+            label: "Asset Sources"|t,
+        }, '<p class="error">' ~ "No asset sources exist yet."|t ~ '</p>') }}
+    {% endif %}
+
+    <!-- seoTitleSource -->
+
+    <div class="field comboField-wrapper first">
+        <div class="heading">
+            <label for="seoTitleSource">{{ "Default SEO Title"|t}}</label>
+            <div class="instructions"><p>{{ "Set what the SEO Title should default to for each entry." |t |raw}}</p></div>
+        </div>
+
+        <div class="source-container">
+            <div class="source-item">
+                <p>{{ "Source" |t }} </p>
+            </div>
+            <div class="source-item">
+                {{ forms.selectField({
+                    fieldClass: 'nomarginfield',
+                    class: 'selectField',
+                    id: 'seoTitleSource',
+                    options: {
+                        "custom": "Custom Text"|t,
+                        "field": "From Field"|t,
+                    },
+                    name: 'seoTitleSource',
+                    value: settings.seoTitleSource,
+                }) }}
+            </div>
+        </div>
+        <div id="seoTitleSourceField-wrapper" class="selectFieldWrapper">
+            {{ forms.selectField({
+                fieldClass: 'nomarginfield',
+                id: 'seoTitleSourceField',
+                options: fieldList,
+                name: 'seoTitleSourceField',
+                value: settings.seoTitleSourceField,
+            }) }}
+        </div>
+        <div id ="seoTitle-wrapper" class="field customFieldWrapper">
+            <div class="heading">
+                <div class="instructions"><p>{{ "You can include tags that output entry properties, such as <code>{title}</code> or <code>{myCustomField}</code> in the text field below." |t |raw}}</p></div>
+            </div>
+           {{ forms.textField({
+                fieldClass: 'nomarginfield',
+                id: 'seoTitle',
+                class: 'nicetext',
+                name: 'seoTitle',
+                value: settings.seoTitle,
+                maxlength: titleLength,
+                showCharsLeft: true,
+                required: false,
+            }) }}
+        </div>
+
+        {{ forms.lightswitchField({
+            label: "SEO Title Source Changeable"|t,
+            name: 'seoTitleSourceChangeable',
+            instructions: "Whether to allow the user to change the SEO Title source while editing the entry"|t,
+            on: settings.seoTitleSourceChangeable,
+        }) }}
+    </div>
+
+    <!-- seoDescriptionSource -->
+
+    <div class="field comboField-wrapper" id="seoDescription-field">
+        <div class="heading">
+            <label for="seoDescriptionSource">{{ "Default SEO Description"|t}}</label>
+            <div class="instructions"><p>{{ "Set what the SEO Description should default to for each entry." |t |raw}}</p></div>
+        </div>
+
+        <div class="source-container">
+            <div class="source-item">
+                <p>{{ "Source" |t }} </p>
+            </div>
+            <div class="source-item">
+                {{ forms.selectField({
+                    fieldClass: 'nomarginfield',
+                    class: 'selectField',
+                    id: 'seoDescriptionSource',
+                    options: {
+                        "custom": "Custom Text"|t,
+                        "field": "From Field"|t,
+                    },
+                    name: 'seoDescriptionSource',
+                    value: settings.seoDescriptionSource,
+                }) }}
+            </div>
+        </div>
+        <div id="seoDescriptionSourceField-wrapper" class="selectFieldWrapper">
+            {{ forms.selectField({
+                fieldClass: 'nomarginfield',
+                id: 'seoDescriptionSourceField',
+                options: fieldList,
+                name: 'seoDescriptionSourceField',
+                value: settings.seoDescriptionSourceField,
+            }) }}
+        </div>
+        <div id ="seoDescription-wrapper" class="field customFieldWrapper">
+            <div class="heading">
+                <div class="instructions"><p>{{ "You can include tags that output entry properties, such as <code>{title}</code> or <code>{myCustomField}</code> in the text field below." |t |raw}}</p></div>
+            </div>
+            {{ forms.textarea({
+                id: 'seoDescription',
+                fieldClass: 'nomarginfield',
+                class: 'nicetext',
+                name: 'seoDescription',
+                value: settings.seoDescription,
+                maxlength: 160,
+                showCharsLeft: true,
+                required: false,
+            }) }}
+        </div>
+
+        {{ forms.lightswitchField({
+            label: "SEO Description Source Changeable"|t,
+            name: 'seoDescriptionSourceChangeable',
+            instructions: "Whether to allow the user to change the SEO Description source while editing the entry"|t,
+            on: settings.seoDescriptionSourceChangeable,
+        }) }}
+    </div>
+
+    <!-- seoKeywordsSource -->
+
+    <div class="field comboField-wrapper" id="seoKeywords-field">
+        <div class="heading">
+            <label for="seoKeywordsSource">{{ "Default SEO Keywords"|t}}</label>
+            <div class="instructions"><p>{{ "Set what the SEO Keywords should default to for each entry." |t |raw}}</p></div>
+        </div>
+
+        <div class="source-container">
+            <div class="source-item">
+                <p>{{ "Source" |t }} </p>
+            </div>
+            <div class="source-item">
+                {{ forms.selectField({
+                    fieldClass: 'nomarginfield',
+                    class: 'selectField',
+                    id: 'seoKeywordsSource',
+                    options: {
+                        "custom": "Custom Text"|t,
+                        "field": "From Field"|t,
+                        "keywords": "Keywords From Field"|t,
+                    },
+                    name: 'seoKeywordsSource',
+                    value: settings.seoKeywordsSource,
+                }) }}
+            </div>
+        </div>
+        <div id="seoKeywordsSourceField-wrapper" class="selectFieldWrapper">
+            {{ forms.selectField({
+                fieldClass: 'nomarginfield',
+                id: 'seoKeywordsSourceField',
+                options: fieldList,
+                name: 'seoKeywordsSourceField',
+                value: settings.seoKeywordsSourceField,
+            }) }}
+        </div>
+        <div id ="seoKeywords-wrapper" class="field customFieldWrapper">
+            <div class="heading">
+                <div class="instructions"><p>{{ "You can include tags that output entry properties, such as <code>{title}</code> or <code>{myCustomField}</code> in the text field below." |t |raw}}</p></div>
+            </div>
+            {{ forms.textarea({
+                id: 'seoKeywords',
+                class: 'nicetext',
+                name: 'seoKeywords',
+                value: settings.seoKeywords,
+                maxlength: 200,
+                showCharsLeft: true,
+                required: false,
+            }) }}
+        </div>
+
+        {{ forms.lightswitchField({
+            label: "SEO Keywords Source Changeable"|t,
+            name: 'seoKeywordsSourceChangeable',
+            instructions: "Whether to allow the user to change the SEO Keywords source while editing the entry"|t,
+            on: settings.seoKeywordsSourceChangeable,
+        }) }}
+    </div>
+
+    <!-- seoImageIdSource -->
+
+    <div class="field comboField-wrapper" id="seoImageId-field">
+        <div class="heading">
+            <label for="seoImageIdSource">{{ "Default SEO Image"|t}}</label>
+            <div class="instructions"><p>{{ "Set what the SEO Image should default to for each entry." |t |raw}}</p></div>
+        </div>
+
+        <div class="source-container">
+            <div class="source-item">
+                <p>{{ "Source" |t }} </p>
+            </div>
+            <div class="source-item">
+                {{ forms.selectField({
+                    fieldClass: 'nomarginfield',
+                    class: 'selectField',
+                    id: 'seoImageIdSource',
+                    options: {
+                        "custom": "Custom Image"|t,
+                        "field": "From Field"|t,
+                    },
+                    name: 'seoImageIdSource',
+                    value: settings.seoImageIdSource,
+                }) }}
+            </div>
+        </div>
+        <div id="seoImageIdSourceField-wrapper" class="selectFieldWrapper">
+            {{ forms.selectField({
+                fieldClass: 'nomarginfield',
+                id: 'seoImageIdSourceField',
+                options: imageFieldList,
+                name: 'seoImageIdSourceField',
+                value: settings.seoImageIdSourceField,
+            }) }}
+        </div>
+        {{ forms.lightswitchField({
+            label: "SEO Image Source Changeable"|t,
+            name: 'seoImageIdSourceChangeable',
+            instructions: "Whether to allow the user to change the SEO Image source while editing the entry"|t,
+            on: settings.seoImageIdSourceChangeable,
+        }) }}
+    </div>
+
+<!-- twitterCardType -->
+
+    {{ forms.selectField({
+        label: "Default Twitter Card Type"|t,
+        instructions: "Set what the Twitter Card Type should default to for each entry.  Setting it to a blank value means 'no change'."|t,
+        id: "twitterCardType",
+        options: {
+            "": "",
+            "summary": "Summary Card"|t,
+            "summary_large_image": "Summary Card with Large Image"|t,
+        },
+        name: "twitterCardType",
+        value: settings.twitterCardType,
+    }) }}
+
+    {{ forms.lightswitchField({
+        label: "Twitter Card Type Changeable"|t,
+        name: 'twitterCardTypeChangeable',
+        instructions: "Whether to allow the user to change the Twitter Card Type while editing the entry"|t,
+        on: settings.twitterCardTypeChangeable,
+    }) }}
+
+<!-- openGraphType -->
+
+    {{ forms.selectField({
+        label: "Default Facebook Open Graph Type"|t,
+        instructions: "Set what the Facebook Open Graph Type should default to for each entry.  Setting it to a blank value means 'no change'."|t,
+        id: "openGraphType",
+        options: {
+            "": "",
+            "website": "Website"|t,
+            "article": "Article"|t,
+        },
+        name: "openGraphType",
+        value: settings.openGraphType,
+    }) }}
+
+    {{ forms.lightswitchField({
+        label: "Facebook Open Graph Type Changeable"|t,
+        name: 'openGraphTypeChangeable',
+        instructions: "Whether to allow the user to change the Facebook Open Graph Type while editing the entry"|t,
+        on: settings.openGraphTypeChangeable,
+    }) }}
+
+<!-- robots -->
+
+    {{ forms.selectField({
+        label: "Default Robots Meta Tag"|t,
+        instructions: "Set what the Robots Meta Tag should default to for each entry.  Setting it to a blank value means 'no change'."|t,
+        id: "robots",
+        options: {
+            "": "",
+            "all": "all - Index this page and follow links (default)" |t,
+            "noindex": "noindex - Do not index this page" |t,
+            "nofollow": "nofollow - Do not follow links on this page" |t,
+            "none": "none - Do not index or follow links on this page" |t,
+        },
+        name: "robots",
+        value: settings.robots,
+    }) }}
+
+    {{ forms.lightswitchField({
+        label: "Robots Meta Tag Changeable"|t,
+        name: 'robotsChangeable',
+        instructions: "Whether to allow the user to change the Robots Meta Tag while editing the entry"|t,
+        on: settings.robotsChangeable,
+    }) }}
+
+</div>

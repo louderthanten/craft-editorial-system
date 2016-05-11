@@ -34,14 +34,16 @@ gulp.task('critical', function() {
     .pipe(concat.header('<style>'))
     .pipe(concat.footer('</style>'))
     .pipe(rename({
-        basename: 'critical-css',
-        extname: '.twig'
+        basename: 'critical',
+        extname: '.html'
     }))
-    .pipe(gulp.dest('source/templates/_includes'));
+    .pipe(gulp.dest('craft/templates/_css'));
 });
 
 gulp.task('js', function () {
   return gulp.src([
+      'bower_components/Lettering.js/jquery.lettering.js',
+      'bower_components/fitvids/jquery.fitvids.js',
       'source/js/components/*.js'
     ])
     .pipe(sourcemaps.init())

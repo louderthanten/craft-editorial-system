@@ -1,0 +1,8 @@
+{% set nav = craft.entries.section('pages') %}
+<nav class="horizontal-nav pull-right">
+  <ul>
+    {% for page in nav %}
+    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>

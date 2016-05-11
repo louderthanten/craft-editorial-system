@@ -2,11 +2,11 @@
 <html class="no-js">
   <head>
     <!-- Include meta tags -->
-    {% include '_modules/head.html' %}
-
-  <!-- build:css({app,.tmp}) /css/guide.css -->
-  <link href="/css/guide.css" rel="stylesheet" media="all" />
-  <!-- endbuild -->
+    {% include '_modules/meta.html' %}
+    {% include '_js/critical.html' %}
+    <!-- build:css({app,.tmp}) /css/guide.css -->
+    <link href="/css/guide.css" rel="stylesheet" media="all" />
+    <!-- endbuild -->
 
   </head>
   <body class="pg-{{ page.slug }}">
@@ -22,7 +22,8 @@
     </main>
 
     <!-- JS Includes -->
-    {% include '_modules/foot.html' %}
+    {% include '_js/includes.html' %}
+    {% include '_js/analytics.html' %}
 
   </body>
 </html>

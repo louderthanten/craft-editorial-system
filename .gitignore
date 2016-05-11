@@ -2,15 +2,10 @@
 /craft/storage/*
 /craft/app/*
 /craft/config/*
-/craft/plugins/*
 !/craft/storage/logo/*
-/public_html/.htaccess
 .DS_Store
-public_html/.htaccess
-craft/app_old
 node_modules
 bower_components
-dist
 .tmp
 .sass-cache
 .gulp-sass-cache

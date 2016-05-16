@@ -1,9 +1,0 @@
-{% spaceless %}
-.art--{{ entry.slug }} .headline:before {
-  {% set assets = block.image.first() %}
-  content:url({{ assets.url }});
-  display:block;
-  max-width:100%;
-  height:auto;
-  position:relative;
-}{% endspaceless %}

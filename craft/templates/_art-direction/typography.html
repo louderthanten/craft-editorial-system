@@ -24,14 +24,12 @@
 }
 {% else %}
 .headline--{{ entry.slug }} {
-  text-transform: none; {% if block.primaryHeadingFont.label == "Calibre" %}letter-spacing: -0.025em;{% endif %}
+  text-transform: none;
 }
 {% endif %}
 {% if block.primaryHeadingSize %}
 .headline--{{ entry.slug }} {
-  {% if block.primaryHeadingFont.label == "Calibre" and block.primaryHeadingUppercase == 1 %}
-  line-height:0.75;
-  {% elseif block.primaryHeadingFont.label == "Calibre" %}
+  {% if block.primaryHeadingUppercase == 1 %}
   line-height:0.9;
   {% else %}
   line-height: 1.125;

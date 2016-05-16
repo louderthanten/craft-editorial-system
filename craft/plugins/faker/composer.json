@@ -1,0 +1,12 @@
+{
+    "name": "fred/faker",
+    "require": {
+        "fzaninotto/faker": "~1.4"
+    },
+    "authors": [
+        {
+            "name": "Fred Carlsen",
+            "email": "fred@sjelfull.no"
+        }
+    ]
+}

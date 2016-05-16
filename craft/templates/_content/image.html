@@ -7,7 +7,7 @@
 {% if block.imageWidth == 'full' %}
 </div>
 {% endif %}
-  <figure class="{{ block.imageWidth }} article__image{% if block.imageWidth == 'full' %} {{ block.fullImageTheme }}{% endif %} {{ block.captionPosition }} {{ block.customClasses }}"{% if blockColour and block.imageWidth == 'full' %} style="background-color:{{ blockColour }};"{% endif %} id="section-{{ block.id }}">
+  <figure class="{{ block.imageWidth }} {{ block.imagePosition}} article__image{% if block.imageWidth == 'full' %} {{ block.fullImageTheme }}{% endif %} {{ block.captionPosition }} {{ block.customClasses }}"{% if blockColour and block.imageWidth == 'full' %} style="background-color:{{ blockColour }};"{% endif %} id="section-{{ block.id }}">
     {% set assets = block.images %}
     {% include '_components/image' %}
   </figure>

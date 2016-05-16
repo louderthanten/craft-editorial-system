@@ -1,16 +1,16 @@
 {% if block.backgroundColour is defined and block.backgroundColour != '#000000' %}
-.article--{{ entry.slug }} {
+.page--{{ entry.slug }} {
   {% if block.backgroundColour != '#000000' %}background-color:{{ block.backgroundColour }};{% endif %}
 }
 {% endif %}
 {% if block.headerBackgroundColour != '#000000' or block.textColour != '#000000' %}
-.article--{{ entry.slug }}__hero {
+.page--{{ entry.slug }}__hero {
   {% if block.headerBackgroundColour != '#000000' %}background-color:{{ block.headerBackgroundColour }};{% endif %}
   {% if block.textColour != '#000000' %}color:{{ block.textColour }};{% endif %}
 }
 {% endif %}
 {% if block.bodyBackgroundColour != '#000000' or block.bodyTextColour != '#000000' %}
-.article--{{ entry.slug }}__content {
+.page--{{ entry.slug }}__content {
   {% if block.bodyBackgroundColour != '#000000' %}background-color:{{ block.bodyBackgroundColour }};{% endif %}
   {% if block.bodyTextColour != '#000000' %}color:{{ block.bodyTextColour }};{% endif %}
 }

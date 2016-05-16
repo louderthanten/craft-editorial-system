@@ -1,0 +1,29 @@
+{% extends "_layouts/default.html" %}
+{% block page %}
+{% cache unless craft.config.devMode %}
+
+{% if entry.artDirection|length %}
+{% set art = true %}
+{% else %}
+{% set art = '' %}
+{% endif %}
+
+<section{% if art %} class="page page--{{ entry.slug }} art--{{ entry.slug }}"{% endif %}>
+  <header class="row {% if art %} page--{{ entry.slug }}__hero{% else %}row--header{% endif %}">
+    <h1>{{ entry.title }}</h1>
+  </header>
+  <section{% if art %} class="page--{{ entry.slug }}__content"{% endif %}>
+    {% endcache %}
+
+    {% block content %}
+    {% cache unless craft.config.devMode %}
+    <div class="row">
+      {% include '_content' %}
+    </div>
+    {% endcache %}
+    {% endblock %}
+    
+
+  </section>
+</section>
+{% endblock %}

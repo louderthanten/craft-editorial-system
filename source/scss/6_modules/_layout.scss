@@ -13,8 +13,112 @@
 //     </aside>
 // </section>
 
+//Halfs
+.c2,
+.c4x2,
+.c6x3 {
 
-@media only screen and (min-width: $screenSmall) {
+}
+//Thirds
+.c3,
+.c6x2 {
+
+}
+.c3x2,
+.c6x4 {
+
+}
+//Quarters
+.c4 {
+
+}
+.c4x3 {
+
+}
+//Fifths
+.c5 {
+
+}
+.c5x2 {
+
+}
+.c5x3 {
+
+}
+.c5x4 {
+
+}
+//Sixths
+.c6 {
+
+}
+.c6x5 {
+
+}
+
+@media #{$small} {
+  .c2,
+  .c4x2,
+  .c6x3,
+  .c3,
+  .c6x2,
+  .c3x2,
+  .c6x4,
+  .c4,
+  .c4x3,
+  .c5,
+  .c5x2,
+  .c5x3,
+  .c5x4,
+  .c6,
+  .c6x5 {
+    float:left;
+  }
+
+  //Halfs
+  .c2,
+  .c4x2,
+  .c6x3 {
+    width: $c2;
+  }
+  //Thirds
+  .c3,
+  .c6x2 {
+    width: $c3;
+  }
+  .c3x2,
+  .c6x4 {
+    width:$c3*2;
+  }
+  //Quarters
+  .c4 {
+    width:$c4
+  }
+  .c4x3 {
+    width:$c4*3;
+  }
+  //Fifths
+  .c5 {
+    width:$c5;
+  }
+  .c5x2 {
+    width:$c5*2;
+  }
+  .c5x3 {
+    width:$c5*3;
+  }
+  .c5x4 {
+    width:$c5*4;
+  }
+  //Sixths
+  .c6 {
+    width:$c6;
+  }
+  .c6x5 {
+    width:$c6*5;
+  }
+
+
   .primary-content {
     width:$c5*3; // Creates an object that's 3/5 the width of its parent
     float:left;  // Float this block to the left

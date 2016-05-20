@@ -30,7 +30,7 @@
     {% include '_js/critical.html' %}
   </head>
   <body>
-    {% if settings.gtm is defined %}{% include '_js/tag-manager.html' %}{% endif %}
+    {% if settings.gtm %}{% include '_js/tag-manager.html' %}{% endif %}
 
     <!-- Header section -->
     {% include '_modules/header.html' %}

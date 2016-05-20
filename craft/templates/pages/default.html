@@ -9,9 +9,7 @@
 {% endif %}
 
 <section{% if art %} class="page page--{{ entry.slug }} art--{{ entry.slug }}"{% endif %}>
-  <header class="row {% if art %} page--{{ entry.slug }}__hero{% else %}row--header{% endif %}">
-    <h1>{{ entry.title }}</h1>
-  </header>
+  {% include '_modules/hero' %}
   <section{% if art %} class="page--{{ entry.slug }}__content"{% endif %}>
     {% endcache %}
 

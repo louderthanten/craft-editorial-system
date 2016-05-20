@@ -1,0 +1,6 @@
+{# set assets in parent template #}
+background-image:{% for img in assets %}url({{ img.url }}){{ not loop.last ? ',' }}{% endfor %};
+background-position:{% for img in assets %}{% if img.imageFinePosition %}{{ img.imageFinePosition }}{% else %}{% switch img.imagePosition %}{% case "drop-left" %}left bottom{% case "drop-right" %}right bottom{% case "left" %}left -1px{% case "right" %}right -1px{% case "center" %}center -1px{% case "full" %}center center{% default %}left top{% endswitch %}{% endif %}{{ not loop.last ? ',' }}{% endfor %};
+background-size:{% for img in assets %}{% if img.imageSize %}{{ img.imageSize }}{% else %}auto auto{% endif %}{{ not loop.last ? ',' }}{% endfor %};
+background-repeat: {% for img in assets %}{% if img.imageRepeat %}{{ img.imageRepeat }}{% else %}repeat{% endif %}{{ not loop.last ? ',' }}{% endfor %};
+background-attachment:{% for img in assets %}{% if img.fixedPosition == 1 %}fixed{% else %}scroll{% endif %}{{ not loop.last ? ',' }}{% endfor %};

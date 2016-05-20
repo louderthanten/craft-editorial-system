@@ -1,12 +1,7 @@
 {# set assets in parent template #}
 {% for img in assets %}
 {% if img.websiteUrl %}<a href="{{ img.websiteUrl }}">{% endif %}
-{#{% if img.extension == 'svg' %}
-{{ craft.inlin.er(img.url, true) | raw }}
-{% else %}#}
 <img src="{{ img.url }}" itemprop="image" alt="{{ img.altText }}" />
-{#{% endif %}#}
-
 {% if img.websiteUrl %}</a>{% endif %}
 {% if img.caption or img.credit %}
 <figcaption>

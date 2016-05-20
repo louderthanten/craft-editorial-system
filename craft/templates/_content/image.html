@@ -1,12 +1,8 @@
-{% if block.fullImageBackground == '' or block.fullImageBackground == '#000000' %}
-    {% set blockColour = '' %}
-{% else %}
-    {% set blockColour = block.fullImageBackground %}
-{% endif %}
-
 <figure class="article__image {{ block.captionPosition }} {% include '_components/position.html' %}" id="section-{{ block.id }}">
+  {% if block.image|length %}
   {% set assets = block.image %}
-  {% if block.link is defined %}<a href="{{ block.link }}">{% endif %}
-    {% include '_components/image' %}
-  {% if block.link is defined %}</a>{% endif %}
+  {% include '_components/image' %}
+  {% elseif block.placeholderSize %}
+  <img src="http://placehold.it/{{ block.placeholderSize }}{% if block.placeholderText %}?text={{ block.placeholderText }}{% endif %}" itemprop="image" alt="" />
+  {% endif %}
 </figure>

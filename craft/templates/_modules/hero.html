@@ -1,0 +1,6 @@
+<header class="row {% if art %} page--{{ entry.slug }}__hero{% else %}row--header{% endif %}">
+  <h1{% if art %} class="headline--{{ entry.slug }} headline"{% endif %}>{{ entry.title }}</h1>
+  {% if entry.subhead %}
+  <h2 itemprop="alternativeHeadline" class="subhead--{{ entry.slug }}">{{ entry.subhead|widont|amp|smartypants }}</h2>
+  {% endif %}
+</header>

@@ -15,9 +15,12 @@ Drop the following folders inside the *craft* folder:
 * craft/config
 
 ## Step 4
-Point a webserver to the *public_html* folder (our default domain is editorial.dev, but this is optional)
+Configure your [environment settings](https://craftcms.com/docs/multi-environment-configs) in `craft/config`.
 
 ## Step 5
+Point a webserver to the *public* folder (our default domain is editorial.dev, but this is optional)
+
+## Step 6
 Create a local MySQL database and import data.db
 
 
@@ -37,4 +40,3 @@ password: password
 email: help@louderthanten.com
 
 (you can change all of this)
-

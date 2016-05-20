@@ -19,6 +19,9 @@
     {% endif %}
     {% block css %}{% cache unless craft.config.devMode %}{% include '_art-direction' %}{% endcache %}{% endblock %}
 
+    {# LiveWires styles #}
+    {% if settings.blankOutText %}<link rel="stylesheet" href="/css/livewires.css" />{% endif %}
+
     <noscript>
       <link rel="stylesheet" href="/css/app.css" />
     </noscript>

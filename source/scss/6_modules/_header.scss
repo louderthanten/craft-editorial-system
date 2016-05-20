@@ -6,7 +6,8 @@
 }
 
 .logo {
-  max-width: rem($line*10);
+  max-width: rem($line*5);
+  max-height:rem($line*5);
   margin-top:rem($line);
   margin-bottom:rem($line);
   float:left;

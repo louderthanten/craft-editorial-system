@@ -1,10 +1,4 @@
 <header class="row row--tight">
-  <div class="logo"><a href="/"><img src="/img/logo.svg" alt="LOGO" /></a></div>
-  <nav class="horizontal-nav pull-right">
-    <ul>
-      <li><a href="/example/">Live Wires example</a></li>
-      <li><a href="/guide/">Live Wires guide</a></li>
-    </ul>
-  </nav>
+  <div class="logo"><a href="/">{{ craft.inlin.er('/img/logo.svg') | raw }}</a></div>
   {% include "_modules/primary-nav.html" %}
 </header>

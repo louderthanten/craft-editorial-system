@@ -4,8 +4,8 @@
   <figcaption>
     {{ block.caption|markdown|widont }}
 
-    {% if block.imageCredit %}
-      <small class="source"><a href="{{ block.imageCreditUrl }}">{{ block.imageCredit }}</a>{% if block.imageCreditOrganization %}, <a href="{{ block.imageCreditOrgUrl }}">{{ block.imageCreditOrganization }}</a>{% endif %}</small>
+    {% if block.credit %}
+      <small class="source"><a href="{{ block.imageCreditUrl }}">{{ block.credit }}</a>{% if block.imageCreditOrganization %}, <a href="{{ block.imageCreditOrgUrl }}">{{ block.imageCreditOrganization }}</a>{% endif %}</small>
     {% endif %}
   </figcaption>
   {% endif %}

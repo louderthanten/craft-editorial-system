@@ -8,11 +8,11 @@
 {#{% endif %}#}
 
 {% if img.websiteUrl %}</a>{% endif %}
-{% if img.caption or img.imageCredit %}
+{% if img.caption or img.credit %}
 <figcaption>
   {{ img.caption|markdown|smartypants|widont }}
-  {% if img.imageCredit %}
-    <small class="source">{% if img.imageCreditUrl %}<a href="{{ img.imageCreditUrl }}">{% endif %}{{ img.imageCredit }}{% if img.imageCreditUrl %}</a>{% endif %}{% if img.imageCreditOrganization %}, {% if img.imageCreditOrgUrl %}<a href="{{ img.imageCreditOrgUrl }}">{% endif %}{{ img.imageCreditOrganization }}{% if img.imageCreditOrgUrl %}</a>{% endif %}{% endif %}</small>
+  {% if img.credit %}
+    <small class="source">{% if img.imageCreditUrl %}<a href="{{ img.imageCreditUrl }}">{% endif %}{{ img.credit }}{% if img.imageCreditUrl %}</a>{% endif %}{% if img.imageCreditOrganization %}, {% if img.imageCreditOrgUrl %}<a href="{{ img.imageCreditOrgUrl }}">{% endif %}{{ img.imageCreditOrganization }}{% if img.imageCreditOrgUrl %}</a>{% endif %}{% endif %}</small>
   {% endif %}
 </figcaption>
 {% endif %}

@@ -1,15 +1,15 @@
-<aside class="callout {{ block.calloutWidth }} {{ block.calloutPosition }} {{ block.customClass }}" id="section-{{ block.id }}">
-  {% if block.calloutImage|length %}
+<aside class="callout  {% include '_components/position.html' %}" id="section-{{ block.id }}">
+  {% if block.image|length %}
   <figure>
-    {% set assets = block.calloutImage %}
+    {% set assets = block.image %}
     {% include '_components/image' %}
   </figure>
   {% endif %}
-  <div class="content {{ block.calloutType }}"{% if block.customColour != '#000000' %} style="background-color:{{ block.customColour }};"{% endif %}>
+  <div class="content {{ block.colour }}"{% if block.customColour != '#000000' %} style="background-color:{{ block.customColour }};"{% endif %}>
     {% if block.markdown == 1 %}
-    {{ block.calloutContent|markdown|typogrify }}
+    {{ block.text|markdown|typogrify }}
     {% else %}
-    {{ block.calloutContent|typogrify }}
+    {{ block.text|typogrify }}
     {% endif %}
   </div>
 </aside>

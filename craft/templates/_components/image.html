@@ -1,0 +1,19 @@
+{# set assets in parent template #}
+{% for img in assets %}
+{% if img.websiteUrl %}<a href="{{ img.websiteUrl }}">{% endif %}
+{#{% if img.extension == 'svg' %}
+{{ craft.inlin.er(img.url, true) | raw }}
+{% else %}#}
+<img src="{{ img.url }}" itemprop="image" alt="{{ img.altText }}" />
+{#{% endif %}#}
+
+{% if img.websiteUrl %}</a>{% endif %}
+{% if img.caption or img.imageCredit %}
+<figcaption>
+  {{ img.caption|markdown|smartypants|widont }}
+  {% if img.imageCredit %}
+    <small class="source">{% if img.imageCreditUrl %}<a href="{{ img.imageCreditUrl }}">{% endif %}{{ img.imageCredit }}{% if img.imageCreditUrl %}</a>{% endif %}{% if img.imageCreditOrganization %}, {% if img.imageCreditOrgUrl %}<a href="{{ img.imageCreditOrgUrl }}">{% endif %}{{ img.imageCreditOrganization }}{% if img.imageCreditOrgUrl %}</a>{% endif %}{% endif %}</small>
+  {% endif %}
+</figcaption>
+{% endif %}
+{% endfor %}

@@ -1,7 +1,7 @@
-<div class="content {{ block.textType }} {{ block.textPosition }} {{ block.customClass }}" id="section-{{ block.id }}">
+<div class="content {% include '_components/position.html' %}" id="section-{{ block.id }}">
   {% if block.markdown == 1 %}
-  {{ block.textContent|md|typogrify }}
+  {{ block.text|md|typogrify }}
   {% else %}
-  {{ block.textContent|dash|initial_quotes|smartypants }}
+  {{ block.text|dash|initial_quotes|smartypants }}
   {% endif %}
 </div>

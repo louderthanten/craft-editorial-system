@@ -1,0 +1,20 @@
+{% if block.customColour == '' or block.customColour == '#000000' %}
+    {% set blockColour = '' %}
+{% else %}
+    {% set blockColour = block.customColour %}
+{% endif %}
+{% if block.image|length %}
+    {% set assets = block.image %}
+{% else %}
+    {% set assets = '' %}
+{% endif %}
+{% if assets|length or blockColour|length %}
+    {% set customCSS = true %}
+{% else %}
+    {% set customCSS = false %}
+{% endif %}
+<div class="row {{ block.rowType }} {{ block.customClass }}"{% if customCSS == true %} style="{% include '_components/background-image' %}{% if blockColour %} background-color:{{ blockColour }};{% endif %}"{% endif %}{% if block.anchorName %} id="{% if block.anchorName %}{{ block.anchorName }}{% else %}section-{{ block.id }}{% endif %}"{% endif %}>
+    {% for block in block.children %}
+      {% include ['_content/' ~ block.type] %}
+    {% endfor %}
+</div>

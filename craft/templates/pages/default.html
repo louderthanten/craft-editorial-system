@@ -17,12 +17,10 @@
 
     {% block content %}
     {% cache unless craft.config.devMode %}
-    <div class="row">
-      {% include '_content' %}
-    </div>
+    {% include '_content' %}
     {% endcache %}
     {% endblock %}
-    
+
 
   </section>
 </section>

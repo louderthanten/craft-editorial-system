@@ -4,13 +4,9 @@
     {% set blockColour = block.fullImageBackground %}
 {% endif %}
 
-{% if block.imageWidth == 'full' %}
-</div>
-{% endif %}
-  <figure class="{{ block.imageWidth }} {{ block.imagePosition}} article__image{% if block.imageWidth == 'full' %} {{ block.fullImageTheme }}{% endif %} {{ block.captionPosition }} {{ block.customClasses }}"{% if blockColour and block.imageWidth == 'full' %} style="background-color:{{ blockColour }};"{% endif %} id="section-{{ block.id }}">
-    {% set assets = block.images %}
+<figure class="article__image {{ block.captionPosition }} {% include '_components/position.html' %}" id="section-{{ block.id }}">
+  {% set assets = block.image %}
+  {% if block.link is defined %}<a href="{{ block.link }}">{% endif %}
     {% include '_components/image' %}
-  </figure>
-{% if block.imageWidth == 'full' %}
-<div class="row row--tight">
-{% endif %}
+  {% if block.link is defined %}</a>{% endif %}
+</figure>

@@ -1,18 +1,12 @@
-{% if block.videoWidth == 'full' %}
-</div>
-{% endif %}
-  <figure class="video {{ block.videoWidth }} {{ block.customClass }}" id="section-{{ block.id }}">
-    {{ block.embed|raw }}
-    {% if block.vidCaption %}
-    <figcaption>
-      {{ block.vidCaption|markdown|widont }}
+<figure class="video {% include '_components/position.html' %}" id="section-{{ block.id }}">
+  {{ block.embedCode|raw }}
+  {% if block.caption %}
+  <figcaption>
+    {{ block.caption|markdown|widont }}
 
-      {% if block.videoCredit %}
-        <small class="source">Cinematographer: <a href="{{ block.videoCreditUrl }}">{{ block.videoCredit }}</a>{% if block.videoCreditOrg %}, <a href="{{ block.creditOrgUrl|shorten }}">{{ block.videoCreditOrg }}</a>{% endif %}</small>
-      {% endif %}
-    </figcaption>
+    {% if block.imageCredit %}
+      <small class="source"><a href="{{ block.imageCreditUrl }}">{{ block.imageCredit }}</a>{% if block.imageCreditOrganization %}, <a href="{{ block.imageCreditOrgUrl }}">{{ block.imageCreditOrganization }}</a>{% endif %}</small>
     {% endif %}
-  </figure>
-{% if block.videoWidth == 'full' %}
-<div class="row row--tight">
-{% endif %}
+  </figcaption>
+  {% endif %}
+</figure>

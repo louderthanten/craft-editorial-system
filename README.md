@@ -21,7 +21,7 @@ Configure your [environment settings](https://craftcms.com/docs/multi-environmen
 Point a webserver to the *public* folder (our default domain is editorial.dev, but this is optional)
 
 ## Step 6
-Create a local MySQL database and import data.db
+Create a local MySQL database and import data.sql
 
 
 You can also install Craft using [these directions](http://buildwithcraft.com/docs/installing).

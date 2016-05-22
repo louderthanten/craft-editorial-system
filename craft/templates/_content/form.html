@@ -1,8 +1,16 @@
-<form action="" method="post" class="{{ block.customClass }} {% include '_components/position.html' %}" id="{{ block.anchorName }}" accept-charset="UTF-8" data-thanks="{{ block.thankYouMessage }}">
-  {% for block in block.children %}
-    {% include ['_form/' ~ block.type] %}
-  {% endfor %}
-  <div class="field">
-  
-  </div>
+<form action="" method="post" class="callout {{ block.customClass }} {% include '_components/position.html' %}" id="{% if block.anchorName %}{{ block.anchorName }}{% else %}form-{{ block.id }}{% endif %}" accept-charset="UTF-8" data-thanks="{{ block.thankYouMessage }}">
+  <fieldset class="content {{ block.colour }}"{% if block.customColour != '#000000' %} style="background-color:{{ block.customColour }};"{% endif %}>
+    <input type="hidden" name="action" value="{{ block.formAction }}" />
+    {% if block.redirect %}
+    <input type="hidden" name="redirect" value="{{ block.redirect }}" />
+    {% endif %}
+    {{ block.text|md|typogrify }}
+
+    {% for block in block.children %}
+      {% include ['_form/' ~ block.type] %}
+    {% endfor %}
+    <div class="field">
+      <button type="submit" name="submit" class="button{% if block.buttonColour %} {{ block.buttonColour }}{% endif %}">{{ block.value }}</button>
+    </div>
+  </fieldset>
 </form>

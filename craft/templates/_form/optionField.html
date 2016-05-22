@@ -1,0 +1,31 @@
+{% if block.fieldName %}
+{% set name = block.fieldName %}
+{% else %}
+{% set name = 'field-' ~ block.id %}
+{% endif %}
+<div class="field{% if block.width %} field--{{ block.width }} {{ block.width }}{% endif %}">
+  <label>{{ block.fieldLabel }}</label>
+
+  {% if block.optionFormat == 'buttons' %}
+  <div class="option-buttons js-options">
+    {% import '_macros/button-option' as input %}
+
+  {% elseif block.optionFormat == 'pills' %}
+  <div class="pill-buttons js-options">
+    {% import '_macros/button-option' as input %}
+
+  {% else %}
+  <ul class="check-list">
+    {% import '_macros/check-field' as input %}
+  {% endif %}
+
+    {% for option in block.fieldOptions %}
+    {{ input.field(option.name, option.value, name, block.optionFieldType) }}
+    {% endfor %}
+
+  {% if block.optionFormat == 'button' %}
+  </div>
+  {% else %}
+  </ul>
+  {% endif %}
+</div>

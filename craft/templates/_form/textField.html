@@ -1,22 +1,22 @@
-{% import '_macros/field' as input %}
+{% import '_macros/text-field' as input %}
 {% set fieldLabel = block.fieldLabel %}
 {% set fieldName = block.fieldName %}
 {% if block.anchorName %}
 {% set anchorName = block.anchorName %}
 {% else %}
-{% set anchorName = fieldName %}
+{% set anchorName = 'field-' ~ block.id %}
 {% endif %}
 {% set fieldType = block.fieldType %}
 {% set width = block.width %}
-{% if block.fieldValue %}
-{% set fieldValue = block.fieldValue %}
+{% if block.value %}
+{% set value = block.value %}
 {% else %}
-{% set fieldValue = 'null' %}
+{% set value = null %}
 {% endif %}
 {% if block.placeholderText %}
 {% set placeholderText = block.placeholderText %}
 {% else %}
-{% set placeholderText = 'null' %}
+{% set placeholderText = null %}
 {% endif %}
 {% if block.required %}
 {% set required = 'required' %}
@@ -24,4 +24,4 @@
 {% set required = null %}
 {% endif %}
 
-{{ input.field(fieldLabel, fieldName, anchorName, fieldType, width, fieldValue,	placeholderText, required) }}
+{{ input.field(fieldLabel, fieldName, anchorName, fieldType, width, value,	placeholderText, required) }}

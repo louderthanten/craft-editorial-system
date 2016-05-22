@@ -1,0 +1,11 @@
+{% macro field(label, name, id, type, size, value, placeholder, required) %}
+
+<div class="field{% if size %} field--{{ size }} {{ size }}{% endif %}">
+  {% if label %}<label for="{{ id }}">{{ label }}{% if required %} <span>*</span>{% endif %}</label>{% endif %}
+  {% if type == 'textarea' %}
+  <textarea name="{{ name }}" id="{{ id }}" {{ required }}>{{ value }}</textarea>
+  {% else %}
+  <input type="{{ type }}" id="{{ id }}" name="{{ name }}" value="{{ value }}" class="text-input" placeholder="{{ placeholder }}" {{ required }} />
+  {% endif %}
+</div>
+{% endmacro %}

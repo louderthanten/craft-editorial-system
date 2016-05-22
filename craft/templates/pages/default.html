@@ -9,7 +9,7 @@
 {% endif %}
 
 <section{% if art %} class="page page--{{ entry.slug }} art--{{ entry.slug }}"{% endif %}>
-  {% include '_modules/hero' %}
+  {% include '_modules/hero' with { art:art } %}
   <section{% if art %} class="page--{{ entry.slug }}__content"{% endif %}>
     {% endcache %}
 

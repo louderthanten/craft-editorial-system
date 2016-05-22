@@ -9,12 +9,7 @@
 {% endif %}
 
 <section{% if art %} class="page page--homepage art--homepage"{% endif %}>
-  <header class="row {% if art %} page--homepage__hero{% else %}row--header{% endif %}">
-    <h1{% if art %} class="headline--homepage headline"{% endif %}>{{ entry.title }}</h1>
-    {% if entry.subhead %}
-    <h2 itemprop="alternativeHeadline" class="subhead--homepage">{{ entry.subhead|widont|amp|smartypants }}</h2>
-    {% endif %}
-  </header>
+  {% include '_modules/hero' with { art:art } %}
   <section{% if art %} class="page--homepage__content"{% endif %}>
     {% endcache %}
 

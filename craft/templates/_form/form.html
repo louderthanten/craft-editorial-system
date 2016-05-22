@@ -1,0 +1,8 @@
+<form action ="" method="post" class="{{ block.customClass }} {% include '_components/position.html' %}" id="{{ block.anchorName }}" accept-charset="UTF-8" data-thanks="{{ block.thankYouMessage }}">
+  {% for block in block.children %}
+    {% include ['_form/' ~ block.type] %}
+  {% endfor %}
+  <div class="field">
+    <button type="submit" name="submit" class="button">{{ block.fieldValue }}</button>
+  </div>
+</form>

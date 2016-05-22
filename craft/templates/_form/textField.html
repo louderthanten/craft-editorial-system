@@ -1,0 +1,27 @@
+{% import '_macros/field' as input %}
+{% set fieldLabel = block.fieldLabel %}
+{% set fieldName = block.fieldName %}
+{% if block.anchorName %}
+{% set anchorName = block.anchorName %}
+{% else %}
+{% set anchorName = fieldName %}
+{% endif %}
+{% set fieldType = block.fieldType %}
+{% set width = block.width %}
+{% if block.fieldValue %}
+{% set fieldValue = block.fieldValue %}
+{% else %}
+{% set fieldValue = 'null' %}
+{% endif %}
+{% if block.placeholderText %}
+{% set placeholderText = block.placeholderText %}
+{% else %}
+{% set placeholderText = 'null' %}
+{% endif %}
+{% if block.required %}
+{% set required = 'required' %}
+{% else %}
+{% set required = null %}
+{% endif %}
+
+{{ input.field(fieldLabel, fieldName, anchorName, fieldType, width, fieldValue,	placeholderText, required) }}

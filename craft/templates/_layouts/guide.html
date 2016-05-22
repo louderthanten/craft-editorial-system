@@ -16,7 +16,7 @@
     {% include '_js/critical.html' %}
 
   </head>
-  <body class="pg-{{ page.slug }}">
+  <body class="pg-{{ craft.request.lastSegment }}">
 
     <!-- Header section -->
     {% include '_modules/header-guide.html' %}

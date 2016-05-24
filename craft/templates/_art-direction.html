@@ -1,7 +1,5 @@
 {% if entry is defined and entry.artDirection %}
-{% set art = entry.artDirection.find({ with: [
-  'backgroundImage:backgroundImage'
-  ] }) %}
+{% set art = entry.artDirection %}
 <style>
 {% for block in art %}
   {% include ['_art-direction/' ~ block.type] %}

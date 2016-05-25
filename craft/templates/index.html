@@ -1,6 +1,6 @@
 {% extends "_layouts/default.html" %}
 {% block page %}
-{% cache unless craft.config.devMode %}
+{% cache unless craft.config.devMode or craft.request.isLivePreview %}
 
 {% if entry.artDirection|length %}
 {% set art = true %}
@@ -14,7 +14,7 @@
     {% endcache %}
 
     {% block content %}
-    {% cache unless craft.config.devMode %}
+    {% cache unless craft.config.devMode or craft.request.isLivePreview %}
     {% include '_content' %}
     {% endcache %}
     {% endblock %}

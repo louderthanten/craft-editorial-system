@@ -1,6 +1,6 @@
 // LAYOUT
 //
-// Setup your main layout blocks here. We've included a few examples, but
+// Setup your common layout blocks here. We've included a few examples, but
 // encourage you to create your own.
 //
 // Example:
@@ -13,186 +13,9 @@
 //     </aside>
 // </section>
 
-//Halfs
-.c2,
-.c4x2,
-.c6x3 {
 
-}
-//Thirds
-.c3,
-.c6x2 {
-
-}
-.c3x2,
-.c6x4 {
-
-}
-//Quarters
-.c4 {
-
-}
-.c4x3 {
-
-}
-//Fifths
-.c5 {
-
-}
-.c5x2 {
-
-}
-.c5x3 {
-
-}
-.c5x4 {
-
-}
-//Sixths
-.c6 {
-
-}
-.c6x5 {
-
-}
-
-@media #{$small} {
-  .c2,
-  .c4x2,
-  .c6x3,
-  .c3,
-  .c6x2,
-  .c3x2,
-  .c6x4,
-  .c4,
-  .c4x3,
-  .c5,
-  .c5x2,
-  .c5x3,
-  .c5x4,
-  .c6,
-  .c6x5 {
-    float:left;
-  }
-
-  //Halfs
-  .c2,
-  .c4x2,
-  .c6x3 {
-    width: $c2;
-  }
-  .pushl2,
-  .pushl4x2,
-  .pushl6x3 {
-    margin-left:$c2;
-  }
-  .pushr2,
-  .pushr4x2,
-  .pushr6x3 {
-    margin-right:$c2;
-  }
-  //Thirds
-  .c3,
-  .c6x2 {
-    width: $c3;
-  }
-  .pushl3,
-  .pushl6x2 {
-    margin-left: $c3;
-  }
-  .pushr3,
-  .pushr6x2 {
-    margin-right: $c3;
-  }
-  .c3x2,
-  .c6x4 {
-    width:$c3*2;
-  }
-  .pushl3x2,
-  .pushl6x4 {
-    margin-left:$c3*2;
-  }
-  .pushr3x2,
-  .pushr6x4 {
-    margin-right:$c3*2;
-  }
-  //Quarters
-  .c4 {
-    width:$c4;
-  }
-  .pushl4 {
-    margin-left:$c4;
-  }
-  .pushr4 {
-    margin-right:$c4;
-  }
-  .c4x3 {
-    width:$c4*3;
-  }
-  .pushl4x3 {
-    margin-left:$c4*3;
-  }
-  .pushr4x3 {
-    margin-right:$c4*3;
-  }
-  //Fifths
-  .c5 {
-    width:$c5;
-  }
-  .pushl5 {
-    margin-left:$c5;
-  }
-  .pushr5 {
-    margin-right:$c5;
-  }
-  .c5x2 {
-    width:$c5*2;
-  }
-  .pushl5x2 {
-    margin-left:$c5*2;
-  }
-  .pushr5x2 {
-    margin-right:$c5*2;
-  }
-  .c5x3 {
-    width:$c5*3;
-  }
-  .pushl5x3 {
-    margin-left:$c5*3;
-  }
-  .pushr5x3 {
-    margin-right:$c5*3;
-  }
-  .c5x4 {
-    width:$c5*4;
-  }
-  .pushl5x4 {
-    margin-left:$c5*4;
-  }
-  .pushr5x4 {
-    margin-right:$c5*4;
-  }
-  //Sixths
-  .c6 {
-    width:$c6;
-  }
-  .pushl6 {
-    margin-left:$c6;
-  }
-  .pushr6 {
-    margin-right:$c6;
-  }
-  .c6x5 {
-    width:$c6*5;
-  }
-  .pushl6x5 {
-    margin-left:$c6*5;
-  }
-  .pushr6x5 {
-    margin-right:$c6*5;
-  }
-
-  .pushrimary-content {
+@media only screen and (min-width: $screenSmall) {
+  .primary-content {
     width:$c5*3; // Creates an object that's 3/5 the width of its parent
     float:left;  // Float this block to the left
 
@@ -216,7 +39,7 @@
 }
 
 @media only screen and (min-width: $screenLarge) {
-  .pushrimary-content {
+  .primary-content {
     width:$c7*4; // Change grid as you move up: Four units of a 7-column grid
   }
   .secondary-content {

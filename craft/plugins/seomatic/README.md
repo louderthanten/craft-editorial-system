@@ -46,11 +46,25 @@ Some things to do, and ideas for potential features:
 * [bug] Enforce *required fields on the various settings pages in the Admin CP by doing proper validation
 * [bug] The `foundingDate` fields probably should be dateTimeField types on the Settings pages
 * [feature] Add support for `og:image:type`, `og:image:width`, and `og:image:height`
-* [feature] Add the ability to analyze a page for content vs. keywords for the SEO Template Metas, "just like Yoast"
+* [feature] Add the ability to analyze a page for content vs. "focus keywords" in the SEOmetrics "just like Yoast"
 * [feature] Change the preview to a live preview when editing things in SEOmatic
 * [feature] Provide SiteMap functionality.  Yes, it's SEO-related, but seems like it might be better to keep SEOmatic focused (?)
 
 ## Changelog
+
+### 1.1.19 -- 2016.05.30
+
+* [Fixed] Fixed an issue where the SEOmetrics wouldn't render on certain server setups
+* [Added] Added a list of the top keywords on the page to the SEOmetrics
+* [Improved] Updated the README.md
+
+### 1.1.18 -- 2016.05.30
+
+* [Added] Added "SEOmetrics" displayed during Live Preview that analyizes your page, and generates helpful tips for improving SEO
+* [Fixed] SEOmatic will now populate its FieldType with default values on `saveElement()`, which is triggered via import plugings and also via Settings → Edit My Section → hit Save
+* [Fixed] Added 'logo' and 'image' to the list of keys that should be always run through getFullyQualifiedUrl()
+* [Fixed] Fixed a CSS issue with the AdminCP UI and very large screens
+* [Improved] Updated the README.md
 
 ### 1.1.17 -- 2016.05.09
 

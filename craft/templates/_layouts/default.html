@@ -19,6 +19,8 @@
     {% endif %}
     {% block css %}{% cache unless craft.config.devMode or craft.request.isLivePreview %}{% include '_art-direction' %}{% endcache %}{% endblock %}
 
+    {% if entry is defined and entry.headSnippets %}{{ entry.headSnippets }}{% endif %}
+
     {# LiveWires styles #}
     {% if settings.blankOutText %}<link rel="stylesheet" href="/css/livewires.css" />{% endif %}
 

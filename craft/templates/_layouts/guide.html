@@ -3,32 +3,32 @@
   <head>
     {% include '_modules/meta.html' %}
 
-    <!-- Fontawesome icons. Remove if not using -->
+    {# Fontawesome icons. For prototyping only. #}
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-    <!-- CSS -->
+    {# CSS #}
     {% include '_css/critical.html' %}
     <link href="/css/app.css" rel="stylesheet" media="all" />
     <link href="/css/guide.css" rel="stylesheet" media="all" />
     {% block css %}{% endblock %}
 
-    <!-- Inline JS -->
+    {# Inline JS #}
     {% include '_js/critical.html' %}
 
   </head>
   <body class="pg-{{ craft.request.lastSegment }}">
 
-    <!-- Header section -->
+    {# Header section #}
     {% include '_modules/header-guide.html' %}
 
-    <!-- Content block, child page inject content -->
+    {# Content block, child page inject content #}
     <main class="main offcanvas--squish offcanvas--squish-left" id="main" role="main">
       {% block page %}{% endblock %}
-      <!-- Footer section -->
+      {# Footer section #}
       {% include '_modules/footer.html' %}
     </main>
 
-    <!-- JS Includes -->
+    {# JS Includes #}
     {% include '_js/includes.html' %}
   </body>
 </html>

@@ -9,13 +9,13 @@
 
     <!-- CSS -->
     {% if getCookie('style') %}
-    {% set loaded = 'style' %}
-    <link rel="stylesheet" href="/css/app.css" id="mainCss" />
+      {% set loaded = 'style' %}
+      <link rel="stylesheet" href="/css/app.css" id="mainCss" />
     {% else %}
-    {% set loaded = '' %}
-    {{ setCookie('style', 'loaded', now | date_modify("+24 hours").timestamp ) }}
-    {% include '_css/critical.html' %}
-    <link rel="preload" onload="this.rel='stylesheet'" href="/css/app.css" as="style" id="mainCss" />
+      {% set loaded = 'empty' %}
+      {{ setCookie('style', 'loaded', now | date_modify("+24 hours").timestamp ) }}
+      {% include '_css/critical.html' %}
+      <link rel="preload" onload="this.rel='stylesheet'" href="/css/app.css" as="style" id="mainCss" />
     {% endif %}
     {% block css %}{% cache unless craft.config.devMode or craft.request.isLivePreview %}{% include '_art-direction' %}{% endcache %}{% endblock %}
 
@@ -29,7 +29,7 @@
     </noscript>
 
     <!-- Inline JS -->
-    {% include '_js/critical.html' with {'loaded':loaded} %}
+    {% include '_js/critical.html' %}
   </head>
   <body>
     {% if settings.gtm %}{% include '_js/tag-manager.html' %}{% endif %}

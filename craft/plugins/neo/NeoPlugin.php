@@ -22,7 +22,7 @@ class NeoPlugin extends BasePlugin
 
 	public function getVersion()
 	{
-		return '1.1.1';
+		return '1.2.1';
 	}
 
 	public function getCraftMinimumVersion()
@@ -37,7 +37,7 @@ class NeoPlugin extends BasePlugin
 
 	public function getSchemaVersion()
 	{
-		return '1.1.1';
+		return '1.2.0';
 	}
 
 	public function getDeveloper()
@@ -81,6 +81,13 @@ class NeoPlugin extends BasePlugin
 
 		craft()->neo_reasons->pluginInit();
 		craft()->neo_relabel->pluginInit();
+	}
+
+	public function addTwigExtension()
+	{
+		Craft::import('plugins.neo.twigextensions.NeoTwigExtension');
+
+		return new NeoTwigExtension();
 	}
 
 	public function onBeforeInstall()

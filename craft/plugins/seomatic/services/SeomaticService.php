@@ -434,15 +434,16 @@ class SeomaticService extends BaseApplicationComponent
 /* -- Render the SEOmatic metrics floater template */
 
         $requestUrl = $this->getFullyQualifiedUrl(craft()->request->url);
-        $separator = "&";
-        $controllerUrl = UrlHelper::getActionUrl('seomatic/renderMetrics');
-        if (strpos($controllerUrl, "?") === false)
-            $separator = "?";
-        $vars = array(
-            'requestUrl' => $requestUrl,
-            'separator' => $separator,
-            'controllerUrl' => $controllerUrl,
+        $keywords = "";
+        $urlParams = array(
+            'url' => $requestUrl,
+            'keywords' => $keywords,
             );
+        $metricsActionUrl = UrlHelper::getActionUrl('seomatic/renderMetrics', $urlParams);
+        $vars = array(
+            'metricsActionUrl' => $metricsActionUrl,
+            );
+
         $htmlText = craft()->templates->render('_seo_metrics_floater.twig', $vars);
         craft()->templates->includeFootHtml($htmlText);
 
@@ -1170,7 +1171,7 @@ class SeomaticService extends BaseApplicationComponent
         $identity['genericOwnerName'] = $settings['genericOwnerName'];
         $identity['genericOwnerAlternateName'] = $settings['genericOwnerAlternateName'];
         $identity['genericOwnerDescription'] = $settings['genericOwnerDescription'];
-        $identity['genericOwnerUrl'] = $this->getFullyQualifiedUrl($settings['genericOwnerUrl']);
+        $identity['genericOwnerUrl'] = $settings['genericOwnerUrl'];
         $identity['genericOwnerImageId'] = $settings['genericOwnerImageId'];
         $image = craft()->assets->getFileById($settings['genericOwnerImageId']);
         if ($image)
@@ -1527,7 +1528,7 @@ class SeomaticService extends BaseApplicationComponent
         $creator['genericCreatorName'] = $settings['genericCreatorName'];
         $creator['genericCreatorAlternateName'] = $settings['genericCreatorAlternateName'];
         $creator['genericCreatorDescription'] = $settings['genericCreatorDescription'];
-        $creator['genericCreatorUrl'] = $this->getFullyQualifiedUrl($settings['genericCreatorUrl']);
+        $creator['genericCreatorUrl'] = $settings['genericCreatorUrl'];
         $creator['genericCreatorImageId'] = $settings['genericCreatorImageId'];
         $image = craft()->assets->getFileById($settings['genericCreatorImageId']);
         if ($image)
@@ -2334,8 +2335,11 @@ public function getFullyQualifiedUrl($url)
             $siteUrl = craft()->getSiteUrl();
 
         $urlParts = parse_url($siteUrl);
+        $port = "";
+        if (isset($urlParts['port']))
+            $port = ":" . $urlParts['port'];
         if (isset($urlParts['scheme']) && isset($urlParts['host']))
-            $siteUrl = $urlParts['scheme'] . "://" . $urlParts['host'] . "/";
+            $siteUrl = $urlParts['scheme'] . "://" . $urlParts['host'] . $port . "/";
         else
             $siteUrl = "/";
         if (($siteUrl[strlen($siteUrl) -1] == '/') && ($result[0] == '/'))

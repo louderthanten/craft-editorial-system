@@ -16,6 +16,8 @@ To install SEOmatic, follow these steps:
 
 SEOmatic works on Craft 2.4.x, Craft 2.5.x, and Craft 2.6.x.
 
+The SEOmetrics feature requires PHP 5.4 or later and that you have the [php-xml extension](http://osticket.com/forum/discussion/8702/php-fatal-error-call-to-undefined-function-utf8-encode-error-message) installed.
+
 ## Overview
 
 SEOmatic allows you to quickly get a website up and running with a robust, comprehensive SEO strategy.  It is also implemented in a Craft-y way, in that it is also flexible and customizable.
@@ -46,11 +48,20 @@ Some things to do, and ideas for potential features:
 * [bug] Enforce *required fields on the various settings pages in the Admin CP by doing proper validation
 * [bug] The `foundingDate` fields probably should be dateTimeField types on the Settings pages
 * [feature] Add support for `og:image:type`, `og:image:width`, and `og:image:height`
-* [feature] Add the ability to analyze a page for content vs. "focus keywords" in the SEOmetrics "just like Yoast"
 * [feature] Change the preview to a live preview when editing things in SEOmatic
 * [feature] Provide SiteMap functionality.  Yes, it's SEO-related, but seems like it might be better to keep SEOmatic focused (?)
 
 ## Changelog
+
+### 1.1.20 -- 2016.06.06
+
+* [Added] Added 'Focus Keywords' to the SEOmetrics window, letting you analyze your page content for specific SEO keywords
+* [Fixed] Fixed an issue with environmentalVariables in the Site Identity/Entity URL field
+* [Improved] Forced CSS style reset on the SEOmetrics skeleton styles
+* [Improved] Include port numbers with getFullyQualifiedUrl()
+* [Improved] More accurate text to HTML % calculations
+* [Improved] Changed the CSS z-index of the SEOmetrics windows to be 9998/9
+* [Improved] Updated the README.md
 
 ### 1.1.19 -- 2016.05.30
 

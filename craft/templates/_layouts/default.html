@@ -29,7 +29,7 @@
     </noscript>
 
     <!-- Inline JS -->
-    {% include '_js/critical.html' %}
+    {% include '_js/critical.html' with loaded %}
   </head>
   <body>
     {% if settings.gtm %}{% include '_js/tag-manager.html' %}{% endif %}

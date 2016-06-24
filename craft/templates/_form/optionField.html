@@ -3,8 +3,13 @@
 {% else %}
 {% set name = 'field-' ~ block.id %}
 {% endif %}
+{% if block.anchorName %}
+{% set anchorName = block.anchorName %}
+{% else %}
+{% set anchorName = fieldLabel|kebab %}
+{% endif %}
 <div class="field{% if block.width %} field--{{ block.width }} {{ block.width }}{% endif %}">
-  <label>{{ block.fieldLabel }}</label>
+  <label for="{{ name }}">{{ block.fieldLabel }}</label>
 
   {% if block.optionFormat == 'buttons' %}
   <div class="option-buttons js-options">
@@ -13,6 +18,14 @@
   {% elseif block.optionFormat == 'pills' %}
   <div class="pill-buttons js-options">
     {% import '_macros/button-option' as input %}
+
+  {% elseif block.optionFormat == 'select' %}
+    <select name="{{ name }}" id="{{ anchorName }}">
+      {% for option in block.fieldOptions %}
+      <option value="{{ option.value }}">{{ option.name }}</option>
+      {% endfor %}
+    </select>
+
 
   {% else %}
   <ul class="check-list">

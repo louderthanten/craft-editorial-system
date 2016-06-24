@@ -13,7 +13,7 @@
 {% else %}
     {% set customCSS = false %}
 {% endif %}
-<div class="row {{ block.colour }} {{ block.customClass }}"{% if customCSS == true %} style="{% include '_components/background-image' %}{% if blockColour %} background-color:{{ blockColour }};{% endif %}"{% endif %}{% if block.anchorName %} id="{% if block.anchorName %}{{ block.anchorName }}{% else %}section-{{ block.id }}{% endif %}"{% endif %}>
+<div class="row {{ block.rowType }} {{ block.colour }} {{ block.customClass }}"{% if customCSS == true %} style="{% include '_components/background-image' %}{% if blockColour %} background-color:{{ blockColour }};{% endif %}"{% endif %}{% if block.anchorName %} id="{% if block.anchorName %}{{ block.anchorName }}{% else %}section-{{ block.id }}{% endif %}"{% endif %}>
     {% for block in block.children %}
       {% include ['_content/' ~ block.type] %}
     {% endfor %}

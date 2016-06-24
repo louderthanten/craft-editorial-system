@@ -3,10 +3,10 @@
   {% if block.backgroundColour != '#000000' %}background-color:{{ block.backgroundColour }};{% endif %}
 }
 {% endif %}
-{% if block.headerBackgroundColour != '#000000' or block.textColour != '#000000' %}
+{% if block.headerBackgroundColour != '#000000' or block.headerTextColour != '#000000' %}
 .page--{{ entry.slug }}__hero {
   {% if block.headerBackgroundColour != '#000000' %}background-color:{{ block.headerBackgroundColour }};{% endif %}
-  {% if block.textColour != '#000000' %}color:{{ block.textColour }};{% endif %}
+  {% if block.headerTextColour != '#000000' %}color:{{ block.headerTextColour }};{% endif %}
 }
 {% endif %}
 {% if block.bodyBackgroundColour != '#000000' or block.bodyTextColour != '#000000' %}
@@ -15,10 +15,10 @@
   {% if block.bodyTextColour != '#000000' %}color:{{ block.bodyTextColour }};{% endif %}
 }
 {% endif %}
-{% if block.teaserBackgroundColour != '#000000' or block.textColour != '#000000' %}
+{% if block.teaserBackgroundColour != '#000000' or block.headerTextColour != '#000000' %}
 .teaser--{{ entry.slug }} {
   {% if block.teaserBackgroundColour != '#000000' %}background-color:{{ block.teaserBackgroundColour }};{% endif %}
-  {% if block.textColour != '#000000' %}color:{{ block.textColour }};{% endif %}
+  {% if block.headerTextColour != '#000000' %}color:{{ block.headerTextColour }};{% endif %}
 }
 {% endif %}
 {% if block.linkColour is defined and block.linkColour != '#000000' %}

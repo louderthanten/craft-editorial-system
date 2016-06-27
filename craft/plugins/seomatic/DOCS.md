@@ -272,6 +272,8 @@ You can also dynamically change any of these SEO Meta fields in your Twig templa
 * **Facebook Open Graph Type** - Adding Open Graph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook.
 * **Robots** - The [robots meta tag](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag?hl=en) lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results.  Setting it to a blank value means 'no change'.
 
+The **SEO Title**, **SEO Description**, and **SEO Keywords** fields can include tags that output entry properties, such as `{title}` or `{myCustomField}` in them.
+
 You can use any Craft `environmentVariables` in these fields in addition to static text, e.g.:
 
     This is my {baseUrl}
@@ -321,6 +323,8 @@ During Live Preview, a small SEOmatic icon is displayed in the lower-left corner
 You can enter **Focus Keyworks**, comma separated, for an additional analysis of how well optimized your page is for those specific SEO keywords.
 
 You can disable this feature by setting `displaySeoMetrics` to `false` in the `config.php`, should you wish to not have it displayed.
+
+SEOmetrics during Live Preview only works if System Status is set to "on".
 
 ## Craft Commerce Product Microdata
 
@@ -877,6 +881,27 @@ All three of these methods accomplish the same thing:
     &#105;&#110;&#102;&#111;&#64;&#110;&#121;&#115;&#116;&#117;&#100;&#105;&#111;&#49;&#48;&#55;&#46;&#99;&#111;&#109;
 
 Google can still properly decode email addresses that are ordinal-encoded, it's still readable by humans when displayed, but it prevents some bots from recognizing it as an email address.
+
+### getLocalizedUrls()
+
+Returns an array of localized URLs for the current page request.  This handles elements with localized slugs, etc.  This function returns the unique URLs for each language for the current page request, not just the localized site URLs.
+
+Both of these methods accomplish the same thing:
+
+    {# Get an array of localized URLs for the current request using the 'getLocalizedUrls' function #}
+    {% set myLocalizedUrls = getLocalizedUrls() }}
+    
+    {# Get an array of localized URLs for the current request using the 'getLocalizedUrls' variable #}
+    {% set myLocalizedUrls = craft.seomatic.getLocalizedUrls() %}
+
+You'll be returned an array that looks like this:
+
+    {
+    'en': 'http://nystudio107.dev/',
+    'el_gr': 'http://nystudio107.dev/gr/'
+    }
+
+With a key/value pair for each language your site is localized in, in the order you have them set in the AdminCP.  This makes it very easy to create a "language switcher" menu.
 
 ### getFullyQualifiedUrl()
 

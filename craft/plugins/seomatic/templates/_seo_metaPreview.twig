@@ -1,6 +1,6 @@
 <!-- BEGIN SEOmatic rendered SEO Meta -->
 
-<title>{% if craft.config.devMode %}[devMode] {% endif %}{% if seomaticSiteMeta.siteSeoTitlePlacement == "before" %}{{ seomaticSiteMeta.siteSeoName |raw }}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{% endif %}{{ seomaticMeta.seoTitle |raw }}{% if seomaticSiteMeta.siteSeoTitlePlacement == "after" %}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{{ seomaticSiteMeta.siteSeoName |raw }}{% endif %}</title> <!-- {% verbatim %}{% if craft.config.devMode %}[devMode] {% endif %}{% if seomaticSiteMeta.siteSeoTitlePlacement == "before" %}{{ seomaticSiteMeta.siteSeoName |raw }}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{% endif %}{{ seomaticMeta.seoTitle |raw }}{% if seomaticSiteMeta.siteSeoTitlePlacement == "after" %}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{{ seomaticSiteMeta.siteSeoName |raw }}{% endif %}{% endverbatim %} -->
+<title>{% if craft.config.devMode %}{{ seomaticSiteMeta.siteDevModeTitle }} {% endif %}{% if seomaticSiteMeta.siteSeoTitlePlacement == "before" %}{{ seomaticSiteMeta.siteSeoName |raw }}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{% endif %}{{ seomaticMeta.seoTitle |raw }}{% if seomaticSiteMeta.siteSeoTitlePlacement == "after" %}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{{ seomaticSiteMeta.siteSeoName |raw }}{% endif %}</title> <!-- {% verbatim %}{% if craft.config.devMode %}[devMode] {% endif %}{% if seomaticSiteMeta.siteSeoTitlePlacement == "before" %}{{ seomaticSiteMeta.siteSeoName |raw }}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{% endif %}{{ seomaticMeta.seoTitle |raw }}{% if seomaticSiteMeta.siteSeoTitlePlacement == "after" %}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{{ seomaticSiteMeta.siteSeoName |raw }}{% endif %}{% endverbatim %} -->
 
 <!-- Standard SEO -->
 
@@ -13,9 +13,12 @@
 <meta name="description" content="{{ seomaticMeta.seoDescription |raw }}" /> <!-- {% verbatim %}{{ seomaticMeta.seoDescription }}{% endverbatim %} -->
 <meta name="generator" content="SEOmatic" /> <!-- {% verbatim %}SEOmatic{% endverbatim %} -->
 <link rel="canonical" href="{{ seomaticMeta.canonicalUrl }}" /> <!-- {% verbatim %}{{ seomaticMeta.canonicalUrl }} (defaults to craft.request.url){% endverbatim %} -->
-{% for locale in craft.i18n.getSiteLocales() %}
-{% if locale != craft.locale and craft.config.siteUrl is iterable %}{% if craft.config.siteUrl[locale.getId()] is defined %}<link rel="alternate" hreflang="{{ locale.getId() | slice (0,2) }}" href="{{ craft.config.siteUrl[locale.getId()] }}" />{% endif %} <!-- {% verbatim %}hreflang="{{ locale.getId() }}" href="{{ craft.config.siteUrl[locale.getId()] }}"{% endverbatim %} -->{% endif %}
+{% set localizedUrls = getLocalizedUrls() %}
+{% if localizedUrls |length > 1 %}
+{% for key, value in localizedUrls %}
+<link rel="alternate" hreflang="{{ key |lower |replace ('_', '-') }}" href="{{ value }}" /> <!-- {% verbatim %}hreflang="{{ key |lower |replace ('_', '-') }}" href="{{ value }}"{% endverbatim %} -->
 {% endfor %}
+{% endif %}
 {% if seomaticIdentity.address.addressRegion is defined and seomaticIdentity.address.addressRegion %}
 <meta name="geo.region" content="{{ seomaticIdentity.address.addressRegion |raw }}" /> <!-- {% verbatim %}{{ seomaticIdentity.address.addressRegion }}{% endverbatim %} -->
 {% endif %}
@@ -86,7 +89,7 @@
 
 {% for key, value in seomaticMeta.twitter %}
 {% if value %}
-<meta property="twitter:{{ key }}" content="{{ value |raw }}" /> <!-- {% verbatim %}{{ {% endverbatim %}seomatic.twitter.{{ key }}{% verbatim %} }}{% endverbatim %} -->
+<meta name="twitter:{{ key }}" content="{{ value |raw }}" /> <!-- {% verbatim %}{{ {% endverbatim %}seomatic.twitter.{{ key }}{% verbatim %} }}{% endverbatim %} -->
 {% endif %}
 {% endfor %}
 

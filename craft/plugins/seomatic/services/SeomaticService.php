@@ -1069,6 +1069,7 @@ class SeomaticService extends BaseApplicationComponent
         $siteMeta['siteSeoTitle'] = $settings['siteSeoTitle'];
         $siteMeta['siteSeoTitleSeparator'] = $settings['siteSeoTitleSeparator'];
         $siteMeta['siteSeoTitlePlacement'] = $settings['siteSeoTitlePlacement'];
+        $siteMeta['siteDevModeTitle'] = craft()->config->get("siteDevModeTitle", "seomatic");
         $siteMeta['siteSeoDescription'] = $settings['siteSeoDescription'];
         $siteMeta['siteSeoKeywords'] = $settings['siteSeoKeywords'];
         $siteMeta['siteSeoImageId'] = $settings['siteSeoImageId'];
@@ -1875,6 +1876,24 @@ class SeomaticService extends BaseApplicationComponent
     } /* -- getWebSiteJSONLD */
 
 /* --------------------------------------------------------------------------------
+    Parse the passed in $templateStr as an object template, with $element passed in
+-------------------------------------------------------------------------------- */
+
+function parseAsTemplate($templateStr, $element)
+{
+    $result = $templateStr;
+    $result = craft()->config->parseEnvironmentString($result);
+    try
+    {
+        $result = craft()->templates->renderObjectTemplate($result, $element);
+    }
+    catch (\Exception $e)
+    {
+        SeomaticPlugin::log("Template error in the `" . $templateStr . "` template.", LogLevel::Info, true);
+    }
+} /* -- parseAsTemplate */
+
+/* --------------------------------------------------------------------------------
     Get the meta record
 -------------------------------------------------------------------------------- */
 
@@ -1884,14 +1903,15 @@ class SeomaticService extends BaseApplicationComponent
 
         if ($forTemplate)
         {
+            $element = craft()->urlManager->getMatchedElement();
             $forTemplate = craft()->db->quoteValue($forTemplate);
             $whereQuery = '`metaPath` = ' . $forTemplate;
             $metaRecord = Seomatic_MetaRecord::model()->find($whereQuery);
             if ($metaRecord)
             {
-                $meta['seoTitle'] = $metaRecord->seoTitle;
-                $meta['seoDescription'] = $metaRecord->seoDescription;
-                $meta['seoKeywords'] = $metaRecord->seoKeywords;
+                $meta['seoTitle'] = $this->parseAsTemplate($metaRecord->seoTitle, $element);
+                $meta['seoDescription'] = $this->parseAsTemplate($metaRecord->seoDescription, $element);
+                $meta['seoKeywords'] = $this->parseAsTemplate($metaRecord->seoKeywords, $element);
                 if (isset($metaRecord->seoImageId))
                     $meta['seoImageId'] = $metaRecord->seoImageId;
                 else
@@ -2313,6 +2333,54 @@ class SeomaticService extends BaseApplicationComponent
     } /* -- sanitizeMetaVars */
 
 /* --------------------------------------------------------------------------------
+    Returns an array of localized URLs for the current request
+-------------------------------------------------------------------------------- */
+
+public function getLocalizedUrls()
+{
+    $localizedUrls = array();
+    $requestUri = craft()->request->getRequestUri();
+    if (craft()->isLocalized())
+    {
+        $element = craft()->urlManager->getMatchedElement();
+        if ($element)
+        {
+            $unsortedLocalizedUrls = array();
+            $_rows = craft()->db->createCommand()
+            ->select('locale')
+            ->addSelect('uri')
+            ->from('elements_i18n')
+            ->where(array('elementId' => $element->id, 'enabled' => 1))
+            ->queryAll();
+
+            foreach ($_rows as $row)
+            {
+              $path = ($row['uri'] == '__home__') ? '' : $row['uri'];
+              $unsortedLocalizedUrls[$row['locale']] = UrlHelper::getSiteUrl($path, null, null, $row['locale'] );
+            }
+
+            $locales = craft()->i18n->getSiteLocales();
+            foreach ($locales as $locale)
+            {
+                $localeId = $locale->getId();
+                $localizedUrls[$localeId] = $unsortedLocalizedUrls[$localeId];
+            }
+        }
+        else
+        {
+            $locales = craft()->i18n->getSiteLocales();
+            foreach ($locales as $locale)
+            {
+                $localeId = $locale->getId();
+                $localizedUrls[$localeId] = UrlHelper::getSiteUrl($requestUri, null, null, $localeId);
+
+            }
+        }
+    }
+    return $localizedUrls;
+} /* --  getLocalizedUrls */
+
+/* --------------------------------------------------------------------------------
     Get a fully qualified URL based on the siteUrl, if no scheme/host is present
 -------------------------------------------------------------------------------- */
 
@@ -2599,6 +2667,8 @@ public function getFullyQualifiedUrl($url)
 
     public function truncateStringOnWord($theString, $desiredLength)
     {
+        $theString = $this->_cleanupText($theString);
+
         if (strlen($theString) > $desiredLength)
         {
 

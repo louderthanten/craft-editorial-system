@@ -1,5 +1,28 @@
 [
     {
+        "version": "1.1.21",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-06-25T11:00:00-11:00",
+        "notes": [
+            "[Improved] Contents of SEOmatic Meta FieldTypes are now parsed when they are saved, rather than at runtime, which should be faster, and also makes the contents of the fields always accessible.  Please re-save your Sections that use SEOmatic FieldTypes as per: https://github.com/nystudio107/seomatic/wiki/05.-SEO-Entry-Meta",
+            "[Added] The SEO Title, SEO Description, and SEO Keywords fields in Template Metas can now include tags that output entry properties, such as `{title}` or `{myCustomField}` in them",
+            "[Added] Added a getLocalizedUrls Twig filter/function that returns an array of localized URLs for the current request",
+            "[Improved] The SEOmetrics window will now remember its open/closed state while in Live Preview",
+            "[Improved] Some minor tweaks to the SEOmetrics CSS",
+            "[Improved] The current locale is now included in the hreflang for localized sites",
+            "[Improved] The language and country code are now both included in the hreflang for localized sites",
+            "[Improved] The full URL to the current page is now used in the hreflang for localized sites",
+            "[Improved] style and script tags are now stripped out before doing any SEOmetrics on the page",
+            "[Added] Added approximate reading time in the Textual Analysis section of the SEOmetrics",
+            "[Added] You can now control the string prepended to the title tag when devMode is on via config.php",
+            "[Added] Added a French localization for SEOmatic, thanks to @FrancisBou",
+            "[Fixed] We should not properly catch exceptions when there are errors in the variables in the SEOmatic FieldType fields",
+            "[Fixed] Fixed a bug where SEOmetrics might not appear on certain setups that use https",
+            "[Fixed] Fixed Twitter cards, changed `property` to `name`",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
         "version": "1.1.20",
         "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
         "date": "2016-06-06T11:00:00-11:00",

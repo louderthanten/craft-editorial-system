@@ -1,6 +1,6 @@
 <!-- BEGIN SEOmatic rendered SEO Meta -->
 
-<title>{% if craft.config.devMode %}[devMode] {% endif %}{% if seomaticSiteMeta.siteSeoTitlePlacement == "before" %}{{ seomaticSiteMeta.siteSeoName |raw }}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{% endif %}{{ seomaticMeta.seoTitle |raw }}{% if seomaticSiteMeta.siteSeoTitlePlacement == "after" %}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{{ seomaticSiteMeta.siteSeoName |raw }}{% endif %}</title>
+<title>{% if craft.config.devMode %}{{ seomaticSiteMeta.siteDevModeTitle }} {% endif %}{% if seomaticSiteMeta.siteSeoTitlePlacement == "before" %}{{ seomaticSiteMeta.siteSeoName |raw }}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{% endif %}{{ seomaticMeta.seoTitle |raw }}{% if seomaticSiteMeta.siteSeoTitlePlacement == "after" %}{% if seomaticMeta.seoTitle %} {{ seomaticSiteMeta.siteSeoTitleSeparator }} {% endif %}{{ seomaticSiteMeta.siteSeoName |raw }}{% endif %}</title>
 
 <!-- Standard SEO -->
 
@@ -13,9 +13,12 @@
 <meta name="description" content="{{ seomaticMeta.seoDescription |raw }}" />
 <meta name="generator" content="SEOmatic" />
 <link rel="canonical" href="{{ seomaticMeta.canonicalUrl }}" />
-{% for locale in craft.i18n.getSiteLocales() %}
-{% if locale != craft.locale and craft.config.siteUrl is iterable %}{% if craft.config.siteUrl[locale.getId()] is defined %}<link rel="alternate" hreflang="{{ locale.getId() | slice (0,2) }}" href="{{ craft.config.siteUrl[locale.getId()] }}" />{% endif%}{% endif %}
+{% set localizedUrls = getLocalizedUrls() %}
+{% if localizedUrls |length > 1 %}
+{% for key, value in localizedUrls %}
+<link rel="alternate" hreflang="{{ key |lower |replace ('_', '-') }}" href="{{ value }}" />
 {% endfor %}
+{% endif %}
 {% if seomaticIdentity.address.addressRegion is defined and seomaticIdentity.address.addressRegion %}
 <meta name="geo.region" content="{{ seomaticIdentity.address.addressRegion |raw }}" />
 {% endif %}
@@ -86,7 +89,7 @@
 
 {% for key, value in seomaticMeta.twitter %}
 {% if value %}
-<meta property="twitter:{{ key }}" content="{{ value |raw }}" />
+<meta name="twitter:{{ key }}" content="{{ value |raw }}" />
 {% endif %}
 {% endfor %}
 

@@ -42,10 +42,16 @@ class SeomaticController extends BaseController
             $keywordsParam = urldecode(craft()->request->getParam('keywords'));
             $keywordsKeys = explode(",", $keywordsParam);
             $keywords = array();
-            $dom = HtmlDomParser::file_get_html($url);
-            if ($dom)
+/* -- Silly work-around for what appears to be a file_get_contents bug with https -> http://stackoverflow.com/questions/10524748/why-im-getting-500-error-when-using-file-get-contents-but-works-in-a-browser */
+            $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
+            $context = stream_context_create($opts);
+            $dom = HtmlDomParser::file_get_html($url, false, $context);            if ($dom)
             {
                 $textStatistics = new TS\TextStatistics;
+                foreach($dom->find('style') as $element)
+                    $element->outertext = '';
+                foreach($dom->find('script') as $element)
+                    $element->outertext = '';
                 $strippedDom = html_entity_decode($dom->plaintext);
                 $strippedDom = preg_replace('@[^0-9a-z\.\!]+@i', ' ', $strippedDom);
                 $htmlDom = html_entity_decode($dom->outertext);
@@ -119,6 +125,9 @@ class SeomaticController extends BaseController
 /* -- Text statistics */
 
                 $wordCount = $textStatistics->wordCount($strippedDom);
+                $readingTime = floor($wordCount / 200);
+                if ($readingTime === 0)
+                    $readingTime = 1;
                 $fleschKincaidReadingEase = $textStatistics->fleschKincaidReadingEase($strippedDom);
                 $fleschKincaidGradeLevel = $textStatistics->fleschKincaidGradeLevel($strippedDom);
                 $gunningFogScore = $textStatistics->gunningFogScore($strippedDom);
@@ -140,6 +149,7 @@ class SeomaticController extends BaseController
                     'effectiveHTags' => $effectiveHTags,
                     'textToHtmlRatio' => $textToHtmlRatio,
                     'wordCount' => $wordCount,
+                    'readingTime' => $readingTime,
                     'pageKeywords' => $pageKeywords,
                     'keywords' => $keywords,
                     'fleschKincaidReadingEase' => $fleschKincaidReadingEase,

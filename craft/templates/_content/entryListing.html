@@ -1,0 +1,16 @@
+{% set items = craft.entries.section(block.listingSection).limit(block.limit) %}
+{% import '_macros/teaser' as teaser %}
+<nav class="vertical-nav{% if block.colour ?? null %} callout{% endif %}  {% include '_components/position.html' %}" id="section-{{ block.id }}">
+  {% if block.colour ?? null %}<div class="content {{ block.colour }}">{% endif %}
+    {% if block.markdown == 1 %}
+    {{ block.text|md|typogrify }}
+    {% else %}
+    {{ block.text|dash|initial_quotes|smartypants }}
+    {% endif %}
+    <ul>
+      {% for entry in items %}
+      {{ teaser.item(entry.postDate, entry.title, entry.url) }}
+      {% endfor %}
+    </ul>
+  {% if block.colour ?? null %}</div>{% endif %}
+</nav>

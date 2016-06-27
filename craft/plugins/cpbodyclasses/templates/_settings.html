@@ -1,0 +1,107 @@
+{% import '_includes/forms' as forms %}
+
+<p>Please select which classes you would like to appear in the <code>&lt;body&gt;</code> tag.</p>
+
+<table class="data" id="cpbodyclasses">
+	<tbody>
+		<tr>
+			<td colspan="2">
+				<h2>Based on currently logged in user...</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ forms.checkbox({
+					label: "Include user group classes?"|t,
+					id: 'showUserGroups',
+					name: 'showUserGroups',
+					checked: settings.showUserGroups,
+					errors: settings.getErrors('showUserGroups')
+				}) }}
+			</td>
+			<td>
+				<code>&lt;body class="<strong>usergroup-myGroup</strong>"&gt;</code>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ forms.checkbox({
+					label: "Include user admin class?"|t,
+					id: 'showUserAdmin',
+					name: 'showUserAdmin',
+					checked: settings.showUserAdmin,
+					errors: settings.getErrors('showUserAdmin')
+				}) }}
+			</td>
+			<td>
+				<code>&lt;body class="<strong>userlevel-admin</strong>"&gt;</code>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h2>Based on the current page being viewed...</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ forms.checkbox({
+					label: "Include a class to denote the current section?"|t,
+					id: 'showCurrentSection',
+					name: 'showCurrentSection',
+					checked: settings.showCurrentSection,
+					errors: settings.getErrors('showCurrentSection')
+				}) }}
+			</td>
+			<td>
+				<code>&lt;body class="<strong>currentsection-entries</strong>"&gt;</code>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ forms.checkbox({
+					label: "Include a class to denote the current page?"|t,
+					id: 'showCurrentPage',
+					name: 'showCurrentPage',
+					checked: settings.showCurrentPage,
+					errors: settings.getErrors('showCurrentPage')
+				}) }}
+			</td>
+			<td>
+				<code>&lt;body class="<strong>currentpage-entries-sectionHandle</strong>"&gt;</code>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h2>Based on the user profile being viewed... &nbsp;<em>(applies to user profile page only)</em></h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ forms.checkbox({
+					label: "Include profile's user group classes?"|t,
+					id: 'showProfileUserGroups',
+					name: 'showProfileUserGroups',
+					checked: settings.showProfileUserGroups,
+					errors: settings.getErrors('showProfileUserGroups')
+				}) }}
+			</td>
+			<td>
+				<code>&lt;body class="<strong>profile-theirGroup</strong>"&gt;</code>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ forms.checkbox({
+					label: "Include profile's user admin class?"|t,
+					id: 'showProfileUserAdmin',
+					name: 'showProfileUserAdmin',
+					checked: settings.showProfileUserAdmin,
+					errors: settings.getErrors('showProfileUserAdmin')
+				}) }}
+			</td>
+			<td>
+				<code>&lt;body class="<strong>profilelevel-admin</strong>"&gt;</code>
+			</td>
+		</tr>
+	</tbody>
+</table>

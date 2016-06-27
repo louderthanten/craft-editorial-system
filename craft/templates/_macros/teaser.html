@@ -1,0 +1,8 @@
+{% macro item(date, title, url) %}
+<li>
+  <a href="{{ url }}">
+    <time datetime="{{ date }}">{{ date }}</time>
+    {{ title }}
+  </a>
+</li>
+{% endmacro %}

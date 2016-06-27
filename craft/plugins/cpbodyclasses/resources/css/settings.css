@@ -1,0 +1,17 @@
+table#settings-cpbodyclasses {}
+
+table#settings-cpbodyclasses h2 {
+	margin-top: 12px !important;
+}
+
+table#settings-cpbodyclasses input.checkbox + label {
+	margin-left: 20px;
+}
+
+table#settings-cpbodyclasses code {
+	margin-right: 30px;
+	margin-left: 30px;
+}
+table#settings-cpbodyclasses code strong {
+	font-family: inherit;
+}

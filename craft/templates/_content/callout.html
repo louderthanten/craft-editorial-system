@@ -1,15 +1,7 @@
-<aside class="callout  {% include '_components/position.html' %}" id="section-{{ block.id }}">
-  {% if block.image|length %}
-  <figure>
-    {% set assets = block.image %}
-    {% include '_components/image' %}
-  </figure>
-  {% endif %}
-  <div class="content {{ block.colour }}"{% if block.customColour != '#000000' %} style="background-color:{{ block.customColour }};"{% endif %}>
-    {% if block.markdown == 1 %}
-    {{ block.text|markdown|typogrify }}
-    {% else %}
-    {{ block.text|typogrify }}
-    {% endif %}
-  </div>
+
+<aside class="callout {% include '_components/position.html' %}" id="section-{{ block.id }}">
+  {% set colour = block.colour %}
+  {% for innerblock in block.children %}
+    {% include '_content/' ~ innerblock.type with {block: innerblock, 'colour': colour } %}
+  {% endfor %}
 </aside>

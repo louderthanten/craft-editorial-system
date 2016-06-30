@@ -1890,7 +1890,9 @@ function parseAsTemplate($templateStr, $element)
     catch (\Exception $e)
     {
         SeomaticPlugin::log("Template error in the `" . $templateStr . "` template.", LogLevel::Info, true);
+        $result = $templateStr;
     }
+    return $result;
 } /* -- parseAsTemplate */
 
 /* --------------------------------------------------------------------------------
@@ -2363,7 +2365,8 @@ public function getLocalizedUrls()
             foreach ($locales as $locale)
             {
                 $localeId = $locale->getId();
-                $localizedUrls[$localeId] = $unsortedLocalizedUrls[$localeId];
+                if (isset($unsortedLocalizedUrls[$localeId]))
+                    $localizedUrls[$localeId] = $unsortedLocalizedUrls[$localeId];
             }
         }
         else

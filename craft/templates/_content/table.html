@@ -1,4 +1,4 @@
-<table class="table--{{ block.tableType }} {% include '_components/position.html' %}">
+<table class="table--{{ block.tableType }} {% include '_components/position.html' %}{% if colour is defined %} {{ colour }}{% endif %}">
   <thead>
     <tr>
       {% for col in block.table.columns %}

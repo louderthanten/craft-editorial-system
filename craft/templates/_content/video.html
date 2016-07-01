@@ -1,4 +1,4 @@
-<figure class="video {% include '_components/position.html' %}" id="section-{{ block.id }}">
+<figure class="video {% include '_components/position.html' %}" {% include '_components/block-id' %}>
   {{ block.embedCode|raw }}
   {% if block.caption %}
   <figcaption>

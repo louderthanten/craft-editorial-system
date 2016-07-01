@@ -1,4 +1,4 @@
-<div class="content {% include '_components/position.html' %}{% if colour is defined %} {{ colour }}{% endif %}" id="section-{{ block.id }}">
+<div class="content {% include '_components/position.html' %}{% if colour is defined %} {{ colour }}{% endif %}" {% include '_components/block-id' %}>
   {% if block.markdown == 1 %}
   {{ block.text|md|typogrify }}
   {% else %}

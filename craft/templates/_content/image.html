@@ -1,4 +1,4 @@
-<figure class="article__image {{ block.captionPosition }} {% include '_components/position.html' %}" id="section-{{ block.id }}">
+<figure class="article__image {{ block.captionPosition }} {% include '_components/position.html' %}" {% include '_components/block-id' %}>
   {% if block.image|length %}
   {% set assets = block.image %}
   {% include '_components/image' %}

@@ -1,5 +1,5 @@
 
-<aside class="callout {% include '_components/position.html' %}" id="section-{{ block.id }}">
+<aside class="callout {% include '_components/position.html' %}" {% include '_components/block-id' %}>
   {% set colour = block.colour %}
   {% for innerblock in block.children %}
     {% include '_content/' ~ innerblock.type with {block: innerblock, 'colour': colour } %}

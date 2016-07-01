@@ -6,7 +6,7 @@
 {% set orgUrl = block.imageCreditOrgUrl %}
 {% set avatar = '' %}
 
-<blockquote class="{{ block.quoteType }} {% include '_components/position.html' %}" id="section-{{ block.id }}">
+<blockquote class="{{ block.quoteType }} {% include '_components/position.html' %}" {% include '_components/block-id' %}>
   {{ testimonial|md|typogrify }}
   {% if source %}
   <footer class="source">{% if sourceurl %}<a href="{{ sourceurl }}">{% endif %}{% if avatar %}<img src="{{ avatar }}" class="grayscale"  alt="" />{% endif %}{{ source }}{% if sourceurl %}</a>{% endif %} {% if sourceOrg %}<small>{% if orgUrl %}<a href="{{ orgUrl }}">{% endif %}{{ sourceOrg }}{% if orgUrl %}</a>{% endif %}</small>{% endif %}</footer>

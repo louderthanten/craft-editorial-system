@@ -6,39 +6,40 @@
 {% if block.anchorName %}
 {% set anchorName = block.anchorName %}
 {% else %}
-{% set anchorName = fieldLabel|kebab %}
+{% set anchorName = block.fieldLabel|kebab %}
 {% endif %}
 <div class="field{% if block.width %} field--{{ block.width }} {{ block.width }}{% endif %}">
   <label for="{{ name }}">{{ block.fieldLabel }}</label>
 
-  {% if block.optionFormat == 'buttons' %}
-  <div class="option-buttons js-options">
-    {% import '_macros/button-option' as input %}
-
-  {% elseif block.optionFormat == 'pills' %}
-  <div class="pill-buttons js-options">
-    {% import '_macros/button-option' as input %}
-
-  {% elseif block.optionFormat == 'select' %}
-    <select name="{{ name }}" {% include '_components/block-id' %}>
-      {% for option in block.fieldOptions %}
-      <option value="{{ option.value }}">{{ option.name }}</option>
-      {% endfor %}
-    </select>
-
-
-  {% else %}
-  <ul class="check-list">
-    {% import '_macros/check-field' as input %}
-  {% endif %}
-
+  {% if block.optionFieldType == 'select' %}
+  <select name="{{ name }}" {% include '_components/block-id' %}>
     {% for option in block.fieldOptions %}
-    {{ input.field(option.name, option.value, name, block.optionFieldType) }}
+    <option value="{{ option.value }}">{{ option.name }}</option>
     {% endfor %}
-
-  {% if block.optionFormat == 'button' %}
-  </div>
+  </select>
   {% else %}
-  </ul>
+    {% if block.optionFormat == 'buttons' %}
+    <div class="option-buttons js-options">
+      {% import '_macros/button-option' as input %}
+
+    {% elseif block.optionFormat == 'pills' %}
+    <div class="pill-buttons js-options">
+      {% import '_macros/button-option' as input %}
+
+
+    {% else %}
+    <ul class="check-list">
+      {% import '_macros/check-field' as input %}
+    {% endif %}
+
+      {% for option in block.fieldOptions %}
+      {{ input.field(option.name, option.value, name, block.optionFieldType) }}
+      {% endfor %}
+
+    {% if block.optionFormat == 'button' %}
+    </div>
+    {% else %}
+    </ul>
+    {% endif %}
   {% endif %}
 </div>

@@ -16,6 +16,12 @@
 {% set anchorName = fieldLabel|kebab %}
 {% endif %}
 
+{% if block.fieldWidth %}
+{% set width = block.fieldWidth %}
+{% else %}
+{% set width = null %}
+{% endif %}
+
 {% if block.value %}
 {% set value = block.value %}
 {% else %}

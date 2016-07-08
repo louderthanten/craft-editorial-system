@@ -13,7 +13,7 @@
 {% else %}
     {% set customCSS = false %}
 {% endif %}
-<div class="row {{ block.rowType }} {{ block.colour }} {{ block.customClass }}"{% if customCSS == true %} style="{% include '_components/background-image' %}{% if blockColour %} background-color:{{ blockColour }};{% endif %}"{% endif %} {% include '_components/block-id' %}>
+<div class="row {{ block.rowType }} {{ block.colour }} {{ block.customClass }}{% if block.textAlignment != 'left' %} {{ block.textAlignment }}-align{% endif %}"{% if customCSS == true %} style="{% include '_components/background-image' %}{% if blockColour %} background-color:{{ blockColour }};{% endif %}"{% endif %} {% include '_components/block-id' %}>
     {% for block in block.children %}
       {% include ['_content/' ~ block.type] %}
     {% endfor %}

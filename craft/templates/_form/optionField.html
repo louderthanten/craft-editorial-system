@@ -20,7 +20,7 @@
     {% import '_macros/button-option' as input %}
 
   {% elseif block.optionFormat == 'select' %}
-    <select name="{{ name }}" id="{{ anchorName }}">
+    <select name="{{ name }}" {% include '_components/block-id' %}>
       {% for option in block.fieldOptions %}
       <option value="{{ option.value }}">{{ option.name }}</option>
       {% endfor %}

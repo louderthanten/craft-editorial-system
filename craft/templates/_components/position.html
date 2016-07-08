@@ -1,1 +1,1 @@
-{{ block.width }} {{ block.pushLeft }} {{ block.pushRight }}  {{ block.float }} {{ block.customClass }}
+{{ block.width }} {{ block.pushLeft }} {{ block.pushRight }}{% if block.float != 'left' %} {{ block.float }}{% endif %} {{ block.customClass }}

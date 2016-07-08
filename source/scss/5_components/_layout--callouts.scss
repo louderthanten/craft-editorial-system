@@ -24,6 +24,7 @@
   .content {
     @extend %group;
     padding:rem($line);
+    width:100%;
 
     // Remove margins from the first and last elements in the callout to help maintain consistent padding around the inside the box
     > *:last-child,

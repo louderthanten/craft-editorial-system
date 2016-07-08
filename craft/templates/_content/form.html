@@ -7,8 +7,5 @@
     {% for block in block.children %}
       {% include ['_form/' ~ block.type] %}
     {% endfor %}
-    <div class="field">
-      <button type="submit" name="submit" class="button{% if block.buttonColour %} button--{{ block.buttonColour }}{% endif %}">{{ block.value }}</button>
-    </div>
   </fieldset>
 </form>

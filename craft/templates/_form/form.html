@@ -1,4 +1,4 @@
-<form action ="" method="post" class="{{ block.customClass }} {% include '_components/position.html' %}"  {% include '_components/block-id' %} accept-charset="UTF-8" data-thanks="{{ block.thankYouMessage }}">
+<form action ="" method="post" class="{% include '_components/position.html' %}"  {% include '_components/block-id' %} accept-charset="UTF-8" data-thanks="{{ block.thankYouMessage }}">
   {% for block in block.children %}
     {% include ['_form/' ~ block.type] %}
   {% endfor %}

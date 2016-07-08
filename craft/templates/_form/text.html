@@ -1,1 +1,7 @@
-{% include '_content/text' %}
+<div class="{% include '_components/position.html' %}" {% include '_components/block-id' %}>
+  {% if block.markdown == 1 %}
+  {{ block.text|md|typogrify }}
+  {% else %}
+  {{ block.text|dash|initial_quotes|smartypants }}
+  {% endif %}
+</div>

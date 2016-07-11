@@ -53,6 +53,17 @@ Some things to do, and ideas for potential features:
 
 ## Changelog
 
+### 1.1.23 -- 2016.07.08
+
+* [Added] Added support for Google Tag Manager (including `dataLayer`)
+* [Fixed] Keywords in the SEOmatic Meta FieldType are now tokenized again
+* [Fixed] Fixed Javascript error in the FieldType Source popup menu
+* [Fixed] Fix Undefined index in getLocalizedUrls
+* [Improved] Change seoKeywords -> seoKeywordsUnparsed
+* [Added] Add accessors for seoTitleUnparsed, seoDescriptionUnparsed, and seoKeywordsUnparsed
+* [Improved] meta keywords and meta description tags only render if they are non-empty
+* [Improved] Updated the README.md
+
 ### 1.1.22 -- 2016.06.27
 
 * [Fixed] Fixed the variable accessor rountines getSocial() and getIdentity()

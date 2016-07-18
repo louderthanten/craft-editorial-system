@@ -24,6 +24,7 @@ EGs
 
   .c#{$i}-mb {
     width: percentage($width);
+    float: left;
   }
   .pushr#{$i}-mb {
     margin-right: percentage($width);
@@ -35,6 +36,7 @@ EGs
   @media #{$small} {
     .c#{$i} {
       width: percentage($width);
+      float: left;
     }
     .pushr#{$i} {
       margin-right: percentage($width);
@@ -47,6 +49,7 @@ EGs
   @media #{$large} {
     .c#{$i}-lg {
       width: percentage($width);
+      float: left;
     }
     .pushr#{$i}-lg {
       margin-right: percentage($width);
@@ -58,12 +61,13 @@ EGs
 
   @for $j from 1 through $i {
     .c#{$i}x#{$j}-mb {
-      float: left;
       width: percentage($width * $j);
+      float: left;
     }
     @media #{$small} {
       .c#{$i}x#{$j} {
         width: percentage($width * $j);
+        float: left;
       }
       .pushr#{$i}x#{$j} {
         margin-right: percentage($width * $j);
@@ -75,6 +79,7 @@ EGs
     @media #{$large} {
       .c#{$i}x#{$j}-lg {
         width: percentage($width * $j);
+        float:left;
       }
       .pushr#{$i}x#{$j}-lg {
         margin-right: percentage($width * $j);

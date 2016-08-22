@@ -4,5 +4,6 @@ $(document).ready(function(){
   scroll();
   tabs();
   fields();
+  blank();
   $('.video').fitVids();
 });

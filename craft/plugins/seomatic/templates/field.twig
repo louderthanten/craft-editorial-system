@@ -2,6 +2,7 @@
 
 {% set locale = craft.isLocalized() ? (element ? element.locale : craft.locale) %}
 
+{% set someUrl = getFullyQualifiedUrl(element.url) | default(siteUrl) %}
 {% include "seomatic/_preview_display_modal" with {'previewMetaPath': '', 'locale': locale } %}
 {% include "seomatic/_preview_tags_modal" with {'previewMetaPath': '', 'elementId': elementId,  'locale': locale } %}
 
@@ -23,6 +24,53 @@
             </div>
         </div>
     </div>
+
+    <div class="field">
+        <div class="heading">
+            <label for="seoMainEntityOfPage">{{ "Main Entity of Page"|t}}{% if craft.isLocalized and meta.locale %}<span class="locale">{{ meta.locale }}</span>{% endif %}</label>
+            <div class="instructions"><p>{{ "The Main Entity of Page is a more specific, additional type that describes this entry.  This additional JSON-LD structured data entity will be added to your page, more specifically describing the page's content.  It is accessible via the <code>seomaticMainEntityOfPage</code> Twig variable, should you wish to modify or add to it" |t |raw}}</p></div>
+        </div>
+        <div>
+            <div class="inline-item">
+                {{ forms.selectField({
+                    id: id ~ "seoMainEntityCategory",
+                    class: "inline-item",
+                    fieldClass: "inline-item",
+                    options: {
+                        "CreativeWork": "CreativeWork",
+                        "Event": "Event",
+                        "Person": "Person",
+                        "Product": "Product",
+                    },
+                    name: name ~ "[seoMainEntityCategory]",
+                    value: meta.seoMainEntityCategory,
+                    locale: field.translatable ? locale,
+                }) }}
+            </div>
+            <div class="inline-item">
+                {{ forms.selectField({
+                    label: "&rarr;",
+                    class: "inline-item",
+                    fieldClass: "inline-item",
+                    id: id ~ "seoMainEntityOfPage",
+                    options: {
+                    },
+                    name: name ~ "[seoMainEntityOfPage]",
+                    value: meta.seoMainEntityOfPage,
+                    locale: field.translatable ? locale,
+                }) }}
+            </div>
+            <div class="inline-item">
+                <div class="inline-item inline-item-padding seomaticSchemaInfo">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% set myJs %}
+        setSelectedValue("{{ meta.seoMainEntityOfPage }}");
+    {% endset %}
+    {% includeJs myJs %}
+
     <div class="field comboField-wrapper first">
         <div class="heading">
             <label for="seoTitle">{{ "SEO Title"|t}}{% if locale %}<span class="locale">{{ locale }}</span>{% endif %}</label>
@@ -194,7 +242,7 @@
     <div class="field comboField-wrapper" id="{{ id }}seoImageId-field">
         <div class="heading">
             <label for="{{ id }}seoImageId">{{ "SEO Image"|t}}{% if locale %}<span class="locale">{{ locale }}</span>{% endif %}</label>
-            <div class="instructions"><p>{{ "This is the image that will be used for display as the webpage brand for this template, as well as on Twitter Cards and Facebook OpenGraph that link to this page.  It should be an image that displays well when cropped to a square format (for Twitter)" |t |raw}}</p></div>
+            <div class="instructions"><p>{{ "This is the image that will be used for display as the webpage brand for this template, as well as on Twitter Cards and Facebook OpenGraph that link to this page.  The image must be in JPG, PNG, or GIF format." |t |raw}}</p></div>
         </div>
         <div class="source-container"{% if not seoImageIdSourceChangeable %} style="display: none;"{% endif %}>
             <div class="source-item">
@@ -237,7 +285,7 @@
                         name: name ~ '[seoImageId]',
                         elementType: elementType,
                         criteria: {
-                            'kind': [],
+                            'kind': ['image'],
                             'localeEnabled': null,
                             'locale': craft.locale,
                         },
@@ -255,6 +303,16 @@
         </div>
     </div>
 
+    {{ forms.selectField({
+        label: "SEO Image Transform"|t,
+        instructions: "The image transform to apply to the Site SEO Image."|t,
+        id: id ~ "seoImageTransform",
+        options: transformsList,
+        name: name ~ "[seoImageTransform]",
+        value: meta.seoImageTransform,
+        locale: field.translatable ? locale,
+    }) }}
+
     <div class="field comboField-wrapper"{% if not twitterCardTypeChangeable %} style="display: none;"{% endif %}>
     {{ forms.selectField({
         label: "Twitter Card Type"|t,
@@ -271,6 +329,16 @@
     }) }}
     </div>
 
+    {{ forms.selectField({
+        label: "Twitter Image Transform"|t,
+        instructions: "The image transform to apply to the Twitter SEO Image.  Twitter recommends: 120 x 120 pixels minimum size, 1:1 aspect ratio, 1mb max size for Summary Card images, and 280x150 pixels minimum size, 1.86:1 aspect ratio, 1mb max size for Summary Card with Large Image images."|t,
+        id: id ~ "seoTwitterImageTransform",
+        options: transformsList,
+        name: name ~ "[seoTwitterImageTransform]",
+        value: meta.seoTwitterImageTransform,
+        locale: field.translatable ? locale,
+    }) }}
+
     <div class="field comboField-wrapper"{% if not openGraphTypeChangeable %} style="display: none;"{% endif %}>
     {{ forms.selectField({
         label: "Facebook Open Graph Type"|t,
@@ -286,6 +354,16 @@
         locale: field.translatable ? locale,
     }) }}
     </div>
+
+    {{ forms.selectField({
+        label: "Facebook Image Transform"|t,
+        instructions: "The image transform to apply to the Facebook SEO Image.  Facebook recommends: 1200 x 630 pixels minimum size, 1.9:1 aspect ratio, 8mb max size."|t,
+        id: id ~ "seoFacebookImageTransform",
+        options: transformsList,
+        name: name ~ "[seoFacebookImageTransform]",
+        value: meta.seoFacebookImageTransform,
+        locale: field.translatable ? locale,
+    }) }}
 
     <div class="field comboField-wrapper"{% if not robotsChangeable %} style="display: none;"{% endif %}>
     {{ forms.selectField({

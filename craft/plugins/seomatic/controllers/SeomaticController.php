@@ -39,131 +39,357 @@ class SeomaticController extends BaseController
     /* -- Render the SEOmatic display preview template */
 
             $url = urldecode(craft()->request->getParam('url'));
-            $keywordsParam = urldecode(craft()->request->getParam('keywords'));
-            $keywordsKeys = explode(",", $keywordsParam);
-            $keywords = array();
-/* -- Silly work-around for what appears to be a file_get_contents bug with https -> http://stackoverflow.com/questions/10524748/why-im-getting-500-error-when-using-file-get-contents-but-works-in-a-browser */
-            $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
-            $context = stream_context_create($opts);
-            $dom = HtmlDomParser::file_get_html($url, false, $context);            if ($dom)
+            if (UrlHelper::isAbsoluteUrl($url))
             {
-                $textStatistics = new TS\TextStatistics;
-                foreach($dom->find('style') as $element)
-                    $element->outertext = '';
-                foreach($dom->find('script') as $element)
-                    $element->outertext = '';
-                $strippedDom = html_entity_decode($dom->plaintext);
-                $strippedDom = preg_replace('@[^0-9a-z\.\!]+@i', ' ', $strippedDom);
-                $htmlDom = html_entity_decode($dom->outertext);
-                $htmlDom = preg_replace('@[^0-9a-z\.\!]+@i', '', $htmlDom);
+                $urlParts = parse_url($url);
 
-/* -- SEO statistics */
+                if (isset($urlParts['scheme']))
+                    $rootUrl = $urlParts['scheme'] . "://" . $urlParts['host'];
+                else
+                    $rootUrl = "http" . "://" . $urlParts['host'];
+                if (isset($urlParts['port']))
+                    $rootUrl .= $urlParts['port'] . "/";
+                else
+                    $rootUrl .= "/";
 
-                $titleTag = html_entity_decode($dom->find('title', 0)->plaintext);
-                $titleLength = strlen($titleTag);
-
-                $metaDescriptionTag = html_entity_decode($dom->find('meta[name=description]', 0)->content);
-                $metaDescriptionLength = strlen($metaDescriptionTag);
-
-                $emptyImageAlts = count($dom->find('img[!alt]'));
-
-                $h1Tags = count($dom->find('h1'));
-                $h2Tags = count($dom->find('h2'));
-                $h3Tags = count($dom->find('h3'));
-                $h4Tags = count($dom->find('h4'));
-                $h5Tags = count($dom->find('h5'));
-                $totalHTags = $h1Tags + $h2Tags + $h3Tags + $h4Tags + $h5Tags;
-                $effectiveHTags = true;
-                if ($h1Tags != 1)
-                    $effectiveHTags = false;
-                if ($totalHTags < 6)
-                    $effectiveHTags = false;
-                if ($h2Tags == 0 && ($h3Tags || $h4Tags || $h5Tags))
-                    $effectiveHTags = false;
-                if ($h3Tags == 0 && ($h4Tags || $h5Tags))
-                    $effectiveHTags = false;
-                if ($h4Tags == 0 && ($h5Tags))
-                    $effectiveHTags = false;
-
-                $textToHtmlRatio = (strlen($strippedDom) / (strlen($htmlDom) - strlen($strippedDom))) * 100;
-
-                $pageKeywords = craft()->seomatic->extractKeywords($strippedDom);
-
-/* -- Focus keywords */
-
-                foreach ($keywordsKeys as $keywordsKey)
+                $keywordsParam = urldecode(craft()->request->getParam('keywords'));
+                $keywordsKeys = explode(",", $keywordsParam);
+                $keywords = array();
+    /* -- Silly work-around for what appears to be a file_get_contents bug with https -> http://stackoverflow.com/questions/10524748/why-im-getting-500-error-when-using-file-get-contents-but-works-in-a-browser */
+                $opts = array('http'=>array('header' => "User-Agent:Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13\r\n"));
+                $context = stream_context_create($opts);
+                $dom = HtmlDomParser::file_get_html($url, false, $context);
+                if ($dom)
                 {
-                    $keywordsKey = trim($keywordsKey);
-                    if (strlen($keywordsKey))
+                    $textStatistics = new TS\TextStatistics;
+
+    /* -- See if robots.txt exists */
+
+                    $hasRobotsTxt = false;
+                    $hasSitemap = false;
+                    $sitemapUrl = rtrim($rootUrl, '/') . "/sitemap.xml";
+                    $foundSitemapUrl = "";
+
+                    $robotsUrl = rtrim($rootUrl, '/') . "/robots.txt";
+                    $robots = @file_get_contents($robotsUrl, false, $context);
+                    if ($robots !== false)
                     {
-                        $appearsInH1Tag = 0;
-                        foreach($dom->find('h1') as $element)
-                            $appearsInH1Tag += substr_count(strtolower($element->plaintext), strtolower($keywordsKey));
-                        foreach($dom->find('h2') as $element)
-                            $appearsInH1Tag += substr_count(strtolower($element->plaintext), strtolower($keywordsKey));
+                        $hasRobotsTxt = true;
+                        $lines = explode("\n", $robots);
+                        foreach ($lines as $line)
+                        {
+                            $line = ltrim($line);
 
-                        $appearsInImgTag = 0;
-                        foreach($dom->find('img') as $element)
-                            $appearsInImgTag += substr_count(strtolower($element->alt), strtolower($keywordsKey));
-
-                        $appearsInAhrefTag = 0;
-                        foreach($dom->find('a') as $element)
-                            $appearsInAhrefTag += substr_count(strtolower($element->plaintext), strtolower($keywordsKey));
-
-                        $keywords[$keywordsKey] = array(
-                            'appearsInTitleTag' => substr_count(strtolower($titleTag), strtolower($keywordsKey)),
-                            'appearsInUrl' => substr_count(strtolower($url), strtolower($keywordsKey)),
-                            'appearsInMetaDescriptionTag' => substr_count(strtolower($metaDescriptionTag), strtolower($keywordsKey)),
-                            'appearsInH1Tag' => $appearsInH1Tag,
-                            'appearsInAhrefTag' => $appearsInAhrefTag,
-                            'appearsInImgTag' => $appearsInImgTag,
-                            'appearsInPageKeywords' => substr_count(strtolower($pageKeywords), strtolower($keywordsKey)),
-                            'appearsOnWebPage' => substr_count(strtolower($strippedDom), strtolower($keywordsKey)),
-                            );
+                            $searchStr = 'Sitemap';
+                            $pos = strpos($line, $searchStr);
+                            if ($pos !== false)
+                            {
+                                $pos += strlen($searchStr);
+                                $foundSitemapUrl = substr($line, $pos);
+                                $foundSitemapUrl = trim($sitemapUrl, ':');
+                                $foundSitemapUrl = trim($sitemapUrl);
+                            }
+                        }
                     }
+
+    /* -- Check to see if a sitemap exists */
+
+                    if ($foundSitemapUrl)
+                    {
+                        $siteMapContents = "";
+                        $siteMapContents = @file_get_contents($sitemapUrl, false, $context, 0, 1);
+                        if ($siteMapContents !== false)
+                            $hasSitemap = true;
+                    }
+
+                    $siteMapContents = "";
+                    $siteMapContents = @file_get_contents($sitemapUrl, false, $context, 0, 1);
+                    if ($siteMapContents !== false)
+                        $hasSitemap = true;
+
+/* -- See if the site is https */
+
+                    $sslReturnCode = 0;
+                    $sslUrl = "https" . "://" . $urlParts['host'];
+                    if (isset($urlParts['port']))
+                        $sslUrl .= $sslUrl['port'] . '/';
+                    else
+                        $sslUrl .= '/';
+
+                    $ch = curl_init($sslUrl);
+
+                    curl_setopt($ch, CURLOPT_NOBODY, true);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                    curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+                    curl_exec($ch);
+                    $sslReturnCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    curl_close($ch);
+
+    /* -- Check to see if the page is valid */
+
+                    $validatorUrl = "https://validator.w3.org/check?uri=" . urlencode($url) . "&output=json";
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_URL, $validatorUrl);
+                    $validatorResult = curl_exec($ch);
+                    curl_close($ch);
+
+                    $validatorStatus = $validatorErrors = $validatorWarnings = "";
+                    if ($validatorResult)
+                    {
+                        $searchStr = "X-W3C-Validator-Status: ";
+                        $pos = strpos($validatorResult, $searchStr);
+                        if ($pos !== false)
+                        {
+                            $pos += strlen($searchStr);
+                            $validatorStatus = substr($validatorResult, $pos, ( strpos($validatorResult, PHP_EOL, $pos) ) - $pos);
+                        }
+
+                        $searchStr = "X-W3C-Validator-Errors: ";
+                        $pos = strpos($validatorResult, $searchStr);
+                        if ($pos !== false)
+                        {
+                            $pos += strlen($searchStr);
+                            $validatorErrors = substr($validatorResult, $pos, ( strpos($validatorResult, PHP_EOL, $pos) ) - $pos);
+                        }
+
+                        $searchStr = "X-W3C-Validator-Warnings: ";
+                        $pos = strpos($validatorResult, $searchStr);
+                        if ($pos !== false)
+                        {
+                            $pos += strlen($searchStr);
+                            $validatorWarnings = substr($validatorResult, $pos, ( strpos($validatorResult, PHP_EOL, $pos) ) - $pos);
+                        }
+                    }
+                    $validatorUrl = "https://validator.w3.org/check?uri=" . urlencode($url);
+
+    /* -- Check Google Pagespeed insights for desktop */
+
+                    $pagespeedDesktopScore = "";
+                    $pagespeedDesktopUrl = "https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=" . urlencode($url) . "&strategy=desktop";
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_URL, $pagespeedDesktopUrl);
+                    $pagespeedDesktopResult = curl_exec($ch);
+                    curl_close($ch);
+                    if ($pagespeedDesktopResult)
+                    {
+                        $pagespeedJson = json_decode($pagespeedDesktopResult, true);
+                        if ($pagespeedJson)
+                        {
+                            if (isset($pagespeedJson['responseCode']) && ($pagespeedJson['responseCode'] == "200" || $pagespeedJson['responseCode'] == "301" || $pagespeedJson['responseCode'] == "302"))
+                            {
+                                if (isset($pagespeedJson['ruleGroups']['SPEED']['score']))
+                                    $pagespeedDesktopScore = intval($pagespeedJson['ruleGroups']['SPEED']['score']);
+                            }
+                        }
+                    }
+                    $pagespeedDesktopUrl = "https://developers.google.com/speed/pagespeed/insights/?url=" . urlencode($url) . "&tab=desktop";
+
+    /* -- Check Google Pagespeed insights for desktop */
+
+                    $pagespeedMobileScore = "";
+                    $pagespeedMobileUsability = "";
+                    $pagespeedMobileUrl = "https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=" . urlencode($url) . "&strategy=mobile";
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+                    curl_setopt($ch, CURLOPT_URL, $pagespeedMobileUrl);
+                    $pagespeedMobileResult = curl_exec($ch);
+                    curl_close($ch);
+                    if ($pagespeedMobileResult)
+                    {
+                        $pagespeedJson = json_decode($pagespeedMobileResult, true);
+                        if ($pagespeedJson)
+                        {
+                            if (isset($pagespeedJson['responseCode']) && ($pagespeedJson['responseCode'] == "200" || $pagespeedJson['responseCode'] == "301" || $pagespeedJson['responseCode'] == "302"))
+                            {
+                                if (isset($pagespeedJson['ruleGroups']['SPEED']['score']))
+                                    $pagespeedMobileScore = intval($pagespeedJson['ruleGroups']['SPEED']['score']);
+                                if (isset($pagespeedJson['ruleGroups']['USABILITY']['score']))
+                                    $pagespeedMobileUsability = intval($pagespeedJson['ruleGroups']['USABILITY']['score']);
+                            }
+                        }
+                    }
+                    $pagespeedMobileUrl = "https://developers.google.com/speed/pagespeed/insights/?url=" . urlencode($url) . "&tab=mobile";
+
+    /* -- Scrape for JSON-LD before we remove the <script> tags */
+
+                    $jsonLdTypes = array();
+                    foreach($dom->find('script[type=application/ld+json]') as $elem)
+                    {
+                        $jsonArray = json_decode($elem->innertext, true);
+                        if (isset($jsonArray['@type']))
+                            array_push($jsonLdTypes, $jsonArray['@type']);
+                    }
+                    $jsonLdTypes = array_unique($jsonLdTypes);
+
+    /* -- Remove inline <script> and <style> tags, and then strip the DOM down */
+
+                    foreach($dom->find('style') as $element)
+                        $element->outertext = '';
+                    foreach($dom->find('script') as $element)
+                        $element->outertext = '';
+                    $strippedDom = html_entity_decode($dom->plaintext);
+                    $strippedDom = preg_replace('@[^0-9a-z\.\!]+@i', ', ', $strippedDom);
+                    $htmlDom = html_entity_decode($dom->outertext);
+                    $htmlDom = preg_replace('@[^0-9a-z\.\!]+@i', '', $htmlDom);
+
+    /* -- SEO statistics */
+
+                    $titleTag = html_entity_decode($dom->find('title', 0)->plaintext);
+                    $titleLength = strlen($titleTag);
+
+                    $metaDescriptionTag = "";
+                    $metaDescriptionLength = 0;
+                    $elem = $dom->find('meta[name=description]', 0);
+                    if ($elem)
+                    {
+                        $metaDescriptionTag = html_entity_decode($elem->content);
+                        $metaDescriptionLength = strlen($metaDescriptionTag);
+                    }
+
+                    $metaTwitterTag = "";
+                    $elem = $dom->find('meta[name=twitter:card],meta[property=twitter:card]', 0);
+                    if ($elem)
+                        $metaTwitterTag = html_entity_decode($elem->content);
+
+                    $metaOpenGraphTag = "";
+                    $elem = $dom->find('meta[property=og:type],meta[property=og:url],meta[property=og:title]', 0);
+                    if ($elem)
+                        $metaOpenGraphTag = html_entity_decode($elem->content);
+
+                    $hasRelPublisherTag = false;
+                    $elem = $dom->find('link[rel=publisher]', 0);
+                    if ($elem)
+                        $hasRelPublisherTag = true;
+
+                    $emptyImageAlts = count($dom->find('img[!alt]'));
+
+                    $h1Tags = count($dom->find('h1'));
+                    $h2Tags = count($dom->find('h2'));
+                    $h3Tags = count($dom->find('h3'));
+                    $h4Tags = count($dom->find('h4'));
+                    $h5Tags = count($dom->find('h5'));
+                    $totalHTags = $h1Tags + $h2Tags + $h3Tags + $h4Tags + $h5Tags;
+                    $effectiveHTags = true;
+                    if ($h1Tags != 1)
+                        $effectiveHTags = false;
+                    if ($totalHTags < 3)
+                        $effectiveHTags = false;
+                    if ($h2Tags == 0 && ($h3Tags || $h4Tags || $h5Tags))
+                        $effectiveHTags = false;
+                    if ($h3Tags == 0 && ($h4Tags || $h5Tags))
+                        $effectiveHTags = false;
+                    if ($h4Tags == 0 && ($h5Tags))
+                        $effectiveHTags = false;
+
+                    $textToHtmlRatio = (strlen($strippedDom) / (strlen($htmlDom) - strlen($strippedDom))) * 100;
+
+                    $pageKeywords = craft()->seomatic->extractKeywords($strippedDom);
+                    $pageKeywords = str_replace(",",", ", $pageKeywords);
+
+    /* -- Focus keywords */
+
+                    foreach ($keywordsKeys as $keywordsKey)
+                    {
+                        $keywordsKey = trim($keywordsKey);
+                        if (strlen($keywordsKey))
+                        {
+                            $appearsInH1Tag = 0;
+                            foreach($dom->find('h1') as $element)
+                                $appearsInH1Tag += substr_count(strtolower($element->plaintext), strtolower($keywordsKey));
+                            foreach($dom->find('h2') as $element)
+                                $appearsInH1Tag += substr_count(strtolower($element->plaintext), strtolower($keywordsKey));
+
+                            $appearsInImgTag = 0;
+                            foreach($dom->find('img') as $element)
+                                $appearsInImgTag += substr_count(strtolower($element->alt), strtolower($keywordsKey));
+
+                            $appearsInAhrefTag = 0;
+                            foreach($dom->find('a') as $element)
+                                $appearsInAhrefTag += substr_count(strtolower($element->plaintext), strtolower($keywordsKey));
+
+                            $keywords[$keywordsKey] = array(
+                                'appearsInTitleTag' => substr_count(strtolower($titleTag), strtolower($keywordsKey)),
+                                'appearsInUrl' => substr_count(strtolower($url), strtolower($keywordsKey)),
+                                'appearsInMetaDescriptionTag' => substr_count(strtolower($metaDescriptionTag), strtolower($keywordsKey)),
+                                'appearsInH1Tag' => $appearsInH1Tag,
+                                'appearsInAhrefTag' => $appearsInAhrefTag,
+                                'appearsInImgTag' => $appearsInImgTag,
+                                'appearsInPageKeywords' => substr_count(strtolower($pageKeywords), strtolower($keywordsKey)),
+                                'appearsOnWebPage' => substr_count(strtolower($strippedDom), strtolower($keywordsKey)),
+                                );
+                        }
+                    }
+    /* -- Text statistics */
+
+                    $wordCount = $textStatistics->wordCount($strippedDom);
+                    $readingTime = floor($wordCount / 200);
+                    if ($readingTime === 0)
+                        $readingTime = 1;
+                    $fleschKincaidReadingEase = $textStatistics->fleschKincaidReadingEase($strippedDom);
+                    $fleschKincaidGradeLevel = $textStatistics->fleschKincaidGradeLevel($strippedDom);
+                    $gunningFogScore = $textStatistics->gunningFogScore($strippedDom);
+                    $colemanLiauIndex = $textStatistics->colemanLiauIndex($strippedDom);
+                    $smogIndex = $textStatistics->smogIndex($strippedDom);
+                    $automatedReadabilityIndex = $textStatistics->automatedReadabilityIndex($strippedDom);
+
+                    $vars = array(
+                        'titleTag' => $titleTag,
+                        'titleLength' => $titleLength,
+                        'metaDescriptionTag' => $metaDescriptionTag,
+                        'metaDescriptionLength' => $metaDescriptionLength,
+                        'metaTwitterTag' => $metaTwitterTag,
+                        'metaOpenGraphTag' => $metaOpenGraphTag,
+                        'hasRelPublisherTag' => $hasRelPublisherTag,
+                        'jsonLdTypes' => $jsonLdTypes,
+                        'hasRobotsTxt' => $hasRobotsTxt,
+                        'hasSitemap' => $hasSitemap,
+                        'emptyImageAlts' => $emptyImageAlts,
+                        'validatorUrl' => $validatorUrl,
+                        'validatorStatus' => $validatorStatus,
+                        'validatorErrors' => $validatorErrors,
+                        'validatorWarnings' => $validatorWarnings,
+                        'pagespeedDesktopScore' => $pagespeedDesktopScore,
+                        'pagespeedDesktopUrl' => $pagespeedDesktopUrl,
+                        'pagespeedMobileScore' => $pagespeedMobileScore,
+                        'pagespeedMobileUsability' => $pagespeedMobileUsability,
+                        'pagespeedMobileUrl' => $pagespeedMobileUrl,
+                        'sslReturnCode' => $sslReturnCode,
+                        'h1Tags' => $h1Tags,
+                        'h2Tags' => $h2Tags,
+                        'h3Tags' => $h3Tags,
+                        'h4Tags' => $h4Tags,
+                        'h5Tags' => $h5Tags,
+                        'effectiveHTags' => $effectiveHTags,
+                        'textToHtmlRatio' => $textToHtmlRatio,
+                        'wordCount' => $wordCount,
+                        'readingTime' => $readingTime,
+                        'pageKeywords' => $pageKeywords,
+                        'keywords' => $keywords,
+                        'fleschKincaidReadingEase' => $fleschKincaidReadingEase,
+                        'fleschKincaidGradeLevel' => $fleschKincaidGradeLevel,
+                        'gunningFogScore' => $gunningFogScore,
+                        'colemanLiauIndex' => $colemanLiauIndex,
+                        'smogIndex' => $smogIndex,
+                        'automatedReadabilityIndex' => $automatedReadabilityIndex,
+                        );
+
+                    //$htmlText = craft()->templates->render('_seo_metrics.twig', $vars);
+                    $this->renderTemplate('_seo_metrics.twig', $vars);
                 }
-/* -- Text statistics */
-
-                $wordCount = $textStatistics->wordCount($strippedDom);
-                $readingTime = floor($wordCount / 200);
-                if ($readingTime === 0)
-                    $readingTime = 1;
-                $fleschKincaidReadingEase = $textStatistics->fleschKincaidReadingEase($strippedDom);
-                $fleschKincaidGradeLevel = $textStatistics->fleschKincaidGradeLevel($strippedDom);
-                $gunningFogScore = $textStatistics->gunningFogScore($strippedDom);
-                $colemanLiauIndex = $textStatistics->colemanLiauIndex($strippedDom);
-                $smogIndex = $textStatistics->smogIndex($strippedDom);
-                $automatedReadabilityIndex = $textStatistics->automatedReadabilityIndex($strippedDom);
-
-                $vars = array(
-                    'titleTag' => $titleTag,
-                    'titleLength' => $titleLength,
-                    'metaDescriptionTag' => $metaDescriptionTag,
-                    'metaDescriptionLength' => $metaDescriptionLength,
-                    'emptyImageAlts' => $emptyImageAlts,
-                    'h1Tags' => $h1Tags,
-                    'h2Tags' => $h2Tags,
-                    'h3Tags' => $h3Tags,
-                    'h4Tags' => $h4Tags,
-                    'h5Tags' => $h5Tags,
-                    'effectiveHTags' => $effectiveHTags,
-                    'textToHtmlRatio' => $textToHtmlRatio,
-                    'wordCount' => $wordCount,
-                    'readingTime' => $readingTime,
-                    'pageKeywords' => $pageKeywords,
-                    'keywords' => $keywords,
-                    'fleschKincaidReadingEase' => $fleschKincaidReadingEase,
-                    'fleschKincaidGradeLevel' => $fleschKincaidGradeLevel,
-                    'gunningFogScore' => $gunningFogScore,
-                    'colemanLiauIndex' => $colemanLiauIndex,
-                    'smogIndex' => $smogIndex,
-                    'automatedReadabilityIndex' => $automatedReadabilityIndex,
-                    );
-
-                //$htmlText = craft()->templates->render('_seo_metrics.twig', $vars);
-                $this->renderTemplate('_seo_metrics.twig', $vars);
+                else
+                    $this->renderTemplate('_error', array('errorMessage' => "Error parsing the DOM.  Is this a valid, publicly accessible URL?"));
             }
-
+            else
+                $this->renderTemplate('_error', array('errorMessage' => "Error loading the webpage. Is this a valid, publicly accessible URL?"));
             method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($oldPath) : craft()->path->setTemplatesPath($oldPath);
         }
         $this->parsingDom = false;
@@ -291,6 +517,7 @@ class SeomaticController extends BaseController
 
         // Set the "Continue Editing" URL
         $variables['continueEditingUrl'] = 'seomatic/site';
+        $variables['transformsList'] = craft()->seomatic->getTransformsList();
 
         // Render the template!
         $this->renderTemplate('seomatic/site/_edit', $variables);
@@ -459,6 +686,8 @@ class SeomaticController extends BaseController
         $sources = craft()->assets->findFolders();
         $variables['assetsSourceExists'] = count($sources);
 
+        $variables['transformsList'] = craft()->seomatic->getTransformsList();
+
         // URL to create a new assets source
         $variables['newAssetsSourceUrl'] = UrlHelper::getUrl('settings/assets/sources/new');
 
@@ -541,9 +770,14 @@ class SeomaticController extends BaseController
         $model->elementId = $metaId;
         $model->metaType = craft()->request->getPost('metaType', $model->metaType);
         $model->metaPath = craft()->request->getPost('metaPath', $model->metaPath);
+        $model->seoMainEntityCategory = craft()->request->getPost('seoMainEntityCategory', $model->seoMainEntityCategory);
+        $model->seoMainEntityOfPage = craft()->request->getPost('seoMainEntityOfPage', $model->seoMainEntityOfPage);
         $model->seoTitle = craft()->request->getPost('seoTitle', $model->seoTitle);
         $model->seoDescription = craft()->request->getPost('seoDescription', $model->seoDescription);
         $model->seoKeywords = craft()->request->getPost('seoKeywords', $model->seoKeywords);
+        $model->seoImageTransform = craft()->request->getPost('seoImageTransform', $model->seoImageTransform);
+        $model->seoFacebookImageTransform = craft()->request->getPost('seoFacebookImageTransform', $model->seoFacebookImageTransform);
+        $model->seoTwitterImageTransform = craft()->request->getPost('seoTwitterImageTransform', $model->seoTwitterImageTransform);
         $model->twitterCardType = craft()->request->getPost('twitterCardType', $model->twitterCardType);
         $model->openGraphType = craft()->request->getPost('openGraphType', $model->openGraphType);
         $model->robots = craft()->request->getPost('robots', $model->robots);
@@ -621,6 +855,9 @@ class SeomaticController extends BaseController
         $record->siteSeoTitlePlacement = craft()->request->getPost('siteSeoTitlePlacement', $record->siteSeoTitlePlacement);
         $record->siteSeoDescription = craft()->request->getPost('siteSeoDescription', $record->siteSeoDescription);
         $record->siteSeoKeywords = craft()->request->getPost('siteSeoKeywords', $record->siteSeoKeywords);
+        $record->siteSeoImageTransform = craft()->request->getPost('siteSeoImageTransform', $record->siteSeoImageTransform);
+        $record->siteSeoFacebookImageTransform = craft()->request->getPost('siteSeoFacebookImageTransform', $record->siteSeoFacebookImageTransform);
+        $record->siteSeoTwitterImageTransform = craft()->request->getPost('siteSeoTwitterImageTransform', $record->siteSeoTwitterImageTransform);
         $record->siteTwitterCardType = craft()->request->getPost('siteTwitterCardType', $record->siteTwitterCardType);
         $record->siteOpenGraphType = craft()->request->getPost('siteOpenGraphType', $record->siteOpenGraphType);
         $record->siteRobots = craft()->request->getPost('siteRobots', $record->siteRobots);
@@ -786,6 +1023,7 @@ class SeomaticController extends BaseController
         $record->instagramHandle = craft()->request->getPost('instagramHandle', $record->instagramHandle);
         $record->pinterestHandle = craft()->request->getPost('pinterestHandle', $record->pinterestHandle);
         $record->githubHandle = craft()->request->getPost('githubHandle', $record->githubHandle);
+        $record->vimeoHandle = craft()->request->getPost('vimeoHandle', $record->vimeoHandle);
 
         if ($record->save())
         {

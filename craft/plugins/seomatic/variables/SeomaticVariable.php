@@ -288,10 +288,10 @@ class SeomaticVariable
     } /* -- renderWebsite */
 
 /* --------------------------------------------------------------------------------
-    Render the SEOmatic Product template
+    Render the Main Enity of Page JSON-LD
 -------------------------------------------------------------------------------- */
 
-    function renderProduct($elementId=null, $locale=null, $isPreview=false)
+    function renderMainEntityOfPage($elementId=null, $locale=null, $isPreview=false)
     {
         if (!$locale)
             $locale = craft()->language;
@@ -308,10 +308,36 @@ class SeomaticVariable
         }
 
         $metaVars = craft()->seomatic->getGlobals('', $locale);
-        $result = craft()->seomatic->renderProduct($metaVars, $locale, $isPreview);
+        $result = craft()->seomatic->renderMainEntityOfPage($metaVars, $locale, $isPreview);
 
         return rtrim($result);
-    } /* -- renderProduct */
+    } /* -- renderMainEntityOfPage */
+
+/* --------------------------------------------------------------------------------
+    Render the Breadcrumbs JSON-LD
+-------------------------------------------------------------------------------- */
+
+    function renderBreadcrumbs($elementId=null, $locale=null, $isPreview=false)
+    {
+        if (!$locale)
+            $locale = craft()->language;
+
+        if ($elementId)
+        {
+            $element = craft()->elements->getElementById($elementId, null, $locale);
+            if ($element)
+            {
+                $entryMeta = craft()->seomatic->getMetaFromElement($element);
+                if ($entryMeta)
+                    craft()->seomatic->setEntryMeta($entryMeta, $element->url);
+            }
+        }
+
+        $metaVars = craft()->seomatic->getGlobals('', $locale);
+        $result = craft()->seomatic->renderBreadcrumbs($metaVars, $locale, $isPreview);
+
+        return rtrim($result);
+    } /* -- renderBreadcrumbs */
 
 /* --------------------------------------------------------------------------------
     Render the SEOmatic Place template

@@ -31,6 +31,9 @@ class Seomatic_MetaFieldType extends BaseFieldType
         craft()->templates->includeCssResource('seomatic/css/bootstrap-tokenfield.css');
         craft()->templates->includeCssResource('seomatic/css/style.css');
         craft()->templates->includeCssResource('seomatic/css/field.css');
+        craft()->templates->includeJsResource('seomatic/js/main_entity_type_list.js');
+        craft()->templates->includeJs("var metaFieldPrefix='" . $namespacedId . "';");
+        craft()->templates->includeJsResource('seomatic/js/meta.js');
         craft()->templates->includeJsResource('seomatic/js/field.js');
         craft()->templates->includeJsResource('seomatic/js/jquery.bpopup.min.js');
         craft()->templates->includeJsResource('seomatic/js/prism.min.js');
@@ -99,6 +102,8 @@ class Seomatic_MetaFieldType extends BaseFieldType
         $variables['openGraphTypeChangeable'] = $this->getSettings()->openGraphTypeChangeable;
         $variables['robotsChangeable'] = $this->getSettings()->robotsChangeable;
 
+        $variables['transformsList'] = craft()->seomatic->getTransformsList();
+
 /* -- Extract a list of the other plain text fields that are in this entry's layout */
 
         $fieldList = array('title' => 'Title');
@@ -115,9 +120,17 @@ class Seomatic_MetaFieldType extends BaseFieldType
                 case "PlainText":
                 case "RichText":
                 case "RedactorI":
+                case "PreparseField_Preparse":
                     $fieldList[$field->handle] = $field->name;
                     $fieldData[$field->handle] = craft()->seomatic->truncateStringOnWord(
                             strip_tags($this->element->content[$field->handle]),
+                            200);
+                    break;
+
+                case "Neo":
+                    $fieldList[$field->handle] = $field->name;
+                    $fieldData[$field->handle] = craft()->seomatic->truncateStringOnWord(
+                            craft()->seomatic->extractTextFromNeo($this->element[$field->handle]),
                             200);
                     break;
 
@@ -135,6 +148,7 @@ class Seomatic_MetaFieldType extends BaseFieldType
                             200);
                     break;
 
+                case "FocusPoint_FocusPoint":
                 case "Assets":
                     $imageFieldList[$field->handle] = $field->name;
                     $img = $this->element[$field->handle]->first();
@@ -166,6 +180,9 @@ class Seomatic_MetaFieldType extends BaseFieldType
             return array(
                 'assetSources' => AttributeType::Mixed,
 
+                'seoMainEntityCategory' => array(AttributeType::String, 'default' => 'CreativeWork'),
+                'seoMainEntityOfPage' => array(AttributeType::String, 'default' => 'WebPage'),
+
                 'seoTitle' => AttributeType::String,
                 'seoTitleSource' => array(AttributeType::String, 'default' => 'field'),
                 'seoTitleSourceField' => array(AttributeType::String, 'default' => 'title'),
@@ -184,12 +201,15 @@ class Seomatic_MetaFieldType extends BaseFieldType
                 'seoImageIdSource' => AttributeType::String,
                 'seoImageIdSourceField' => AttributeType::String,
                 'seoImageIdSourceChangeable' => array(AttributeType::Bool, 'default' => 1),
+                'seoImageTransform' => AttributeType::String,
 
                 'twitterCardType' => AttributeType::String,
                 'twitterCardTypeChangeable' => array(AttributeType::Bool, 'default' => 1),
+                'seoTwitterImageTransform' => AttributeType::String,
 
                 'openGraphType' => AttributeType::String,
                 'openGraphTypeChangeable' => array(AttributeType::Bool, 'default' => 1),
+                'seoFacebookImageTransform' => AttributeType::String,
 
                 'robots' => AttributeType::String,
                 'robotsChangeable' => array(AttributeType::Bool, 'default' => 1),
@@ -217,6 +237,7 @@ class Seomatic_MetaFieldType extends BaseFieldType
                 case "PlainText":
                 case "RichText":
                 case "RedactorI":
+                case "PreparseField_Preparse":
                     $fieldList[$field->handle] = $field->name;
                     break;
 
@@ -224,10 +245,15 @@ class Seomatic_MetaFieldType extends BaseFieldType
                     $fieldList[$field->handle] = $field->name;
                     break;
 
+                case "Neo":
+                    $fieldList[$field->handle] = $field->name;
+                    break;
+
                 case "Tags":
                     $fieldList[$field->handle] = $field->name;
                     break;
 
+                case "FocusPoint_FocusPoint":
                 case "Assets":
                     $imageFieldList[$field->handle] = $field->name;
                     break;
@@ -240,9 +266,14 @@ class Seomatic_MetaFieldType extends BaseFieldType
         else
             $titleLength = ($titleLength - strlen(" | ") - strlen($siteMeta['siteSeoName']));
 
+        craft()->templates->includeCssResource('seomatic/css/bootstrap-tokenfield.css');
         craft()->templates->includeCssResource('seomatic/css/style.css');
         craft()->templates->includeCssResource('seomatic/css/field.css');
+        craft()->templates->includeJsResource('seomatic/js/main_entity_type_list.js');
+        craft()->templates->includeJs("var metaFieldPrefix='types-Seomatic_Meta-';");
         craft()->templates->includeJsResource('seomatic/js/field_settings.js');
+        craft()->templates->includeJsResource('seomatic/js/meta.js');
+        craft()->templates->includeJsResource('seomatic/js/bootstrap-tokenfield.min.js');
 
         $assetElementType = craft()->elements->getElementType(ElementType::Asset);
         return craft()->templates->render('seomatic/field_settings', array(
@@ -250,6 +281,7 @@ class Seomatic_MetaFieldType extends BaseFieldType
             'fieldList'             => $fieldList,
             'imageFieldList'        => $imageFieldList,
             'titleLength'           => $titleLength,
+            'transformsList'        => craft()->seomatic->getTransformsList(),
             'settings'              => $this->getSettings()
         ));
    }
@@ -281,6 +313,9 @@ class Seomatic_MetaFieldType extends BaseFieldType
         {
             $value = new Seomatic_MetaFieldModel();
 
+            $value->seoMainEntityCategory = $this->getSettings()->seoMainEntityCategory;
+            $value->seoMainEntityOfPage = $this->getSettings()->seoMainEntityOfPage;
+
             $value->seoTitle = $this->getSettings()->seoTitle;
             $value->seoTitleUnparsed = $this->getSettings()->seoTitle;
             $value->seoTitleSource = $this->getSettings()->seoTitleSource;
@@ -298,9 +333,12 @@ class Seomatic_MetaFieldType extends BaseFieldType
 
             $value->seoImageIdSource = $this->getSettings()->seoImageIdSource;
             $value->seoImageIdSourceField = $this->getSettings()->seoImageIdSourceField;
+            $value->seoImageTransform = $this->getSettings()->seoImageTransform;
 
             $value->twitterCardType = $this->getSettings()->twitterCardType;
+            $value->seoTwitterImageTransform = $this->getSettings()->seoTwitterImageTransform;
             $value->openGraphType = $this->getSettings()->openGraphType;
+            $value->seoFacebookImageTransform = $this->getSettings()->seoFacebookImageTransform;
 
             $value->robots = $this->getSettings()->robots;
         }
@@ -315,6 +353,15 @@ class Seomatic_MetaFieldType extends BaseFieldType
         if ($value->seoKeywordsUnparsed == "")
             $value->seoKeywordsUnparsed = $value->seoKeywords;
 
+/* -- If we're attached to a Commerce_Product element, always have the Main Enity of Page be a Product */
+
+        $elemType = $element->getElementType();
+        if ($elemType == "Commerce_Product")
+        {
+            $value->seoMainEntityCategory = "Product";
+            $value->seoMainEntityOfPage = "";
+        }
+
         if ($element)
         {
     /* -- Swap in any SEOmatic fields that are pulling from other entry fields */
@@ -325,6 +372,11 @@ class Seomatic_MetaFieldType extends BaseFieldType
                     if (isset($element[$value->seoTitleSourceField]))
                     {
                         $value->seoTitle = craft()->seomatic->getTextFromEntryField($element[$value->seoTitleSourceField]);
+                        if (craft()->config->get("truncateTitleTags", "seomatic"))
+                        {
+                            $truncLength = craft()->config->get("maxTitleLength", "seomatic");
+                            $value->seoTitle = craft()->seomatic->truncateStringOnWord($value->seoTitle, $truncLength);
+                        }
                     }
                 break;
 
@@ -339,6 +391,11 @@ class Seomatic_MetaFieldType extends BaseFieldType
                     if (isset($element[$value->seoDescriptionSourceField]))
                     {
                         $value->seoDescription = craft()->seomatic->getTextFromEntryField($element[$value->seoDescriptionSourceField]);
+                        if (craft()->config->get("truncateDescriptionTags", "seomatic"))
+                        {
+                            $truncLength = craft()->config->get("maxDescriptionLength", "seomatic");
+                            $value->seoDescription = craft()->seomatic->truncateStringOnWord($value->seoDescription, $truncLength);
+                        }
                     }
                 break;
 
@@ -353,6 +410,11 @@ class Seomatic_MetaFieldType extends BaseFieldType
                     if (isset($element[$value->seoKeywordsSourceField]))
                     {
                         $value->seoKeywords = craft()->seomatic->getTextFromEntryField($element[$value->seoKeywordsSourceField]);
+                        if (craft()->config->get("truncateKeywordsTags", "seomatic"))
+                        {
+                            $truncLength = craft()->config->get("maxKeywordsLength", "seomatic");
+                            $value->seoKeywords = craft()->seomatic->truncateStringOnWord($value->seoKeywords, $truncLength);
+                        }
                     }
                 break;
 

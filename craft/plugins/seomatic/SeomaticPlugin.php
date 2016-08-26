@@ -26,12 +26,12 @@ class SeomaticPlugin extends BasePlugin
 
     public function getVersion()
     {
-        return '1.1.23';
+        return '1.1.33';
     }
 
     public function getSchemaVersion()
     {
-        return '1.1.16';
+        return '1.1.21';
     }
 
     public function getDeveloper()
@@ -77,10 +77,10 @@ class SeomaticPlugin extends BasePlugin
                     'seomaticHelper' => $seomaticHelper,
                 );
 
-/* -- For Craft Commerce products */
+/* -- Main Entity of Page info, which is optional */
 
-                if (isset($context['seomaticProduct']))
-                    $metaVars['seomaticProduct'] = $context['seomaticProduct'];
+                if (isset($context['seomaticMainEntityOfPage']))
+                    $metaVars['seomaticMainEntityOfPage'] = $context['seomaticMainEntityOfPage'];
 
 /* -- Render the seomaticMeta, this is where the magic happens */
 

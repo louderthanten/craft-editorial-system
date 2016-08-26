@@ -67,7 +67,7 @@ define('DEFAULT_BR_TEXT', "\r\n");
 define('DEFAULT_SPAN_TEXT', " ");
 if (!defined('MAX_FILE_SIZE'))
 {
-    define('MAX_FILE_SIZE', 600000);
+    define('MAX_FILE_SIZE', 2000000);
 }
 // helper functions
 // -----------------------------------------------------------------------------
@@ -78,7 +78,7 @@ function file_get_html($url, $use_include_path = false, $context=null, $offset =
     // We DO force the tags to be terminated.
     $dom = new simple_html_dom(null, $lowercase, $forceTagsClosed, $target_charset, $stripRN, $defaultBRText, $defaultSpanText);
     // For sourceforge users: uncomment the next line and comment the retreive_url_contents line 2 lines down if it is not already done.
-    $contents = file_get_contents($url, $use_include_path, $context, $offset);
+    $contents = @file_get_contents($url, $use_include_path, $context, $offset);
     // Paperg - use our own mechanism for getting the contents as we want to control the timeout.
     //$contents = retrieve_url_contents($url);
     if (empty($contents) || strlen($contents) > MAX_FILE_SIZE)
@@ -451,7 +451,7 @@ class simple_html_dom_node
             }
 
             // If this node is a span... add a space at the end of it so multiple spans don't run into each other.  This is plaintext after all.
-            if ($this->tag == "span")
+            if ($this->tag == "span" || $this->tag == "li")
             {
                 $ret .= $this->dom->default_span_text;
             }

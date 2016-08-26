@@ -59,6 +59,29 @@ class Seomatic_MetaFieldModel extends Seomatic_MetaModel
     }
 
     /**
+     * Returns the Main Entity of Page JSON-LD for the entry, without mainEntryOfPage being set
+     *
+     * @return string
+     */
+    public function getJsonLD($element)
+    {
+        $locale = craft()->language;
+
+        if ($element)
+        {
+            $entryMeta = craft()->seomatic->getMetaFromElement($element);
+            if ($entryMeta)
+                $entryMeta = craft()->seomatic->setEntryMeta($entryMeta, $element->url);
+        }
+
+        $metaVars = craft()->seomatic->getGlobals('', $locale);
+        $result = craft()->seomatic->getMainEntityOfPageJSONLD($entryMeta, $metaVars['seomaticIdentity'], $locale, false);
+
+        return $result;
+    }
+
+
+    /**
      * Returns whether the current user can edit the element.
      *
      * @return bool

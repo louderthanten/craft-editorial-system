@@ -20,7 +20,11 @@ The SEOmetrics feature requires PHP 5.4 or later and that you have the [php-xml 
 
 ## Overview
 
-SEOmatic allows you to quickly get a website up and running with a robust, comprehensive SEO strategy.  It is also implemented in a Craft-y way, in that it is also flexible and customizable.
+### Video overview of SEOmatic:
+
+[![Video Overview of SEOmatic](https://img.youtube.com/vi/f1149YVEF_0/0.jpg)](https://www.youtube.com/watch?v=f1149YVEF_0)
+
+SEOmatic allows you to quickly get a website up and running with a robust, comprehensive SEO strategy.  It is also implemented in a Craft-y way, in that it is also flexible and customizable.  The SEOmetrics feature scans your content for focus keywords, and offers analysis on how to improve your SEO.
 
 It implements [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl=en) microdata, [Dublin Core](http://dublincore.org) core metadata, [Twitter Cards](https://dev.twitter.com/cards/overview) tags, [Facebook OpenGraph](https://developers.facebook.com/docs/sharing/opengraph) tags, [Humans.txt](http://humanstxt.org) authorship accreditation, and as well as HTML meta tags.
 
@@ -47,11 +51,109 @@ Some things to do, and ideas for potential features:
 * [bug] Get the Template Metas implemented with full `locale` support, so the settings can all be per-locale based
 * [bug] Enforce *required fields on the various settings pages in the Admin CP by doing proper validation
 * [bug] The `foundingDate` fields probably should be dateTimeField types on the Settings pages
-* [feature] Add support for `og:image:type`, `og:image:width`, and `og:image:height`
-* [feature] Change the preview to a live preview when editing things in SEOmatic
 * [feature] Provide SiteMap functionality.  Yes, it's SEO-related, but seems like it might be better to keep SEOmatic focused (?)
+* [feature] Allow people to choose individual fields to pull from inside of Matrix and Neo blocks
 
 ## Changelog
+
+### 1.1.32 -- 2016.08.25
+
+* [Improved] The SEOmetrics tab in the AdminCP now doesn't start analyzing until you click Analyze
+* [Improved] Improved SEOmetric's sitemap.xml detection
+* [Improved] Updated DOCS.md to reflect the change from `seomaticProduct` to `seomaticMainEntityOfPage`
+* [Improved] Products now have commas stripped from their price, and use a `.` as a decimal point
+* [Fixed] Fixed an issue that caused SEOmatic to throw an error in a tokenized entry draft
+* [Fixed] Fixed an issue with stale SEOmatic FieldTypes that were added to a section, but then later removed
+* [Improved] Updated the README.md
+
+### 1.1.31 -- 2016.08.15
+
+* [Added] SEOmetrics now has its own tab, and can evaluate any arbitrary URL you paste into it
+* [Added] SEOmatic can now pull images from FocusPoint FieldTypes
+* [Added] Added 'Person' as a type for the Main Entity of Page
+* [Added] Added Vimeo Handle to Social Media settings
+* [Added] Added a 'globalMetaOverride' setting to config.php
+* [Added] SEOmetrics checks for HTML validity via the WC3 Validator
+* [Added] Added a Score % summary for each SEOmetrics category
+* [Added] SEOmetrics now includes Google Pagespeed Insights scores and Google Mobile Usability
+* [Added] SEOmetrics checks for SSL encryption via https
+* [Improved] Better extraction of 'top keywords on page' in SEOmetrics
+* [Improved] SEOmetrics now looks for link rel='publisher'
+* [Improved] Refined SEOmetrics a bit, and added more 'Learn More' links
+* [Fixed] The mainEntityOfPage is no longer improperly cached if being called by getJsonLd()
+* [Improved] Updated the README.md
+
+### 1.1.30 -- 2016.08.05
+
+* [Added] Added 'Learn More' link for JSON-LD structured data in SEOmetrics
+* [Added] Breadcrumbs get added to WebPage objects, too
+* [Improved] SEOmatic now remembers the selected locale in its tabbed settings
+* [Improved] Fixed a regression in SEOmetric's keyword in URL checking
+* [Improved] Increased HTML SimpleDom's MAX_FILE_SIZE to allow for parsing larger pages (especially with devMode on)
+* [Improved] SEOmetrics handles missing robots.txt files more elegantly
+* [Improved] SEOmetrics no longer depends on there being an meta description tag
+* [Fixed] Fixed an error when using the Share arrow on a draft from Live Preview
+* [Fixed] Fixed an issue accessing getJsonLd from an entry that has no URLs or has empty SEOmatic values
+* [Fixed] mainEntityOfPage now works for Template Metas
+* [Improved] Updated the README.md
+
+### 1.1.29 -- 2016.07.31
+
+* [Added] Added the ability to extract seoTitle, seoDescription, and seoKeywords from Neo fields
+* [Added] Added the ability to extract seoTitle, seoDescription, and seoKeywords from Preparse fields
+* [Added] Added detection of Twitter Card meta tags, OpenGraph meta tags, and JSON-LD structured data in SEOmetrics
+* [Added] Added detection robots.txt and sitemaps in SEOmetrics
+* [Improved] Breadcrumbs are now generated for every element that matches a URI in the current URL segments
+* [Improved] seoTitles, seoDescriptions, and seoKeywords are now truncated on save in SEOmatic Meta FieldTypes when they pull from other fields
+* [Improved] Improved the SEOmetrics preview CSS a bit
+* [Improved] Updated the README.md
+
+### 1.1.28 -- 2016.07.27
+
+* [Added] Added modified_time and published_time to OpenGraph articles when an SEOmatic Meta FieldType is used
+* [Improved] Safeguard against 'Undefined index: seoImageTransform'
+* [Fixed] Handle non-posted entries
+* [Fixed] Fixed an issue with getJsonLD($element)
+* [Improved] Updated the README.md
+
+### 1.1.27 -- 2016.07.26
+
+* [Fixed] Fixed a regression with Entry Meta cascade
+* [Fixed] Fixed an issue with SEOmatic FieldTypes on categories
+* [Fixed] Fixed invalid releases.json
+* [Improved] We now strip all control characters (including \n and \r) from the JSON-LD arrays
+* [Improved] Updated the README.md
+
+### 1.1.26 -- 2016.07.25
+
+* [Added] Added Main Entity of Page JSON-LD microdata
+* [Added] Added the method getJsonLD($element) to the FieldType model, so you can get the Main Entity of Page JSON-LD for an arbitrary entry (maybe in a craft.entries loop, for instance)
+* [Improved] The 'logo' and 'image' in Creator and Identity JSON-LD is now an ImageObject
+* [Improved] Added a space after each keyword in SEOmetrics to prevent horizontal scrolling due to frame overflow
+* [Fixed] Fixed the locale of the transform fields in the FieldType
+* [Fixed] Fix for empty SEO Titles for breadcrumbs
+* [Improved] Updated the DOCS.md and wiki docs
+* [Improved] Updated the README.md
+
+### 1.1.25 -- 2016.07.19
+
+* [Fixed] Fixed an issue with SEO images not rendering properly via the FieldType
+* [Fixed] Fixed a typo that would cause Template Metas to not save properly
+* [Improved] Added a fallback if `iconv` is not installed for UTF-8 conversion
+* [Improved] Explicitly state that the SEO Image must be in JPG, PNG, or GIF format
+* [Improved] Updated the README.md
+
+### 1.1.24 -- 2016.07.18
+
+* [Added] You can now specify image transforms for your SEO Image, Twitter Image, and Facebook Image for Site Meta, Template Meta, and Entry Metas
+* [Added] Added og:image:type, og:image:width, and og:image:height to the OpenGraph meta
+* [Added] Added support for Breadcrumbs JSON-LD microdata
+* [Improved] the Twig array keys are now quoted in the display preview
+* [Improved] Trimmed the fat on some of the settings storage maxLength's
+* [Added] Added the ability to control the name of the GTM dataLayer variable
+* [Fixed] Added renderGoogleTagManagerScript in config.php
+* [Improved] The GTM script tags are now rendered when `devMode` is on, for debugging GTM
+* [Improved] Updated the README.md
 
 ### 1.1.23 -- 2016.07.08
 

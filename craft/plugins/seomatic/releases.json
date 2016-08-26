@@ -1,5 +1,140 @@
 [
     {
+        "version": "1.1.32",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-08-25T11:00:00-11:00",
+        "notes": [
+            "[Improved] The SEOmetrics tab in the AdminCP now doesn't start analyzing until you click Analyze",
+            "[Improved] Improved SEOmetric's sitemap.xml detection",
+            "[Improved] Updated DOCS.md to reflect the change from `seomaticProduct` to `seomaticMainEntityOfPage`",
+            "[Improved] Products now have commas stripped from their price, and use a `.` as a decimal point",
+            "[Fixed] Fixed an issue that caused SEOmatic to throw an error in a tokenized entry draft",
+            "[Fixed] Fixed an issue with stale SEOmatic FieldTypes that were added to a section, but then later removed",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.31",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-08-15T11:00:00-11:00",
+        "notes": [
+            "[Added] SEOmetrics now has its own tab, and can evaluate any arbitrary URL you paste into it",
+            "[Added] SEOmatic can now pull images from FocusPoint FieldTypes",
+            "[Added] Added 'Person' as a type for the Main Entity of Page",
+            "[Added] Added Vimeo Handle to Social Media settings",
+            "[Added] Added a 'globalMetaOverride' setting to config.php",
+            "[Added] SEOmetrics checks for HTML validity via the WC3 Validator",
+            "[Added] Added a Score % summary for each SEOmetrics category",
+            "[Added] SEOmetrics now includes Google Pagespeed Insights scores and Google Mobile Usability scores",
+            "[Added] SEOmetrics checks for SSL encryption via https",
+            "[Improved] Better extraction of 'top keywords on page' in SEOmetrics",
+            "[Improved] SEOmetrics now looks for link rel='publisher'",
+            "[Improved] Refined SEOmetrics a bit, and added more 'Learn More' links",
+            "[Fixed] The mainEntityOfPage is no longer improperly cached if being called by getJsonLd()",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.30",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-08-05T11:00:00-11:00",
+        "notes": [
+            "[Added] Added 'Learn More' link for JSON-LD structured data in SEOmetrics",
+            "[Added] Breadcrumbs get added to WebPage objects, too",
+            "[Improved] SEOmatic now remembers the selected locale in its tabbed settings",
+            "[Improved] Fixed a regression in SEOmetric's keyword in URL checking",
+            "[Improved] Increased HTML SimpleDom's MAX_FILE_SIZE to allow for parsing larger pages (especially with devMode on)",
+            "[Improved] SEOmetrics handles missing robots.txt files more elegantly",
+            "[Improved] SEOmetrics no longer depends on there being an meta description tag",
+            "[Fixed] Fixed an error when using the Share arrow on a draft from Live Preview",
+            "[Fixed] Fixed an issue accessing getJsonLd from an entry that has no URLs or has empty SEOmatic values",
+            "[Fixed] mainEntityOfPage now works for Template Metas",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.29",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-07-31T11:00:00-11:00",
+        "notes": [
+            "[Added] Added the ability to extract seoTitle, seoDescription, and seoKeywords from Neo fields",
+            "[Added] Added the ability to extract seoTitle, seoDescription, and seoKeywords from Preparse fields",
+            "[Added] Added detection of Twitter Card meta tags, OpenGraph meta tags, and JSON-LD structured data in SEOmetrics",
+            "[Added] Added detection robots.txt and sitemaps in SEOmetrics",
+            "[Improved] Breadcrumbs are now generated for every element that matches a URI in the current URL segments",
+            "[Improved] seoTitles, seoDescriptions, and seoKeywords are now truncated on save in SEOmatic Meta FieldTypes when they pull from other fields",
+            "[Improved] Improved the SEOmetrics preview CSS a bit",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.28",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-07-27T11:00:00-11:00",
+        "notes": [
+            "[Added] Added modified_time and published_time to OpenGraph articles when an SEOmatic Meta FieldType is used",
+            "[Improved] Safeguard against 'Undefined index: seoImageTransform'",
+            "[Fixed] Handle non-posted entries",
+            "[Fixed] Fixed an issue with getJsonLD($element)",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.27",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-07-26T11:00:00-11:00",
+        "notes": [
+            "[Fixed] Fixed a regression with Entry Meta cascade",
+            "[Fixed] Fixed an issue with SEOmatic FieldTypes on categories",
+            "[Fixed] Fixed invalid releases.json",
+            "[Improved] We now strip all control characters from the JSON-LD arrays",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.26",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-07-25T11:00:00-11:00",
+        "notes": [
+            "[Added] Added Main Entity of Page JSON-LD microdata",
+            "[Added] Added the method getJsonLD($element) to the FieldType model, so you can get the Main Entity of Page JSON-LD for an arbitrary entry (maybe in a craft.entries loop, for instance)",
+            "[Improved] The 'logo' and 'image' in Creator and Identity JSON-LD is now an ImageObject",
+            "[Improved] Added a space after each keyword in SEOmetrics to prevent horizontal scrolling due to frame overflow",
+            "[Fixed] Fixed the locale of the transform fields in the FieldType",
+            "[Fixed] Fix for empty SEO Titles for breadcrumbs",
+            "[Improved] Updated the DOCS.md and wiki docs",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.25",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-07-19T11:00:00-11:00",
+        "notes": [
+            "[Fixed] Fixed an issue with SEO images not rendering properly via the FieldType",
+            "[Fixed] Fixed a typo that would cause Template Metas to not save properly",
+            "[Improved] Added a fallback if `iconv` is not installed for UTF-8 conversion",
+            "[Improved] Explicitly state that the SEO Image must be in JPG, PNG, or GIF format",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.24",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-07-18T11:00:00-11:00",
+        "notes": [
+            "[Added] You can now specify image transforms for your SEO Image, Twitter Image, and Facebook Image for Site Meta, Template Meta, and Entry Metas",
+            "[Added] Added og:image:type, og:image:width, and og:image:height to the OpenGraph meta",
+            "[Added] Added support for Breadcrumbs JSON-LD microdata",
+            "[Improved] the Twig array keys are now quoted in the display preview",
+            "[Improved] Trimmed the fat on some of the settings storage maxLength's",
+            "[Added] Added the ability to control the name of the GTM dataLayer variable",
+            "[Fixed] Added renderGoogleTagManagerScript in config.php",
+            "[Improved] The GTM script tags are now rendered when `devMode` is on, for debugging GTM",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
         "version": "1.1.23",
         "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
         "date": "2016-07-08T11:00:00-11:00",

@@ -16,7 +16,51 @@
         }, '<p class="error">' ~ "No asset sources exist yet."|t ~ '</p>') }}
     {% endif %}
 
-    <!-- seoTitleSource -->
+    <!-- Main Eneity of Page -->
+
+    <div class="field">
+    <div class="heading">
+        <label for="seoMainEntityOfPage">{{ "Main Entity of Page"|t}}</label>
+        <div class="instructions"><p>{{ "Default Main Entity of Page.  The Main Entity of Page is a more specific, additional type that describes this entry.  This additional JSON-LD structured data entity will be added to your page, more specifically describing the page's content.  It is accessible via the <code>seomaticMainEntityOfPage</code> Twig variable, should you wish to modify or add to it" |t |raw}}</p></div>
+    </div>
+    <div>
+        <div class="inline-item">
+            {{ forms.selectField({
+                id: "seoMainEntityCategory",
+                class: "inline-item",
+                fieldClass: "inline-item",
+                options: {
+                    "CreativeWork": "CreativeWork",
+                    "Event": "Event",
+                    "Person": "Person",
+                    "Product": "Product",
+                },
+                name: "seoMainEntityCategory",
+                value: settings.seoMainEntityCategory,
+            }) }}
+        </div>
+        <div class="inline-item">
+            {{ forms.selectField({
+                label: "&rarr;",
+                class: "inline-item",
+                fieldClass: "inline-item",
+                id: "seoMainEntityOfPage",
+                options: {
+                },
+                name: "seoMainEntityOfPage",
+                value: settings.seoMainEntityOfPage,
+            }) }}
+        </div>
+        <div class="inline-item">
+            <div class="inline-item inline-item-padding seomaticSchemaInfo">
+            </div>
+        </div>
+    </div>
+    </div>
+    {% set myJs %}
+    setSelectedValue("{{ settings.seoMainEntityOfPage }}");
+    {% endset %}
+    {% includeJs myJs %}
 
     <div class="field comboField-wrapper first">
         <div class="heading">
@@ -236,6 +280,15 @@
         }) }}
     </div>
 
+    {{ forms.selectField({
+        label: "Default SEO Image Transform"|t,
+        instructions: "Set the default image transform to apply to the Site SEO Image."|t,
+        id: "seoImageTransform",
+        options: transformsList,
+        name: "seoImageTransform",
+        value: settings.seoImageTransform,
+    }) }}
+
 <!-- twitterCardType -->
 
     {{ forms.selectField({
@@ -258,6 +311,15 @@
         on: settings.twitterCardTypeChangeable,
     }) }}
 
+    {{ forms.selectField({
+        label: "Default Twitter Image Transform"|t,
+        instructions: "Set the default image transform to apply to the Twitter SEO Image.  Twitter recommends: 120 x 120 pixels minimum size, 1:1 aspect ratio, 1mb max size for Summary Card images, and 280x150 pixels minimum size, 1.86:1 aspect ratio, 1mb max size for Summary Card with Large Image images."|t,
+        id: "seoTwitterImageTransform",
+        options: transformsList,
+        name: "seoTwitterImageTransform",
+        value: settings.seoTwitterImageTransform,
+    }) }}
+
 <!-- openGraphType -->
 
     {{ forms.selectField({
@@ -278,6 +340,15 @@
         name: 'openGraphTypeChangeable',
         instructions: "Whether to allow the user to change the Facebook Open Graph Type while editing the entry"|t,
         on: settings.openGraphTypeChangeable,
+    }) }}
+
+    {{ forms.selectField({
+        label: "Default Facebook Image Transform"|t,
+        instructions: "Set the default image transform to apply to the Facebook SEO Image.  Facebook recommends: 1200 x 630 pixels minimum size, 1.9:1 aspect ratio, 8mb max size."|t,
+        id: "seoFacebookImageTransform",
+        options: transformsList,
+        name: "seoFacebookImageTransform",
+        value: settings.seoFacebookImageTransform,
     }) }}
 
 <!-- robots -->

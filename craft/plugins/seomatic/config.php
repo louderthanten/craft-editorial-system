@@ -52,18 +52,26 @@ return array(
 /**
  * SEOmatic will render the Google Analytics <script> tag and code for you, if you
  * enter a Google Analytics UID tracking code in the Site Identity settings.  It
- * does not render the <script> tag if devMode is on, but here is an additional
- * override for controlling it.
+ * does not render the <script> tag if devMode is on or during Live Preview, but
+ * here is an additional override for controlling it.
  */
     "renderGoogleAnalyticsScript" => true,
 
 /**
  * SEOmatic will render the Google Tag Manager <script> tag and code for you, if you
  * enter a Google Tag Manager ID tracking code in the Site Identity settings.  It
- * does not render the <script> tag if devMode is on, but here is an additional
- * override for controlling it.
+ * does not render the <script> tag during Live Preview, but here is an additional
+ * override for controlling it.  It does render the script tag if devMode is on,
+ * to allow for debugging GTM.
  */
     "renderGoogleTagManagerScript" => true,
+
+/**
+ * This controls the name of the Javascript variable that SEOmatic outputs for the
+ * dataLayer variable.  Note that the Twig variable always will be named:
+ * `dataLayer` regardless of this setting.
+ */
+    "gtmDataLayerVariableName" => "dataLayer",
 
 /**
  * SEOmatic will render Product JSON-LD microdata for you automatically, if an SEOmatic Meta
@@ -85,8 +93,38 @@ return array(
     "displaySeoMetrics" => true,
 
 /**
+ * Determines the name used for the "Home" default breadcrumb.
+ */
+    "breadcrumbsHomeName" => 'Home',
+
+/**
  * Determines the string prepended to the <title> tag when devMode is on.
  */
     "siteDevModeTitle" => '[devMode]',
+
+/**
+ * This allows you to globally override the meta settings on your website.  WARNING:
+ * anything you set here will REPLACE the meta settings globally.  You might wish to
+ * use this, for instance, to set 'robots' to be 'none' on development/staging to
+ * prevent crawlers from indexing it.  Since this config file is multi-environment aware,
+ * like any Craft config file, this allows you to do just that.
+ * Leave any value in the array blank to cause it to not override.
+ */
+
+    "globalMetaOverride" => array(
+        'locale'                    => '',
+        'seoMainEntityCategory'     => '',
+        'seoMainEntityOfPage'       => '',
+        'seoTitle'                  => '',
+        'seoDescription'            => '',
+        'seoKeywords'               => '',
+        'seoImageTransform'         => '',
+        'seoFacebookImageTransform' => '',
+        'seoTwitterImageTransform'  => '',
+        'twitterCardType'           => '',
+        'openGraphType'             => '',
+        'robots'                    => '',
+        'seoImageId'                => '',
+    ),
 
 );

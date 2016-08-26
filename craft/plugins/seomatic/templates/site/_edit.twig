@@ -19,13 +19,18 @@
 
 {% set docsUrl = "https://github.com/nystudio107/seomatic/wiki" %}
 
+{% set localeUrlSuffix = "" %}
+{% if craft.isLocalized %}
+    {% set localeUrlSuffix = "/" ~ siteMeta.locale %}
+{% endif %}
 {% set seomaticSections = {
+    seometrics: { label: "SEOmetrics"|t, url: url('seomatic/seometrics') },
     meta:       { label: "Template Meta"|t, url: url('seomatic/meta') },
-    site:       { label: "Site Meta"|t, url: url('seomatic/site') },
-    identity:   { label: "Site Identity"|t, url: url('seomatic/identity') },
-    social:     { label: "Social Media"|t, url: url('seomatic/social') },
-    creator:    { label: "Site Creator"|t, url: url('seomatic/creator') },
-    settings:    { label: "Settings"|t, url: url('seomatic/settings') },
+    site:       { label: "Site Meta"|t, url: url('seomatic/site' ~ localeUrlSuffix ) },
+    identity:   { label: "Site Identity"|t, url: url('seomatic/identity' ~ localeUrlSuffix ) },
+    social:     { label: "Social Media"|t, url: url('seomatic/social' ~ localeUrlSuffix ) },
+    creator:    { label: "Site Creator"|t, url: url('seomatic/creator' ~ localeUrlSuffix ) },
+    settings:   { label: "Settings"|t, url: url('seomatic/settings') },
 } %}
 
 {% set crumbs = [
@@ -161,7 +166,7 @@
                     <div class="field" id="siteSeoImageId-field">
                         <div class="heading">
                             <label for="siteSeoImageId">{{ "Site SEO Image"|t}}{% if craft.isLocalized and siteMeta.locale %}<span class="locale">{{ siteMeta.locale }}</span>{% endif %}</label>
-                            <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website.  It should be an image that displays well when cropped to a square format (for Twitter)" |t |raw}}</p></div>
+                            <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website.  The image must be in JPG, PNG, or GIF format." |t |raw}}</p></div>
                         </div>
                         <div class="input">
                             {% if assetsSourceExists %}
@@ -171,7 +176,7 @@
                                     name: 'siteSeoImageId',
                                     elementType: elementType,
                                     criteria: {
-                                        'kind': [],
+                                        'kind': ['image'],
                                         'localeEnabled': null,
                                         'locale': craft.locale,
                                     },
@@ -188,6 +193,16 @@
                     </div>
 
                     {{ forms.selectField({
+                        label: "SEO Image Transform"|t,
+                        instructions: "The image transform to apply to the Site SEO Image."|t,
+                        id: "siteSeoImageTransform",
+                        options: transformsList,
+                        name: "siteSeoImageTransform",
+                        value: siteMeta.siteSeoImageTransform,
+                        locale: siteMeta.locale,
+                    }) }}
+
+                    {{ forms.selectField({
                         label: "Site Twitter Card Type"|t,
                         instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a “Card” added to the Tweet that’s visible to all of their followers."|t,
                         id: "siteTwitterCardType",
@@ -201,6 +216,16 @@
                     }) }}
 
                     {{ forms.selectField({
+                        label: "Twitter Image Transform"|t,
+                        instructions: "The image transform to apply to the Twitter SEO Image.  Twitter recommends: 120 x 120 pixels minimum size, 1:1 aspect ratio, 1mb max size for Summary Card images, and 280x150 pixels minimum size, 1.86:1 aspect ratio, 1mb max size for Summary Card with Large Image images."|t,
+                        id: "siteSeoTwitterImageTransform",
+                        options: transformsList,
+                        name: "siteSeoTwitterImageTransform",
+                        value: siteMeta.siteSeoTwitterImageTransform,
+                        locale: siteMeta.locale,
+                    }) }}
+
+                    {{ forms.selectField({
                         label: "Site Facebook Open Graph Type"|t,
                         instructions: "Adding Open Graph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook."|t,
                         id: "siteOpenGraphType",
@@ -210,6 +235,16 @@
                         },
                         name: "siteOpenGraphType",
                         value: siteMeta.siteOpenGraphType,
+                        locale: siteMeta.locale,
+                    }) }}
+
+                    {{ forms.selectField({
+                        label: "Facebook Image Transform"|t,
+                        instructions: "The image transform to apply to the Facebook SEO Image.  Facebook recommends: 1200 x 630 pixels minimum size, 1.9:1 aspect ratio, 8mb max size."|t,
+                        id: "siteSeoFacebookImageTransform",
+                        options: transformsList,
+                        name: "siteSeoFacebookImageTransform",
+                        value: siteMeta.siteSeoFacebookImageTransform,
                         locale: siteMeta.locale,
                     }) }}
 
@@ -297,7 +332,7 @@
 
             <div class="item" data-position="right" data-colspan="1">
 
-                <div id="preview-display" class="btn big livepreviewbtn">
+                <div id="preview-display" class="btn big livepreviewbtn secondbtn">
                     {{ "Preview SEO Meta Display" |t }}
                 </div>
 

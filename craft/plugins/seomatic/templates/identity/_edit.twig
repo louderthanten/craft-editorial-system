@@ -18,13 +18,18 @@
 
 {% set docsUrl = "https://github.com/nystudio107/seomatic/wiki" %}
 
+{% set localeUrlSuffix = "" %}
+{% if craft.isLocalized %}
+    {% set localeUrlSuffix = "/" ~ identity.locale %}
+{% endif %}
 {% set seomaticSections = {
+    seometrics: { label: "SEOmetrics"|t, url: url('seomatic/seometrics') },
     meta:       { label: "Template Meta"|t, url: url('seomatic/meta') },
-    site:       { label: "Site Meta"|t, url: url('seomatic/site') },
-    identity:   { label: "Site Identity"|t, url: url('seomatic/identity') },
-    social:     { label: "Social Media"|t, url: url('seomatic/social') },
-    creator:    { label: "Site Creator"|t, url: url('seomatic/creator') },
-    settings:    { label: "Settings"|t, url: url('seomatic/settings') },
+    site:       { label: "Site Meta"|t, url: url('seomatic/site' ~ localeUrlSuffix ) },
+    identity:   { label: "Site Identity"|t, url: url('seomatic/identity' ~ localeUrlSuffix ) },
+    social:     { label: "Social Media"|t, url: url('seomatic/social' ~ localeUrlSuffix ) },
+    creator:    { label: "Site Creator"|t, url: url('seomatic/creator' ~ localeUrlSuffix ) },
+    settings:   { label: "Settings"|t, url: url('seomatic/settings') },
 } %}
 
 {% set crumbs = [
@@ -320,7 +325,7 @@
                     <div class="field" id="genericOwnerImageId-field">
                         <div class="heading">
                             <label for="genericOwnerImageId">{{ "Entity Brand"|t}}{% if craft.isLocalized and identity.locale %}<span class="locale">{{ identity.locale }}</span>{% endif %}</label>
-                            <div class="instructions"><p>{{ "An image or logo that represents the entity that owns the website" |t |raw}}</p></div>
+                            <div class="instructions"><p>{{ "An image or logo that represents the entity that owns the website.  The image must be in JPG, PNG, or GIF format." |t |raw}}</p></div>
                         </div>
                         <div class="input">
                             {% if assetsSourceExists %}
@@ -330,7 +335,7 @@
                                     name: 'genericOwnerImageId',
                                     elementType: elementType,
                                     criteria: {
-                                        'kind': [],
+                                        'kind': ['image'],
                                         'localeEnabled': null,
                                         'locale': craft.locale,
                                     },
@@ -766,7 +771,7 @@
 
             <div class="item" data-position="right" data-colspan="1">
 
-                <div id="preview-display" class="btn big livepreviewbtn">
+                <div id="preview-display" class="btn big livepreviewbtn secondbtn">
                     {{ "Preview SEO Meta Display" |t }}
                 </div>
 

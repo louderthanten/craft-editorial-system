@@ -10,6 +10,7 @@
 {% includeJsResource "seomatic/js/jquery.bpopup.min.js" %}
 {% includeJsResource "seomatic/js/bootstrap-tokenfield.min.js" %}
 {% includeJsResource "seomatic/js/prism.min.js" %}
+{% includeJsResource "seomatic/js/main_entity_type_list.js" %}
 {% includeJsResource "seomatic/js/meta.js" %}
 
 {% set fullPageForm = true %}
@@ -17,12 +18,13 @@
 {% set docsUrl = "https://github.com/nystudio107/seomatic/wiki" %}
 
 {% set seomaticSections = {
+    seometrics: { label: "SEOmetrics"|t, url: url('seomatic/seometrics') },
     meta:       { label: "Template Meta"|t, url: url('seomatic/meta') },
     site:       { label: "Site Meta"|t, url: url('seomatic/site') },
     identity:   { label: "Site Identity"|t, url: url('seomatic/identity') },
     social:     { label: "Social Media"|t, url: url('seomatic/social') },
     creator:    { label: "Site Creator"|t, url: url('seomatic/creator') },
-    settings:    { label: "Settings"|t, url: url('seomatic/settings') },
+    settings:   { label: "Settings"|t, url: url('seomatic/settings') },
 } %}
 
 {% set crumbs = [
@@ -80,13 +82,13 @@
 
                 <div class="item" data-position="right" data-colspan="1">
 
-                    <div id="preview-display" class="btn big livepreviewbtn">
-                        {{ "Preview SEO Meta Display" |t }}
-                    </div>
+                <div id="preview-display" class="btn big livepreviewbtn secondbtn">
+                    {{ "Preview SEO Meta Display" |t }}
+                </div>
 
-                    <div id="preview-tags" class="btn big livepreviewbtn secondbtn">
-                        {{ "Preview SEO Meta Tags" |t }}
-                    </div>
+                <div id="preview-tags" class="btn big livepreviewbtn secondbtn">
+                    {{ "Preview SEO Meta Tags" |t }}
+                </div>
 
                     {% if craft.isLocalized %}
                         <ul id="locales" class="pane">
